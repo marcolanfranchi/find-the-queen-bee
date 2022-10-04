@@ -52,6 +52,3 @@ buildNumber.properties
 *.iws.bak
 *.core.prefs    
 *.resources.prefs
-
-# Leaderboard file 
-leaderboard.txt
