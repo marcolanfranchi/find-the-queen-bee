@@ -1,6 +1,5 @@
-# project
+# Group 16 CMPT 276 Project
 
-CMPT 276 Project <br>
 "The Maze to the Queen Bee" <br>
 <br>
 <br>
