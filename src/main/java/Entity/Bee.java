@@ -1,9 +1,9 @@
 package Entity;
 
-import javax.swing.plaf.basic.BasicComboBoxUI.KeyHandler;
+import java.awt.Graphics2D;
 
 import main.GamePanel;
-//import main.KeyHandler;
+import main.KeyHandler;
 
 public class Bee extends Entity {
 
@@ -14,9 +14,8 @@ public class Bee extends Entity {
 
         this.gamePanel = gp;
         this.keyHandler = kh;
-    }
 
-    public void setDefaultValues() {
+        // default values
         x = 100;
         y = 100;
         speed = 4;
@@ -24,10 +23,21 @@ public class Bee extends Entity {
 
 
     public void update() {
-
+        if (keyHandler.upPressed == true) {
+            y -= speed;
+        } else if (keyHandler.downPressed == true) {
+            y += speed;
+        } else if (keyHandler.leftPressed == true) {
+            x -= speed;
+        } else if (keyHandler.rightPressed == true) {
+            x += speed;
+        }
     }
 
-    public void draw() {
+    public void draw(Graphics2D g2) {
+
+        g2.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize);
+
 
     }
     

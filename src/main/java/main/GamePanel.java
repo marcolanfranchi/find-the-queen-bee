@@ -4,10 +4,8 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.JPanel;
-import javax.swing.plaf.basic.BasicComboBoxUI.KeyHandler;
 
 import Entity.Bee;
 import Tile.TileManager;
@@ -28,8 +26,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 	TileManager tileM = new TileManager(this);
 
+	KeyHandler keyHandler = new KeyHandler();
 	Thread gameThread;
-	//Bee bee = new Bee(this, keyHandler);
+	Bee bee = new Bee(this, keyHandler);
 
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -67,6 +66,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void update() {
 
+		bee.update();
+
 	}
 
 	public void paintComponent(Graphics g) {
@@ -76,6 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
 		Graphics2D g2 = (Graphics2D) g;
 
 		tileM.draw(g2);
+		bee.draw(g2);
 
 		g2.dispose();
 	}
