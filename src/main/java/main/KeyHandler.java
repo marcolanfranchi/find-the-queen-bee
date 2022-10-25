@@ -6,6 +6,11 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
+    GamePanel gamePanel;
+    public KeyHandler(GamePanel gp) {
+        this.gamePanel = gp;
+    }
+
     public boolean upPressed, downPressed, 
                     leftPressed, rightPressed;
 

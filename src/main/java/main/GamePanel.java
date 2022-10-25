@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	TileManager tileM = new TileManager(this);
 
-	KeyHandler keyHandler = new KeyHandler();
+	KeyHandler keyHandler = new KeyHandler(this);
 	Thread gameThread;
 	Bee bee = new Bee(this, keyHandler);
 
@@ -34,6 +34,8 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
+		this.addKeyListener(keyHandler);
+		this.setFocusable(true);
 	}
 
 	public void startGameThread() {
@@ -58,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
 			if (delta >= 1) {
 				update();
 				repaint();
-				delta = delta - 1;
+				delta--;
 			}
 
 		}
