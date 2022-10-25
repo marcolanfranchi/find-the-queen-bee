@@ -4,9 +4,12 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.JPanel;
+import javax.swing.plaf.basic.BasicComboBoxUI.KeyHandler;
 
+import Entity.Bee;
 import Tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -21,9 +24,12 @@ public class GamePanel extends JPanel implements Runnable {
 	final int screenWidth = tileSize * maxScreenCol; // 768 pixels
 	final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
+	int FPS = 60;
+
 	TileManager tileM = new TileManager(this);
 
 	Thread gameThread;
+	//Bee bee = new Bee(this, keyHandler);
 
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -38,10 +44,24 @@ public class GamePanel extends JPanel implements Runnable {
 
 	@Override
 	public void run() {
-		while (gameThread != null) {
-			update();
 
-			repaint();
+		double tick = 1000000000/FPS;
+		double delta = 0;
+		long lastTime = System.nanoTime();
+		long currentTime;
+
+		while (gameThread != null) {
+
+			currentTime = System.nanoTime();
+			delta += (currentTime - lastTime) / tick;
+			lastTime = currentTime;
+
+			if (delta >= 1) {
+				update();
+				repaint();
+				delta = delta - 1;
+			}
+
 		}
 	}
 
