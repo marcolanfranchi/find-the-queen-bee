@@ -2,9 +2,14 @@ package Entity;
 
 import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
+import main.GamePanel;
+
 
 
 abstract public class Entity {
+
+    GamePanel gamePanel;
+
 
     public int worldX, worldY;
     public int speed;
@@ -17,19 +22,53 @@ abstract public class Entity {
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public String direction;
 
+    public Rectangle bounds;
+
     public Rectangle getBounds() {
-        Rectangle bounds = new Rectangle(worldX, worldY, this.width, this.height);
+        bounds = new Rectangle(getX(), getY(), this.width, this.height);
         return bounds;
     }
 
-    public void checkWallCollision() {
+    public int getX() {
+        return this.worldX;
     }
 
+    public int getY() {
+        return this.worldY;
+    }
+    
+    public int getTileNum() {
+        int posX = this.getX() / gamePanel.tileSize;
+        int posY = this.getY() / gamePanel.tileSize;
+        return gamePanel.tileM.mapTileNum[posX][posY];
+    }
 
+    public int tileNumUp() {
+        int posX = this.getX() / gamePanel.tileSize;
+        int posY = (this.getY() - speed) / gamePanel.tileSize;
+        return gamePanel.tileM.mapTileNum[posX][posY];
+    } 
+    
+    public int tileNumDown() {
+        int posX = this.getX() / gamePanel.tileSize;
+        int posY = (this.getY() + speed) / gamePanel.tileSize;
+        return gamePanel.tileM.mapTileNum[posX][posY];
+    }
+
+    public int tileNumLeft() {
+        int posX = (this.getX() - speed) / gamePanel.tileSize;
+        int posY = this.getY() / gamePanel.tileSize;
+        return gamePanel.tileM.mapTileNum[posX][posY];
+    }
+
+    public int tileNumRight() {
+        int posX = (this.getX() + speed) / gamePanel.tileSize;
+        int posY = this.getY() / gamePanel.tileSize;
+        return gamePanel.tileM.mapTileNum[posX][posY];
+    }
 
     
 
-
-
-
+  
+   
 }

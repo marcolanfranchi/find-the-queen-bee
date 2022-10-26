@@ -12,7 +12,7 @@ import main.KeyHandler;
 
 public class Bee extends Entity {
 
-    GamePanel gamePanel;
+    //GamePanel gamePanel;
     KeyHandler keyHandler;
 
 	public final int screenX;
@@ -28,8 +28,10 @@ public class Bee extends Entity {
 		this.screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
         // default values
-		worldX = gp.tileSize * 2;
-		worldY = gp.tileSize * 2;
+		//worldX = gp.tileSize * 2;
+		//worldY = gp.tileSize * 2;
+        worldX = 48;
+        worldY = 48;
 		speed = 48;
         direction = "down";
         getBeeImage();
@@ -75,6 +77,16 @@ public class Bee extends Entity {
             }
             spriteCounter = 0;
         }
+
+        //System.out.println(this.getBounds().toString());
+        //System.out.println(this.getTileNum());
+        //System.out.println(this.tileNumUp());
+        //System.out.println(this.tileNumDown());
+        //System.out.println(this.tileNumLeft());
+        //System.out.println(this.tileNumRight());
+
+
+
     }
 
     public void draw(Graphics2D g2) {
