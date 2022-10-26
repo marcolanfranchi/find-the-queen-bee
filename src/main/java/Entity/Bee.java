@@ -18,6 +18,7 @@ public class Bee extends Entity {
 	public final int screenX;
 	public final int screenY;
 
+
     public Bee(GamePanel gp, KeyHandler kh) {
 
         this.gamePanel = gp;
@@ -97,6 +98,6 @@ public class Bee extends Entity {
                 image = right1; 
             } else image = right2;
         }
-		g2.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+		g2.drawImage(image, screenX, screenY, 32, 32, null);
     }
 }
