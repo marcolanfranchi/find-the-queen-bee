@@ -31,11 +31,11 @@ public class TileManager {
 			tile[0] = new Tile();
 			tile[0].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Floor.png"));
 
-			tile[2] = new Tile();
-			tile[2].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Door-2.png"));
-
 			tile[1] = new Tile();
 			tile[1].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Wall-2.png"));
+
+			tile[2] = new Tile();
+			tile[2].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Door-2.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -84,6 +84,7 @@ public class TileManager {
 			int screenX = worldX - gp.bee.worldX + gp.bee.screenX;
 			int screenY = worldY - gp.bee.worldY + gp.bee.screenY;
 
+			// Optimization (Only draw tiles that are visibile)
 			if (worldX + gp.tileSize > gp.bee.worldX - gp.bee.screenX &&
 					worldX - gp.tileSize < gp.bee.worldX + gp.bee.screenX &&
 					worldY + gp.tileSize > gp.bee.worldY - gp.bee.screenY &&

@@ -18,8 +18,8 @@ public class GamePanel extends JPanel implements Runnable {
 	final int scale = 3;
 
 	public final int tileSize = originalTileSize * scale; // 48x48 Tile
-	public final int maxScreenCol = 25;
-	public final int maxScreenRow = 25;
+	public final int maxScreenCol = 20;
+	public final int maxScreenRow = 20;
 	public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
 	public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
@@ -85,10 +85,11 @@ public class GamePanel extends JPanel implements Runnable {
 
 		Graphics2D g2 = (Graphics2D) g;
 
+		tileM.draw(g2);
+		bee.draw(g2);
+
 		// Temporary Text for Testing
 		if (true) {
-			tileM.draw(g2);
-			bee.draw(g2);
 			g2.setFont(new Font("TimesRoman", Font.BOLD, 25));
 			g2.drawString("Bee WorldX: " + bee.worldX, 50, 50);
 			g2.drawString("Bee WorldY: " + bee.worldY, 50, 80);
