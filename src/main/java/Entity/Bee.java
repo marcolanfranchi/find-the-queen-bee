@@ -54,16 +54,19 @@ public class Bee extends Entity {
     }
 
     public void update() {
-        if (keyHandler.upPressed == true) {
+
+        this.checkCollision();
+
+        if (keyHandler.upPressed && moveUp) {
 			worldY -= speed;
             direction = "up";
-        } else if (keyHandler.downPressed == true) {
+        } else if (keyHandler.downPressed && moveDown) {
 			worldY += speed;
             direction = "down";
-        } else if (keyHandler.leftPressed == true) {
+        } else if (keyHandler.leftPressed && moveLeft) {
 			worldX -= speed;
             direction = "left";
-        } else if (keyHandler.rightPressed == true) {
+        } else if (keyHandler.rightPressed && moveRight) {
 			worldX += speed;
             direction = "right";
         }

@@ -23,6 +23,7 @@ abstract public class Entity {
     public String direction;
 
     public Rectangle bounds;
+    public boolean moveUp, moveDown, moveLeft, moveRight;
 
     public Rectangle getBounds() {
         bounds = new Rectangle(getX(), getY(), this.width, this.height);
@@ -65,6 +66,32 @@ abstract public class Entity {
         int posX = (this.getX() + speed) / gamePanel.tileSize;
         int posY = this.getY() / gamePanel.tileSize;
         return gamePanel.tileM.mapTileNum[posX][posY];
+    }
+
+    public void checkCollision() {
+        if (this.tileNumUp() == 1) {
+            moveUp = false;
+        } else {
+            moveUp = true;
+        }
+
+        if (this.tileNumDown() == 1) {
+            moveDown = false;
+        } else {
+            moveDown= true;
+        }
+
+        if (this.tileNumLeft() == 1) {
+            moveLeft = false;
+        } else {
+            moveLeft= true;
+        }
+
+        if (this.tileNumRight() == 1) {
+            moveRight = false;
+        } else {
+            moveRight= true;
+        }
     }
 
     
