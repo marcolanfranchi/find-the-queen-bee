@@ -15,15 +15,21 @@ public class Bee extends Entity {
     GamePanel gamePanel;
     KeyHandler keyHandler;
 
+	public final int screenX;
+	public final int screenY;
+
     public Bee(GamePanel gp, KeyHandler kh) {
 
         this.gamePanel = gp;
         this.keyHandler = kh;
 
+		this.screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
+		this.screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
+
         // default values
-        x = 0;
-        y = 0;
-        speed = 4;
+		worldX = gp.tileSize * 2;
+		worldY = gp.tileSize * 2;
+		speed = 6;
         direction = "down";
         getBeeImage();
     }
@@ -46,16 +52,16 @@ public class Bee extends Entity {
 
     public void update() {
         if (keyHandler.upPressed == true) {
-            y -= speed;
+			worldY -= speed;
             direction = "up";
         } else if (keyHandler.downPressed == true) {
-            y += speed;
+			worldY += speed;
             direction = "down";
         } else if (keyHandler.leftPressed == true) {
-            x -= speed;
+			worldX -= speed;
             direction = "left";
         } else if (keyHandler.rightPressed == true) {
-            x += speed;
+			worldX += speed;
             direction = "right";
         }
 
@@ -91,6 +97,6 @@ public class Bee extends Entity {
                 image = right1; 
             } else image = right2;
         }
-        g2.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+		g2.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 }
