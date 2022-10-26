@@ -32,7 +32,7 @@ public class Bee extends Entity {
 		//worldY = gp.tileSize * 2;
         worldX = 48;
         worldY = 48;
-		speed = 48;
+		speed = 48 / 2;
         direction = "down";
         getBeeImage();
     }
@@ -72,7 +72,7 @@ public class Bee extends Entity {
         }
 
         spriteCounter ++;
-        if (spriteCounter > 10) {
+        if (spriteCounter > 2) {
             if (spriteNum == 1) {
                 spriteNum = 2;
             } else if (spriteNum == 2) {
