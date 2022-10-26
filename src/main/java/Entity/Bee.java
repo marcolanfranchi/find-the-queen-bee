@@ -30,7 +30,7 @@ public class Bee extends Entity {
         // default values
 		worldX = gp.tileSize * 2;
 		worldY = gp.tileSize * 2;
-		speed = 6;
+		speed = 48;
         direction = "down";
         getBeeImage();
     }
@@ -101,5 +101,5 @@ public class Bee extends Entity {
 		g2.drawImage(image, screenX, screenY, width, height, null);
     }
 
-    
+
 }

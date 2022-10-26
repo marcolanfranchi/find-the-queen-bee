@@ -1,6 +1,8 @@
 package Entity;
 
 import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
+
 
 abstract public class Entity {
 
@@ -15,8 +17,19 @@ abstract public class Entity {
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public String direction;
 
-    public int getSpeed() {
-        return this.speed;
+    public Rectangle getBounds() {
+        Rectangle bounds = new Rectangle(worldX, worldY, this.width, this.height);
+        return bounds;
     }
+
+    public void checkWallCollision() {
+    }
+
+
+
+    
+
+
+
 
 }
