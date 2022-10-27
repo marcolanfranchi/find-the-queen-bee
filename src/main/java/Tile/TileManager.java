@@ -29,7 +29,7 @@ public class TileManager {
 	public void getTileImage() {
 		try {
 			tile[0] = new Tile();
-			tile[0].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Floor.png"));
+			tile[0].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/NewTile.png"));
 
 			tile[1] = new Tile();
 			tile[1].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Wall-2.png"));
