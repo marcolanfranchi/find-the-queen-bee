@@ -9,9 +9,13 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import Entity.Bee;
+import Environment.EnvironmentManager;
 import Tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
+
+	// SYSTEM
+	EnvironmentManager eManager = new EnvironmentManager(this);
 
 	// Screen Setting
 	final int originalTileSize = 16;
@@ -43,6 +47,10 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyHandler);
 		this.setFocusable(true);
+	}
+
+	public void setupGame() {
+		eManager.setup();
 	}
 
 	public void startGameThread() {
@@ -87,6 +95,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 		tileM.draw(g2);
 		bee.draw(g2);
+		eManager.draw(g2);
 
 		// Temporary Text for Testing
 		if (true) {
