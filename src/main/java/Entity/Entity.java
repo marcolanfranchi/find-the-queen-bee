@@ -69,6 +69,10 @@ abstract public class Entity {
     }
 
     public void checkCollision() {
+		if (tileNumUp() == 3 || tileNumDown() == 3 || tileNumLeft() == 3 || tileNumRight() == 3) {
+			System.out.println("Collision With Trap Tile");
+		}
+
         if (this.tileNumUp() == 1) {
             moveUp = false;
         } else {

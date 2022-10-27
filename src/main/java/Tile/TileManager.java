@@ -23,7 +23,7 @@ public class TileManager {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
 		getTileImage();
-		loadMap("../ui/maps/map1.txt");
+		loadMap("../ui/maps/trap-tile.txt");
 	}
 
 	public void getTileImage() {
@@ -36,6 +36,9 @@ public class TileManager {
 
 			tile[2] = new Tile();
 			tile[2].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Door-2.png"));
+
+			tile[3] = new Tile();
+			tile[3].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/TrapTile.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
