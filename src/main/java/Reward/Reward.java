@@ -5,6 +5,8 @@ import main.GamePanel;
 import java.awt.image.BufferedImage;
 
 
+ 
+
 public abstract class Reward {
  
     private GamePanel map;
@@ -54,6 +56,8 @@ public abstract class Reward {
       public Image getTexture() {
         return texture;
     }
+
+    
      
 }
 
