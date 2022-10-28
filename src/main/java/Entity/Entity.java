@@ -10,7 +10,6 @@ abstract public class Entity {
 
     GamePanel gamePanel;
 
-
     public int worldX, worldY;
     public int speed;
     public int width = 32;
@@ -69,7 +68,7 @@ abstract public class Entity {
     }
 
     public void checkCollision() {
-		if (tileNumUp() == 3 || tileNumDown() == 3 || tileNumLeft() == 3 || tileNumRight() == 3) {
+		if (getTileNum() == 3) {
 			System.out.println("Collision With Trap Tile");
 		}
 
@@ -96,10 +95,5 @@ abstract public class Entity {
         } else {
             moveRight= true;
         }
-    }
-
-    
-
-  
-   
+	}
 }
