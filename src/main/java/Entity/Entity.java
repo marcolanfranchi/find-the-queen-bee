@@ -70,6 +70,7 @@ abstract public class Entity {
     public void checkCollision() {
 		if (getTileNum() == 3) {
 			System.out.println("Collision With Trap Tile");
+            System.out.println("------");
 		}
 
         if (this.tileNumUp() == 1) {
