@@ -1,3 +1,4 @@
+  
 package Reward;
 import main.Entity.Bee;
 import main.GamePanel;
@@ -16,6 +17,8 @@ public abstract class Reward {
      * @param location
      */
 
+      
+
     public Reward(int value, Image texture, GamePanel map) {
         this.value = value;
         this.texture = texture;
@@ -32,7 +35,7 @@ public abstract class Reward {
     }
 
     public void setTexture(Image texture) {
-        this.texture = texture;
+        //this.texture = texture;
     }
 
     //Accessors
@@ -40,12 +43,17 @@ public abstract class Reward {
         return map;
     }
 
+
     public int getValue() {
         return value;
     }
 
-    public Image getTexture() {
+
+    
+
+      public Image getTexture() {
         return texture;
     }
+     
 }
 
