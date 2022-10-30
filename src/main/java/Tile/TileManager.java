@@ -18,12 +18,12 @@ public class TileManager {
 
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
-		tile = new Tile[10];
+		tile = new Tile[57];
 
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
 		getTileImage();
-		loadMap("../ui/maps/trap-tile.txt");
+		loadMap("../ui/maps/filename.txt");
 	}
 
 	public void getTileImage() {
