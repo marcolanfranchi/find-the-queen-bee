@@ -10,23 +10,24 @@ abstract public class Entity {
 
     GamePanel gamePanel;
 
-    public int worldX, worldY;
+    public int worldX;
+    public int worldY;
     public int speed;
     public int width = 32;
     public int height = 32;
-    	
+    
     public int spriteCounter = 0;
     public int spriteNum = 1;
-	
-    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, enemyUp, enemyDown, enemyLeft, enemyRight;
     public String direction;
 
     public Rectangle bounds;
     public boolean moveUp, moveDown, moveLeft, moveRight;
 
-    public Rectangle getBounds() {
+    public boolean onPath = false;
+
+    public void getBounds() {
         bounds = new Rectangle(getX(), getY(), this.width, this.height);
-        return bounds;
     }
 
     public int getX() {
@@ -67,6 +68,57 @@ abstract public class Entity {
         return gamePanel.tileM.mapTileNum[posX][posY];
     }
 
+    public Entity(GamePanel gp){
+        this.gamePanel = gp;
+    }
+
+    public int checkEntity(Entity entity, Entity target){
+        int index = 999;
+        //for(int i = 0; i < target.length; i++){
+        entity.bounds.x = entity.worldX + entity.bounds.x;
+        entity.bounds.y = entity.worldY + entity.bounds.y;
+        target.bounds.x = target.worldX + target.bounds.x;
+        target.bounds.y = target.worldY + target.bounds.y;
+        if(direction == "up"){
+            entity.bounds.y -= entity.speed;
+            //System.out.println("test3");
+		    //System.out.println(entity.bounds.intersects(target.bounds));
+            if(entity.bounds.intersects(target.bounds)){
+                index = 1;
+                moveUp = false;
+            }
+            //break;
+        }else if(direction == "down"){
+            entity.bounds.y += entity.speed;
+            if(entity.bounds.intersects(target.bounds)){
+                index = 2;
+                moveDown = false;
+            }
+            //break;
+        }else if(direction == "left"){
+            entity.bounds.x -= entity.speed;
+            if(entity.bounds.intersects(target.bounds)){
+                index = 3;
+                moveLeft = false;
+            }
+            //break;
+        }else if(direction == "right"){
+            entity.bounds.x += entity.speed;
+            if(entity.bounds.intersects(target.bounds)){
+                index = 4;
+                moveRight = false;
+            }
+            //break;
+        }
+        entity.bounds.x = getX();
+        entity.bounds.y = getY();
+        target.bounds.x = getX();
+        target.bounds.y = getY();
+    
+        return index;
+
+    }
+
     public void checkCollision() {
 		if (getTileNum() == 3) {
 			System.out.println("Collision With Trap Tile");
@@ -96,5 +148,7 @@ abstract public class Entity {
         } else {
             moveRight= true;
         }
+
+
 	}
 }

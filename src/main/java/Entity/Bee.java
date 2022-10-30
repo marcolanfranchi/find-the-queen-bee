@@ -1,6 +1,7 @@
 package Entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 
@@ -9,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+//import Reward.RewardGenerator;
 
 public class Bee extends Entity {
 
@@ -20,13 +22,22 @@ public class Bee extends Entity {
 
 
     public Bee(GamePanel gp, KeyHandler kh) {
-
-        this.gamePanel = gp;
+        super(gp);
+        //this.gamePanel = gp;
         this.keyHandler = kh;
-
+        bounds = new Rectangle();
+		bounds.x = getX();
+		bounds.y = getY();
+		bounds.width = this.width;
+		bounds.height = this.height;
 		this.screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
 		this.screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
+        // System.out.println("Test2");
+		// System.out.println(bounds.x = getX());
+		// System.out.println(bounds.y = getY());
+		// System.out.println(bounds.width);
+		// System.out.println(bounds.height);
         // default values
 		//worldX = gp.tileSize * 2;
 		//worldY = gp.tileSize * 2;
@@ -71,6 +82,12 @@ public class Bee extends Entity {
             direction = "right";
         }
 
+        // To check if the Bee hits the enemy
+        int collisionNPC = checkEntity(this, gamePanel.enemy);
+        if(collisionNPC != 999){
+            reduceScore();
+        }
+
         spriteCounter ++;
         if (spriteCounter > 2) {
             if (spriteNum == 1) {
@@ -90,6 +107,11 @@ public class Bee extends Entity {
 
 
 
+    }
+
+    //TODO: reduce score
+    public void reduceScore(){
+    //     BeeScoreNum -= Punishment
     }
 
     public void draw(Graphics2D g2) {
