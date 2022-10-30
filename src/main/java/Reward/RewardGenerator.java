@@ -1,4 +1,5 @@
-package Rewards;
+
+package Reward;
 
 import main.java.Entities.Enemy;
 import main.GamePanel;

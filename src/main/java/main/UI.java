@@ -73,7 +73,7 @@ public class UI {
 		g2.setColor(Color.WHITE);
 		g2.drawString(text, x, y);
 
-		// Blue boy image
+		// Bee image
 		x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
 		y += gp.tileSize * 2;
 		g2.drawImage(gp.bee.down1, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
