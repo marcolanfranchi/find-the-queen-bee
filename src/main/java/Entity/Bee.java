@@ -83,10 +83,10 @@ public class Bee extends Entity {
         }
 
         // To check if the Bee hits the enemy
-        int collisionNPC = checkEntity(this, gamePanel.enemy);
-        if(collisionNPC != 999){
-            reduceScore();
-        }
+        // int collisionNPC = checkEntity(this, gamePanel.enemy);
+        // if(collisionNPC != 999){
+        //     reduceScore();
+        // }
 
         spriteCounter ++;
         if (spriteCounter > 2) {

@@ -136,6 +136,7 @@ public class Enemy extends Entity{
 			// //checkCollision();
 			// }
 		}
+		
 	}
 
 	public void instantiateNodes() {
@@ -281,7 +282,7 @@ public class Enemy extends Entity{
 	public void draw(Graphics2D g2) {
 
 		BufferedImage image = null;
-        int screenX = worldX - gamePanel.bee.worldX + gamePanel.bee.screenX;
+        //int screenX = worldX - gamePanel.bee.worldX + gamePanel.bee.screenX;
         int screenY = worldY - gamePanel.bee.worldY + gamePanel.bee.screenY;
 
         if(worldX + gamePanel.tileSize > gamePanel.bee.worldX - gamePanel.bee.screenX &&
