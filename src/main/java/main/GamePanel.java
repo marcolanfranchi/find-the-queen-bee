@@ -93,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public void update() {
 		if (gameState == playState) {
 			bee.update();
+			enemy.update();
 		}
 
 		if (gameState == pauseState) {
@@ -112,6 +113,7 @@ public class GamePanel extends JPanel implements Runnable {
 		} else {
 
 			tileM.draw(g2);
+			enemy.draw(g2);
 			bee.draw(g2);
 			eManager.draw(g2);
 
