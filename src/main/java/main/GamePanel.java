@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import Entity.Bee;
+import Entity.Enemy;
 import Environment.EnvironmentManager;
 import Tile.TileManager;
 
@@ -28,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// Entity and Object
 	public Bee bee = new Bee(this, keyHandler);
+	public Enemy enemy = new Enemy(this);
 
 	// World Settings
 	public final int tileSize = originalTileSize * scale; // 48x48 Tile

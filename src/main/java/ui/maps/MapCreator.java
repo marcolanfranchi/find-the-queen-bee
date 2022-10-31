@@ -22,18 +22,13 @@ public class MapCreator {
 			FileWriter myWriter = new FileWriter("filename.txt");
 			// create map with 1 as the grid lines and 0 as the empty space
 			// the map is 20x20
-			int x = 57;
-			int y = 57;
+			int x = 60;
+			int y = 60;
 			int[][] map = new int[x][y];
 
-			map = createBasicGrid(x, y, 9);
-			// Now go through map and at random locations place the different objects
-			// labeled 2, 3, 4
-			// 3 is a flower
-			// 4 is a rock
-			// 5 is a bee
+			map = createBasicGrid(x, y, 5);
 
-			placeObjects(map, 60, 40, 400);
+			placeObjects(map, 100, 40, 400);
 
 			// now write the map to the file
 			for (int i = 0; i < map.length; i++) {
@@ -52,12 +47,15 @@ public class MapCreator {
 	}
 
 	private static int[][] createBasicGrid(int sizeX, int sizeY, int numberOfRooms) throws IOException {
-		int walls = sizeX / numberOfRooms;
+		System.out.println("sizeX/numberOfRooms: " + (double) sizeX / numberOfRooms);
+		int walls = (int) Math.floor((double) sizeX / numberOfRooms);
+		System.out.println("walls: " + walls);
 		int[][] map = new int[sizeX][sizeY];
 
+		// Add boundry walls
 		for (int i = 0; i < sizeX; i++) {
 			for (int j = 0; j < sizeY; j++) {
-				if (i == 0 || i == sizeX - 1 || j == 0 || j == sizeY - 1 || i % walls == 0 || j % walls == 0) {
+				if (i == 0 || i == sizeX - 1 || j == 0 || j == sizeY - 1) {
 					map[i][j] = 1;
 				} else {
 					map[i][j] = 0;
@@ -65,7 +63,27 @@ public class MapCreator {
 			}
 		}
 
-		// add doors to map in the middle of the walls
+		// Add walls at at intervals horizontally
+		for (int i = 0; i < sizeX; i += walls) {
+			for (int j = 0; j < sizeY; j++) {
+				// if (i % walls == 0 || j % walls == 0) {
+				// map[i][j] = 1;
+				// }
+				map[i][j] = 1;
+			}
+		}
+
+		// Add walls at at intervals vertically
+		for (int i = 0; i < sizeX; i++) {
+			for (int j = 0; j < sizeY; j += walls) {
+				// if (i % walls == 0 || j % walls == 0) {
+				// map[i][j] = 1;
+				// }
+				map[i][j] = 1;
+			}
+		}
+
+		// add doors to map in the middle of the walls on the x axis
 		for (int i = 0; i < sizeX; i++) {
 			for (int j = 0; j < sizeY; j++) {
 				if (i - 1 >= 0 && i + 1 < sizeX) {
@@ -77,7 +95,7 @@ public class MapCreator {
 			}
 		}
 
-		// add doors to map in the middle of the walls
+		// add doors to map in the middle of the walls on the y axis
 		for (int i = 0; i < sizeX; i++) {
 			for (int j = 0; j < sizeY; j++) {
 				if (j - 1 >= 0 && j + 1 < sizeY) {
@@ -92,11 +110,11 @@ public class MapCreator {
 		return map;
 	}
 
-	private static void placeObjects(int[][] map, int numberOfFlowers, int numberOfRocks, int numberOfBees) {
+	private static void placeObjects(int[][] map, int numberOfTraps, int numberOfHoney, int numberOfPots) {
 		int sizeX = map.length;
 		int sizeY = map[0].length;
 
-		for (int i = 0; i < numberOfFlowers; i++) {
+		for (int i = 0; i < numberOfTraps; i++) {
 			int x = (int) (Math.random() * sizeX);
 			int y = (int) (Math.random() * sizeY);
 
@@ -107,7 +125,7 @@ public class MapCreator {
 			}
 		}
 
-		// for (int i = 0; i < numberOfRocks; i++) {
+		// for (int i = 0; i < numberOfHoney; i++) {
 		// int x = (int) (Math.random() * sizeX);
 		// int y = (int) (Math.random() * sizeY);
 
@@ -118,7 +136,7 @@ public class MapCreator {
 		// }
 		// }
 
-		// for (int i = 0; i < numberOfBees; i++) {
+		// for (int i = 0; i < numberOfPots; i++) {
 		// int x = (int) (Math.random() * sizeX);
 		// int y = (int) (Math.random() * sizeY);
 
