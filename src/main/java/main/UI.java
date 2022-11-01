@@ -8,15 +8,20 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+import object.OBJ_ARROW;
 import object.OBJ_Honey;
+import object.OBJ_WASD;
 
 public class UI {
 	GamePanel gp;
 	Graphics2D g2;
 	Font retroPixel;
 	BufferedImage honeyImage;
+	BufferedImage arrowKeysImage;
+	BufferedImage wasdKeysImage;
 
 	public int commandNum = 0;
+	public int pauseCommandNum = 0;
 
 	public UI(GamePanel gp) {
 		this.gp = gp;
@@ -33,7 +38,11 @@ public class UI {
 		}
 
 		OBJ_Honey honey = new OBJ_Honey();
+		OBJ_ARROW arrowKeys = new OBJ_ARROW();
+		OBJ_WASD wasdKeys = new OBJ_WASD();
 		honeyImage = honey.image;
+		arrowKeysImage = arrowKeys.image;
+		wasdKeysImage = wasdKeys.image;
 	}
 
 	public void draw(Graphics2D g2) {
@@ -52,6 +61,15 @@ public class UI {
 				break;
 			case GamePanel.titleState:
 				drawTitleScreen();
+				break;
+			case GamePanel.gameOverState:
+				drawGameOverScreen();
+				break;
+			case GamePanel.winState:
+				drawWinScreen();
+				break;
+			case GamePanel.controlState:
+				drawControlState();
 				break;
 		}
 
@@ -122,11 +140,170 @@ public class UI {
 		// Draw the Paused Text
 		// Draw Button to Resume
 		String text = "PAUSED";
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 100f));
 		int x = getXforCenteredText(text);
-		int y = gp.screenHeight / 2;
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80f));
+		int y = gp.tileSize * 5;
+
+		// Draw Shadow
+		g2.setColor(Color.gray);
+		g2.drawString(text, x + 3, y + 3);
+		// Draw Text
+		g2.setColor(Color.WHITE);
 		g2.drawString(text, x, y);
 
+		// Draw Resume Button
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
+		text = "RESUME GAME";
+		x = getXforCenteredText(text);
+		y += gp.tileSize * 8;
+		g2.drawString(text, x, y);
+
+		if (pauseCommandNum == 0) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+
+		text = "CONTROLS";
+		x = getXforCenteredText(text);
+		y += gp.tileSize * 1.5;
+		g2.drawString(text, x, y);
+
+		if (pauseCommandNum == 1) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+
+		// Draw Quit Button
+		text = "QUIT";
+		x = getXforCenteredText(text);
+		y += gp.tileSize * 1.5;
+		g2.drawString(text, x, y);
+
+		if (pauseCommandNum == 2) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+
+	}
+
+	public void drawGameOverScreen() {
+		g2.setColor(Color.black);
+		g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
+
+		// Control Name
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
+		String text = "YOU LOSE";
+		int x = getXforCenteredText(text);
+		int y = gp.tileSize * 10;
+
+		// shadow
+		g2.setColor(Color.BLACK);
+		g2.drawString(text, x + 7, y + 7);
+		g2.setColor(Color.WHITE);
+		g2.drawString(text, x, y);
+	}
+
+	public void drawWinScreen() {
+		g2.setColor(Color.black);
+		g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
+
+		// Control Name
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
+		String text = "YOU WIN";
+		int x = getXforCenteredText(text);
+		int y = gp.tileSize * 10;
+
+		// shadow
+		g2.setColor(Color.BLACK);
+		g2.drawString(text, x + 7, y + 7);
+		g2.setColor(Color.WHITE);
+		g2.drawString(text, x, y);
+	}
+
+	public void drawControlState() {
+		g2.setColor(Color.black);
+		g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
+
+		// Control Name
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
+		String text = "Instructions";
+		int x = getXforCenteredText(text);
+		int y = gp.tileSize * 3;
+
+		// shadow
+		g2.setColor(Color.gray);
+		g2.drawString(text, x + 7, y + 7);
+		g2.setColor(Color.WHITE);
+		g2.drawString(text, x, y);
+
+		// Controls
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
+		text = "Movement";
+		x = getXforCenteredText(text);
+		y = gp.tileSize * 7;
+
+		// shadow
+		g2.setColor(Color.gray);
+		g2.drawString(text, x + 3, y + 3);
+		g2.setColor(Color.WHITE);
+		g2.drawString(text, x, y);
+
+		// Control Image
+		x = gp.tileSize * 4;
+		y += gp.tileSize;
+		g2.drawImage(arrowKeysImage, x, y, gp.tileSize * 3, gp.tileSize * 2, null);
+
+		// Or text
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
+		text = "OR";
+		x = getXforCenteredText(text);
+		y += gp.tileSize;
+
+		// shadow
+		g2.setColor(Color.gray);
+		g2.drawString(text, x + 3, y + 3);
+		g2.setColor(Color.WHITE);
+		g2.drawString(text, x, y);
+
+		// Control WASD Image
+		x += gp.tileSize * 4;
+		y -= gp.tileSize;
+		g2.drawImage(wasdKeysImage, x, y, gp.tileSize * 3, gp.tileSize * 2, null);
+
+		// Rules
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
+		text = "Rules";
+		x = getXforCenteredText(text);
+		y = gp.tileSize * 13;
+
+		// shadow
+		g2.setColor(Color.gray);
+		g2.drawString(text, x + 3, y + 3);
+		g2.setColor(Color.WHITE);
+		g2.drawString(text, x, y);
+
+		// Rules
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
+		text = "Your goal is to reach the end of the maze by going through doors that";
+		x = getXforCenteredText(text);
+		y += gp.tileSize * 2;
+		g2.setColor(Color.WHITE);
+		g2.drawString(text, x, y);
+
+		text = "may or may not be locked. While also avoiding the bee hunters.";
+		x = getXforCenteredText(text);
+		y += gp.tileSize;
+		g2.setColor(Color.WHITE);
+		g2.drawString(text, x, y);
+
+		text = "If you get caught by a bee hunter, you lose. If you reach ";
+		x = getXforCenteredText(text);
+		y += gp.tileSize;
+		g2.setColor(Color.WHITE);
+		g2.drawString(text, x, y);
+
+		text = "the end of the maze, you win. Press ESC to pause the game.";
+		x = getXforCenteredText(text);
+		y += gp.tileSize;
+		g2.setColor(Color.WHITE);
+		g2.drawString(text, x, y);
 	}
 
 	public int getXforCenteredText(String text) {

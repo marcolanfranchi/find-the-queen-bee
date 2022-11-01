@@ -14,6 +14,7 @@ public class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, 
                     leftPressed, rightPressed;
 
+	private int prevState = GamePanel.titleState;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -24,6 +25,8 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
 
         int keyCode = e.getKeyCode();
+		System.out.println("KeyPressed: " + keyCode);
+		System.out.println("Current GameState: " + gamePanel.gameState);
 
 		// title state
 		if (gamePanel.gameState == GamePanel.titleState) {
@@ -46,9 +49,41 @@ public class KeyHandler implements KeyListener {
 					gamePanel.gameState = GamePanel.playState;
 				}
 				if(gamePanel.ui.commandNum == 1) {
-					//send to menu screen
+					prevState = gamePanel.gameState;
+					gamePanel.gameState = GamePanel.controlState;
 				}
 				if(gamePanel.ui.commandNum == 2) {
+					System.exit(0);
+				}
+			}
+		}
+
+		// pause state
+		if (gamePanel.gameState == GamePanel.pauseState) {
+			if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
+				gamePanel.ui.pauseCommandNum--;
+				if (gamePanel.ui.pauseCommandNum < 0) {
+					gamePanel.ui.pauseCommandNum = 2;
+				}
+			}
+
+			if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
+				gamePanel.ui.pauseCommandNum++;
+				if (gamePanel.ui.pauseCommandNum > 2) {
+					gamePanel.ui.pauseCommandNum = 0;
+				}
+			}
+
+			if (keyCode == KeyEvent.VK_ENTER) {
+				if (gamePanel.ui.pauseCommandNum == 0) {
+					gamePanel.gameState = GamePanel.playState;
+				}
+				if (gamePanel.ui.pauseCommandNum == 1) {
+					prevState = gamePanel.gameState;
+					System.out.println("PrevState == " + prevState);
+					gamePanel.gameState = GamePanel.controlState;
+				}
+				if (gamePanel.ui.pauseCommandNum == 2) {
 					System.exit(0);
 				}
 			}
@@ -75,6 +110,9 @@ public class KeyHandler implements KeyListener {
 				gamePanel.gameState = GamePanel.pauseState;
 			} else if (gamePanel.gameState == GamePanel.pauseState) {
 				gamePanel.gameState = GamePanel.playState;
+			} else if (gamePanel.gameState == GamePanel.controlState) {
+				System.out.println("PrevState == " + prevState);
+				gamePanel.gameState = prevState;
 			}
 		}
         
