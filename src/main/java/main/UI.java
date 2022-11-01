@@ -130,7 +130,7 @@ public class UI {
 	public void drawPlayScreen() {
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40f));
 		g2.setColor(Color.WHITE);
-		g2.drawImage(honeyImage, gp.tileSize / 2, gp.tileSize / 2, gp.tileSize - 10, gp.tileSize - 10, null);
+		g2.drawImage(honeyImage, gp.tileSize / 12, gp.tileSize / 12, gp.tileSize * 2, gp.tileSize * 2, null);
 		// The 100 will be replaced with the current number of points in the bee class
 		g2.drawString("x " + 100, 80, 55);
 	}

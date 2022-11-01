@@ -21,6 +21,11 @@ public class OBJ_HoneyDropReward extends SuperObject {
 		rewardValue = 10;
 	}
 
+	public void setSize(int width, int height) {
+		this.width = width;
+		this.height = height;
+	}
+
 
 
 
