@@ -13,7 +13,7 @@ import Entity.Enemy;
 import Environment.EnvironmentManager;
 import Tile.TileManager;
 import object.ObjectManager;
-import object.QueenBee;
+import object.OBJ_QueenBee;
 import object.SuperObject;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -104,6 +104,8 @@ public class GamePanel extends JPanel implements Runnable {
 		if (gameState == playState) {
 			bee.update();
 			enemy.update();
+			//update QueenBee image
+			((OBJ_QueenBee) objects[0]).updateBee();
 		}
 
 		if (gameState == pauseState) {
