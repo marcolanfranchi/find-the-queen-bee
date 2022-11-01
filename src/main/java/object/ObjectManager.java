@@ -21,15 +21,26 @@ public class ObjectManager {
         gp.objects[1].worldX = 23 * gp.tileSize - 24;
         gp.objects[1].worldY = 22 * gp.tileSize;
 
-        // drawing multiple honey drop rewards
-
-
+        // drawing multiple honey drop rewards randomly, avoiding map walls
         for (int i = 2; i < 13; i++) {
 
             gp.objects[i] = new OBJ_HoneyDropReward();
-            gp.objects[i].worldX = getRandomNum(1, 23) * gp.tileSize;
-            gp.objects[i].worldY = getRandomNum(1, 23) * gp.tileSize;
-
+            int randomX = getRandomNum(0, 24);
+            int randomY = getRandomNum(0, 24);
+            if (randomX % 6 == 0) {
+                randomX++;
+                if (randomX == 25) {
+                    randomX -= 2;
+                }
+            }
+            if (randomY % 6 == 0) {
+                randomY++;
+                if (randomY == 25) {
+                    randomY -= 2;
+                }
+            }
+            gp.objects[i].worldX = randomX * gp.tileSize;
+            gp.objects[i].worldY = randomY * gp.tileSize;
         }
 
         // gp.objects[2] = new OBJ_HoneyDropReward();
