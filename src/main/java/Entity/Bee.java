@@ -3,6 +3,7 @@ package Entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 
 
@@ -11,6 +12,8 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 //import Reward.RewardGenerator;
+import object.OBJ_HoneyDropReward;
+import object.SuperObject;
 
 public class Bee extends Entity {
 
@@ -19,6 +22,7 @@ public class Bee extends Entity {
 
 	public final int screenX;
 	public final int screenY;
+    private ArrayList<OBJ_HoneyDropReward> regRewardList = new ArrayList<>();
 
 
     public Bee(GamePanel gp, KeyHandler kh) {
@@ -68,6 +72,10 @@ public class Bee extends Entity {
 
         this.checkCollision();
 
+        for (int i = 2; i < 12; i++) {
+            onReward(gamePanel.objects[i]);
+        }  
+
         if (keyHandler.upPressed && moveUp) {
 			worldY -= speed;
             direction = "up";
@@ -87,6 +95,7 @@ public class Bee extends Entity {
         // if(collisionNPC != 999){
         //     reduceScore();
         // }
+
 
         boolean endReached = checkReachedEnd();
 
@@ -164,6 +173,29 @@ public class Bee extends Entity {
 
     private boolean hasAllRewards() {
         return false;
+    }
+
+    public void addRegReward(OBJ_HoneyDropReward regReward) {
+        regRewardList.add(regReward);
+    }
+
+    public boolean onReward(SuperObject reward) {
+        int rewardX = reward.worldX;
+        int rewardY = reward.worldY;
+
+        final boolean inTopLeft = this.worldX == rewardX && this.worldY == rewardY;  
+        final boolean inTopRight = this.worldX - 24 == rewardX && this.worldY == rewardY;
+        final boolean inBottomLeft = this.worldX == rewardX && this.worldY == rewardY + 24;
+        final boolean inBottomRight = this.worldX - 24 == rewardX && this.worldY == rewardY + 24;              
+
+        if (inTopLeft || inTopRight || inBottomLeft || inBottomRight) {
+            System.out.println("On reward");
+            return true;
+        } else {
+            return false;
+                        }
+
+
     }
 
 

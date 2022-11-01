@@ -4,6 +4,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class OBJ_HoneyDropReward extends SuperObject {
+
+	public int rewardValue;
 	public OBJ_HoneyDropReward() {
 		name = "Honey";
 
@@ -15,7 +17,7 @@ public class OBJ_HoneyDropReward extends SuperObject {
 
 		width = 48;
 		height = 48;
- 
 
+		rewardValue = 10;
 	}
 }
