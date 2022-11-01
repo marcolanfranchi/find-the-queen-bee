@@ -104,9 +104,6 @@ public class Bee extends Entity {
         //System.out.println(this.tileNumDown());
         //System.out.println(this.tileNumLeft());
         //System.out.println(this.tileNumRight());
-
-
-
     }
 
     //TODO: reduce score

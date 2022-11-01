@@ -105,7 +105,6 @@ public class GamePanel extends JPanel implements Runnable {
 			bee.update();
 			enemy.update();
 			//update QueenBee image
-			((OBJ_QueenBee) objects[0]).updateBee();
 		}
 
 		if (gameState == pauseState) {
