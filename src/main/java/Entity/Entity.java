@@ -26,8 +26,9 @@ abstract public class Entity {
 
     public boolean onPath = false;
 
-    public void getBounds() {
+    public Rectangle getBounds() {
         bounds = new Rectangle(getX(), getY(), this.width, this.height);
+        return bounds;
     }
 
     public int getX() {

@@ -88,6 +88,12 @@ public class Bee extends Entity {
         //     reduceScore();
         // }
 
+        boolean endReached = checkReachedEnd();
+
+        if (endReached) {
+            System.out.println("End Reached");
+        }
+
         spriteCounter ++;
         if (spriteCounter > 2) {
             if (spriteNum == 1) {
@@ -133,6 +139,19 @@ public class Bee extends Entity {
             } else image = right2;
         }
 		g2.drawImage(image, screenX, screenY, width, height, null);
+    }
+
+    public boolean checkReachedEnd() {
+    
+        int endTileX = gamePanel.objects[0].worldX;
+        int endTileY = gamePanel.objects[0].worldY;
+
+
+        if (this.worldX >= endTileX && this.worldY >= endTileY) {
+            return true;
+        } else {
+            return false;
+                        }
     }
 
 
