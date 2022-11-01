@@ -20,4 +20,8 @@ public class OBJ_HoneyDropReward extends SuperObject {
 
 		rewardValue = 10;
 	}
+
+
+
+
 }

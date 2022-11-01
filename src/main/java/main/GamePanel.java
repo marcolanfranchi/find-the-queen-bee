@@ -5,7 +5,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import Entity.Bee;
@@ -14,6 +18,7 @@ import Environment.EnvironmentManager;
 import Tile.TileManager;
 import object.ObjectManager;
 import object.OBJ_QueenBee;
+import object.OBJ_TextBubble;
 import object.SuperObject;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -35,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public Enemy enemy = new Enemy(this);
 	public SuperObject objects[] = new SuperObject[20];
 	public ObjectManager objManager = new ObjectManager(this);
+
 
 	// World Settings
 	public final int tileSize = originalTileSize * scale; // 48x48 Tile
@@ -104,7 +110,12 @@ public class GamePanel extends JPanel implements Runnable {
 		if (gameState == playState) {
 			bee.update();
 			enemy.update();
+			updateQueenMessage();
 			//update QueenBee image
+
+			// update message from queen bee
+			//objManager.updateObjects(this);
+			
 		}
 
 		if (gameState == pauseState) {
@@ -147,5 +158,17 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 
 		g2.dispose();
+	}
+
+	public void updateQueenMessage() {
+		if (bee.nearQueenMissingRewards()) {
+            ((OBJ_TextBubble) objects[1]).setAltImage();
+        } else {
+            if (!bee.nearQueenMissingRewards()) {
+                objects[1] = new OBJ_TextBubble();
+                objects[1].worldX = 23 * tileSize - 24;
+                objects[1].worldY = 22 * tileSize;
+            }
+        }
 	}
 }

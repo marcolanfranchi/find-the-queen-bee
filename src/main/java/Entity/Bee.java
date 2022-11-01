@@ -13,6 +13,7 @@ import main.GamePanel;
 import main.KeyHandler;
 //import Reward.RewardGenerator;
 import object.OBJ_HoneyDropReward;
+import object.OBJ_TextBubble;
 import object.SuperObject;
 
 public class Bee extends Entity {
@@ -172,8 +173,29 @@ public class Bee extends Entity {
     }
 
     private boolean hasAllRewards() {
+        if (regRewardList.size() == 10) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+   /**
+    * if Bee is two tiles away from Queen Bee and doesnt not have all rewards,
+    * show alternate text bubble reminding to collect all rewards 
+    */
+    public boolean nearQueenMissingRewards() {
+        if (this.worldX >= 20 * gamePanel.tileSize && 
+            this.worldY >= 20 * gamePanel.tileSize) {
+                if (regRewardList.size() < 10) {
+                    ((OBJ_TextBubble) gamePanel.objects[1]).setAltImage();
+                    return true;
+                }
+            }
         return false;
     }
+
+
 
     public void addRegReward(OBJ_HoneyDropReward regReward) {
         regRewardList.add(regReward);
@@ -194,9 +216,9 @@ public class Bee extends Entity {
         } else {
             return false;
                         }
-
-
     }
+
+
 
 
 }
