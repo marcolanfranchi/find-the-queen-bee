@@ -11,7 +11,7 @@ import java.awt.Graphics2D;
 
 import main.GamePanel;
 
-public class TileManager {
+public class TileManager<BufferedImage> {
 	GamePanel gp;
 	Tile[] tile;
 	public int mapTileNum[][];
@@ -43,10 +43,15 @@ public class TileManager {
 			tile[4] = new Tile();
 			tile[4].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/QueenBee1.png"));
 			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
+	// public void addImage(BufferedImage i1, BufferedImage i2) {
+
+	// }
 
 	public void loadMap(String mapPath) {
 		try {
@@ -77,7 +82,7 @@ public class TileManager {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-	}
+	} 
 
 	public void draw(Graphics2D g2) {
 		int worldCol = 0;

@@ -12,6 +12,9 @@ import Entity.Bee;
 import Entity.Enemy;
 import Environment.EnvironmentManager;
 import Tile.TileManager;
+import object.ObjectManager;
+import object.QueenBee;
+import object.SuperObject;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -30,6 +33,8 @@ public class GamePanel extends JPanel implements Runnable {
 	// Entity and Object
 	public Bee bee = new Bee(this, keyHandler);
 	public Enemy enemy = new Enemy(this);
+	public SuperObject objects[] = new SuperObject[20];
+	public ObjectManager objManager = new ObjectManager(this);
 
 	// World Settings
 	public final int tileSize = originalTileSize * scale; // 48x48 Tile
@@ -60,8 +65,10 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setFocusable(true);
 	}
 
+
 	public void setupGame() {
 		eManager.setup();
+		objManager.setObjects();
 		gameState = titleState;
 	}
 
@@ -116,16 +123,23 @@ public class GamePanel extends JPanel implements Runnable {
 		} else {
 
 			tileM.draw(g2);
+
+			for(int i = 0; i < objects.length; i++) {
+				if (objects[i] != null) {
+					objects[i].draw(g2, this);
+				}
+			}
+
 			enemy.draw(g2);
 			bee.draw(g2);
 			eManager.draw(g2);
 
 			// Temporary Text for Testing
-			if (false) {
-				g2.setFont(new Font("TimesRoman", Font.BOLD, 25));
-				g2.drawString("Bee WorldX: " + bee.worldX, 50, 50);
-				g2.drawString("Bee WorldY: " + bee.worldY, 50, 80);
-			}
+			// if (false) {
+			// 	g2.setFont(new Font("TimesRoman", Font.BOLD, 25));
+			// 	g2.drawString("Bee WorldX: " + bee.worldX, 50, 50);
+			// 	g2.drawString("Bee WorldY: " + bee.worldY, 50, 80);
+			// }
 
 			// UI
 			ui.draw(g2);
