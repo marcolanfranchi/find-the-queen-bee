@@ -154,5 +154,17 @@ public class Bee extends Entity {
                         }
     }
 
+    public boolean checkDoneGame() {
+        if (checkReachedEnd() && hasAllRewards()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean hasAllRewards() {
+        return false;
+    }
+
 
 }

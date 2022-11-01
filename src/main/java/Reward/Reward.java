@@ -1,6 +1,6 @@
   
 // package Reward;
-// import main.Entity.Bee;
+// import Entity.Bee;
 // import main.GamePanel;
 // import java.awt.image.BufferedImage;
 
@@ -9,9 +9,10 @@
 
 // public abstract class Reward {
  
-//     private GamePanel map;
+//     private GamePanel gp;
 //     private int value;
-//     private Image texture; 
+//     private BufferedImage texture; 
+    
     
 //     /*Creates a reward given the parameters
 //      * @param value
@@ -21,15 +22,15 @@
 
       
 
-//     public Reward(int value, Image texture, GamePanel map) {
+//     public Reward(Image texture, GamePanel map) {
 //         this.value = value;
 //         this.texture = texture;
-//         this.map = map;
+//         this.gp = map;
 //     }
 
 //     //Mutators
 //     public void setMap(GamePanel map) {
-//         this.map = map;
+//         this.gp = map;
 //     }
 
 //     public void setValue(int value) {
