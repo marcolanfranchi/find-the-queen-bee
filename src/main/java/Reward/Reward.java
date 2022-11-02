@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 public abstract class Reward {
 
     private GamePanel map;
-    protected int value;
+    public int value;
     protected BufferedImage image;
     public int worldX;
     public int worldY;
@@ -54,5 +54,12 @@ public abstract class Reward {
 
     public BufferedImage getTexture() {
         return image;
+    }
+
+    public void remove() {
+        this.worldX = 0;
+        this.worldY = 0;
+        this.image = null;
+
     }
 }

@@ -18,6 +18,7 @@ public class RegularReward extends Reward {
         super(gp);
         this.value = regRewardVal;
         this.collected = false;
+        this.value = regRewardVal;
         try {
             this.image = ImageIO.read(getClass().getResource("../ui/images/HoneyDrop.png"));
         } catch (IOException e) {

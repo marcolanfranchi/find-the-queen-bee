@@ -17,6 +17,7 @@ public class BonusReward extends Reward {
         this.value = bonusRewardVal;
         this.collected = false;
         this.displayNow = false;
+        this.value = bonusRewardVal;
         try {
             this.image = ImageIO.read(getClass().getResource("../ui/images/HoneyPot.png"));
         } catch (IOException e) {

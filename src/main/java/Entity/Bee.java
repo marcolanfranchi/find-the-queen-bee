@@ -25,6 +25,7 @@ public class Bee extends Entity {
 	public final int screenX;
 	public final int screenY;
     private ArrayList<Reward> rewardList = new ArrayList<>();
+    public int beeScore;
 
 
     public Bee(GamePanel gp, KeyHandler kh) {
@@ -76,7 +77,7 @@ public class Bee extends Entity {
 
         for (int i = 0; i < gamePanel.rewards.length; i++) {
             if (gamePanel.rewards[i] != null) {
-                onReward(gamePanel.rewards[i]);
+                pickUpReward(gamePanel.rewards[i]);
             }
         }  
 
@@ -100,6 +101,7 @@ public class Bee extends Entity {
         //     reduceScore();
         // }
 
+        System.out.println("collected " + rewardList.size() +  " rewards");
 
         boolean endReached = checkReachedEnd();
 
@@ -206,6 +208,7 @@ public class Bee extends Entity {
      */
     public void addReward(Reward reward) {
         rewardList.add(reward);
+        beeScore += reward.value;
     }
 
     public boolean onReward(Reward reward) {
@@ -223,6 +226,13 @@ public class Bee extends Entity {
         } else {
             return false;
                         }
+    }
+
+    public void pickUpReward(Reward reward) {
+        if (onReward(reward)) {
+            addReward(reward);
+            reward.remove();
+        }
     }
 
 
