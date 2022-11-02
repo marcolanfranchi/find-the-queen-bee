@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable {
 	final int scale = 3;
 	int FPS = 10;
 
-	// Entity and Object
+	// Entities, Rewards, & Objects
 	public Bee bee = new Bee(this, keyHandler);
 	public Enemy enemy = new Enemy(this);
 	public Reward rewards[] = new Reward[20];
@@ -136,19 +136,8 @@ public class GamePanel extends JPanel implements Runnable {
 		} else {
 
 			tileM.draw(g2);
-
-			for (int i = 0; i < rewards.length; i++) {
-				if (rewards[i] != null) {
-					rewards[i].draw(g2, this); 
-				}
-			}
-
-
-			for(int i = 0; i < objects.length; i++) {
-				if (objects[i] != null) {
-					objects[i].draw(g2, this);
-				}
-			}
+			drawRewards(g2);
+			drawObjects(g2);
 
 			enemy.draw(g2);
 			bee.draw(g2);
@@ -178,5 +167,21 @@ public class GamePanel extends JPanel implements Runnable {
                 objects[1].worldY = 22 * tileSize;
             }
         }
+	}
+
+	public void drawObjects(Graphics2D g2) {
+		for (int i = 0; i < objects.length; i++) {
+			if (objects[i] != null) {
+				objects[i].draw(g2, this); 
+			}
+		}
+	}
+
+	public void drawRewards(Graphics2D g2) {
+		for (int i = 0; i < rewards.length; i++) {
+			if (rewards[i] != null) {
+				rewards[i].draw(g2, this); 
+			}
+		}
 	}
 }

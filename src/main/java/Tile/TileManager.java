@@ -38,7 +38,7 @@ public class TileManager<BufferedImage> {
 			tile[2] = new Tile();
 			tile[2].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Door-2.png"));
 
-			tile[3] = new Tile();
+			tile[3] = new Tile(); 
 			tile[3].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/TrapTile2.png"));
 			
 
