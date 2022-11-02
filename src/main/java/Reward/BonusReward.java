@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import Entity.Bee;
+
 import java.awt.*;
 
 public class BonusReward extends Reward {
@@ -21,7 +23,6 @@ public class BonusReward extends Reward {
         try {
             this.image = ImageIO.read(getClass().getResource("../ui/images/HoneyPot.png"));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -40,7 +41,11 @@ public class BonusReward extends Reward {
                     }
     }
 
-    public void update() {
-        checkCollected();
+    // public void update() {
+    //     checkCollected();
+    // }
+
+    public void collectReward(Bee bee) {
+        bee.beeScore += this.value;
     }
 }

@@ -1,11 +1,11 @@
 package Reward;
 import main.GamePanel;
 
-
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import Entity.Bee;
 
 import java.awt.*;
 
@@ -43,6 +43,12 @@ public class RegularReward extends Reward {
     }
 
     public void update() {
-        checkCollected();
+        //checkCollected();
+    }
+
+    public void collectReward(Bee bee) {
+        bee.rewardList.add(this);
+        bee.beeScore += this.value;
+        
     }
 }

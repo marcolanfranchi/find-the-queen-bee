@@ -116,11 +116,7 @@ public class GamePanel extends JPanel implements Runnable {
 			bee.update();
 			enemy.update();
 			updateQueenMessage();
-			//update QueenBee image
-
-			// update message from queen bee
-			//objManager.updateObjects(this);
-			
+			updateGameCompletion();			
 		}
 	}
 
@@ -182,6 +178,12 @@ public class GamePanel extends JPanel implements Runnable {
 			if (rewards[i] != null) {
 				rewards[i].draw(g2, this); 
 			}
+		}
+	}
+
+	public void updateGameCompletion() {
+		if (bee.checkDoneGame()) {
+			// send to GameOverState where player's time and score is displayed
 		}
 	}
 }

@@ -24,7 +24,7 @@ public class Bee extends Entity {
 
 	public final int screenX;
 	public final int screenY;
-    private ArrayList<Reward> rewardList = new ArrayList<>();
+    public ArrayList<Reward> rewardList = new ArrayList<>();
     public int beeScore;
 
 
@@ -178,7 +178,7 @@ public class Bee extends Entity {
     }
 
     private boolean hasAllRewards() {
-        if (rewardList.size() == 10) {
+        if (rewardList.size() == gamePanel.rewardGenerator.maxRegReward) {
             return true;
         } else {
             return false;
@@ -230,7 +230,7 @@ public class Bee extends Entity {
 
     public void pickUpReward(Reward reward) {
         if (onReward(reward)) {
-            addReward(reward);
+            reward.collectReward(this);
             reward.remove();
         }
     }
