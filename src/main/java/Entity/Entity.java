@@ -15,7 +15,7 @@ abstract public class Entity {
     public int speed;
     public int width = 32;
     public int height = 32;
-    
+    public int actionLockCounter = 0;
     public int spriteCounter = 0;
     public int spriteNum = 1;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, enemyUp, enemyDown, enemyLeft, enemyRight;
@@ -25,6 +25,7 @@ abstract public class Entity {
     public boolean moveUp, moveDown, moveLeft, moveRight;
 
     public boolean onPath = false;
+    public boolean enemyCollision;
 
     public Rectangle getBounds() {
         bounds = new Rectangle(getX(), getY(), this.width, this.height);
@@ -148,6 +149,43 @@ abstract public class Entity {
             moveRight = false;
         } else {
             moveRight= true;
+        }
+
+
+	}
+
+    public void enemyCheckCollision() {
+		if (getTileNum() == 3) {
+			System.out.println("Collision With Trap Tile");
+            System.out.println("------");
+		}
+
+        if (this.tileNumUp() == 1) {
+            enemyCollision = true;
+            direction = null;
+        } else {
+            direction = "up";
+        }
+
+        if (this.tileNumDown() == 1) {
+            enemyCollision = true;
+            direction = null;
+        } else {
+            direction = "down";
+        }
+
+        if (this.tileNumLeft() == 1) {
+            enemyCollision = true;
+            direction = null;
+        } else {
+            direction = "left";
+        }
+
+        if (this.tileNumRight() == 1) {
+            enemyCollision = true;
+            direction = null;
+        } else {
+            direction = "right";
         }
 
 

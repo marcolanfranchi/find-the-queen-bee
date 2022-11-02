@@ -48,7 +48,7 @@ public class Bee extends Entity {
 		//worldY = gp.tileSize * 2;
         worldX = 48;
         worldY = 48;
-		speed = 48 / 2;
+		speed = 48;
         direction = "down";
         getBeeImage();
     }

@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
@@ -25,13 +26,14 @@ public class Enemy extends Entity{
     Node startNode, goalNode, currentNode;
     boolean goalReached = false;
     int step = 0;
+	int randomX;
+	int randomY;
+	Random num = new Random();
 
 	public Enemy(GamePanel gp) {
 		super(gp);
 		instantiateNodes();
-        // allows the enemy to track down the Bee
         onPath = true;
-		//this.keyHandler = kh;
 		bounds = new Rectangle();
 		bounds.x = getX();
 		bounds.y = getY();
@@ -46,10 +48,23 @@ public class Enemy extends Entity{
 		// System.out.println(bounds.width);
 		// System.out.println(bounds.height);
 
-
-		worldX = gp.tileSize*10;
-		worldY = gp.tileSize*10;
-		speed = 48 / 2;
+		randomX = num.nextInt(25);
+		randomY = num.nextInt(25);
+		if (randomX % 6 == 0) {
+			randomX++;
+			if (randomX == 25) {
+				randomX -= 2;
+			}
+		}
+		if (randomY % 6 == 0) {
+			randomY++;
+			if (randomY == 25) {
+				randomY -= 2;
+			}
+		}
+		worldX = randomX * gp.tileSize;
+		worldY = randomY * gp.tileSize;
+		speed = 48 / 4;
 		direction = "up";
 		//contact = false;
 		getEnemyImage();
@@ -59,13 +74,13 @@ public class Enemy extends Entity{
 		try {
 
             up1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-up.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-up.png"));
+            //up2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-up.png"));
             down1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-down.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-down.png"));
+            //down2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-down.png"));
             left1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-left.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-left.png"));
+            //left2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-left.png"));
             right1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-right.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-right.png"));
+            //right2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-right.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,10 +88,47 @@ public class Enemy extends Entity{
 	}
 
 	public void update(){
-        this.checkCollision();
-        int goalCol = gamePanel.bee.worldX; //(gamePanel.bee.worldX + gamePanel.bee.bounds.x) / gamePanel.tileSize;
-        int goalRow = gamePanel.bee.worldY; //(gamePanel.bee.worldY + gamePanel.bee.bounds.y) / gamePanel.tileSize;
+	
+		this.checkCollision();
+		int goalCol = gamePanel.bee.worldX / gamePanel.tileSize; //(gamePanel.bee.worldX + gamePanel.bee.bounds.x) / gamePanel.tileSize;
+		int goalRow = gamePanel.bee.worldY / gamePanel.tileSize; //(gamePanel.bee.worldY + gamePanel.bee.bounds.y) / gamePanel.tileSize;
 		searchPath(goalCol, goalRow);
+
+		// this.enemyCheckCollision();
+		// actionLockCounter++;
+		// if(actionLockCounter == 10){
+		// 	//worldX += speed;
+		// 	//direction = "right";
+		// 	// Random random = new Random();
+		// 	// int i = random.nextInt(100) + 1;
+		// 	// if(i <= 25){
+		// 	// 	worldY -= speed;
+		// 	// 	direction = "up";
+		// 	// }
+		// 	// if(i > 25 && i <= 50){
+		// 	// 	worldY += speed;
+		// 	// 	direction = "down";
+		// 	// }
+		// 	// if(i > 50 && i <= 75){
+		// 	// 	worldX -= speed;
+		// 	// 	direction = "left";
+		// 	// }
+		// 	// if(i > 75 && i <=100){
+		// 	// 	worldX += speed;
+		// 	// 	direction = "right";
+		// 	// }
+		// 	// spriteCounter ++;
+		// 	if (spriteCounter > 2) {
+		// 		if (spriteNum == 1) {
+		// 			spriteNum = 2;
+		// 		} else if (spriteNum == 2) {
+		// 			spriteNum = 1;
+		// 		}
+		// 		spriteCounter = 0;
+		// 	}
+		// 	actionLockCounter = 0;
+
+		// }
     }
 
 
@@ -95,7 +147,10 @@ public class Enemy extends Entity{
 		// System.out.println(goalCol);
 		// System.out.println(goalRow);
 		setNodes(startCol, startRow, goalCol, goalRow);
+
+		//System.out.println(search());
 		if (search() == true) {
+			//System.out.println(search());
 			int nextX = pathList.get(0).col * gamePanel.tileSize;
 			int nextY = pathList.get(0).row * gamePanel.tileSize;
 			int enLeftX = worldX + bounds.x;
@@ -111,38 +166,58 @@ public class Enemy extends Entity{
 			// System.out.println(enDownY);
 
 			if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
+				worldY -= speed;
 				direction = "up";
 			} else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
+				worldY += speed;
 				direction = "down";
 			} else if (enTopY >= nextY && enDownY < nextY + gamePanel.tileSize) {
 				if (enLeftX > nextX) {
+					worldX -= speed;
 					direction = "left";
 				}
 				if (enLeftX < nextX) {
+					worldX += speed;
 					direction = "right";
 				}
 			}
-			// else if(enTopY > nextY && enLeftX > nextX){
-			// direction = "up";
-			// //checkCollision();
-			// }else if(enTopY > nextY && enLeftX < nextX){
-			// direction = "up";
-			// //checkCollision();
-			// }else if(enTopY < nextY && enLeftX > nextX){
-			// direction = "down";
-			// //checkCollision();
-			// }else if(enTopY < nextY && enLeftX < nextX){
-			// direction = "down";
-			// //checkCollision();
-			// }
+			else if(enTopY > nextY && enLeftX > nextX){
+				worldY -= speed;
+				direction = "up";
+				enemyCheckCollision();
+				if(enemyCollision == true){
+					worldX -= speed;
+					direction = "left";
+				}
+			}else if(enTopY > nextY && enLeftX < nextX){
+				direction = "up";
+				enemyCheckCollision();
+				if(enemyCollision == true){
+					worldX += speed;
+					direction = "right";
+				}
+			}else if(enTopY < nextY && enLeftX > nextX){
+				direction = "down";
+				enemyCheckCollision();
+				if(enemyCollision == true){
+					worldX -= speed;
+					direction = "left";
+				}
+			}else if(enTopY < nextY && enLeftX < nextX){
+				direction = "down";
+				enemyCheckCollision();
+				if(enemyCollision == true){
+					worldX += speed;
+					direction = "right";
+				}
+			}
 		}
-		
 	}
 
 	public void instantiateNodes() {
 		node = new Node[gamePanel.worldWidth][gamePanel.worldHeight];
-		// System.out.println("maxWorldCol: " + gamePanel.worldWidth);
-		// System.out.println("maxWorldRow: " + gamePanel.worldHeight);
+		//System.out.println("maxWorldCol: " + gamePanel.worldWidth);
+		//System.out.println("maxWorldRow: " + gamePanel.worldHeight);
 		int col = 0;
 		int row = 0;
 		while (col < gamePanel.worldWidth && row < gamePanel.worldHeight) {
@@ -183,11 +258,16 @@ public class Enemy extends Entity{
 		startNode = node[startCol][startRow];
 		currentNode = startNode;
 		goalNode = node[goalCol][goalRow];
-		// System.out.println("goalNode.col: " + goalNode);
+		// System.out.println("startNode.col: " + startNode.col);
+		// System.out.println("startNode.row: " + startNode.row);
+		// System.out.println("goalNode.col: " + goalNode.col);
+		// System.out.println("goalNode.col: " + goalNode.row);
+		
 		openList.add(currentNode);
 		int col = 0;
 		int row = 0;
 		while (col < gamePanel.maxWorldCol && row < gamePanel.maxWorldRow) {
+			//System.out.println("mapTileNum: " + gamePanel.tileM.mapTileNum[col][row]);
 			if (gamePanel.tileM.mapTileNum[col][row] == 1) {
 				node[col][row].solid = true;
 			}
@@ -218,16 +298,27 @@ public class Enemy extends Entity{
 
 		// F cost
 		node.fCost = node.gCost + node.hCost;
+		// System.out.println("gCost: " + node.gCost);
+		// System.out.println("hCost: " + node.hCost);
+		// System.out.println("fCost: " + node.fCost);
 	}
 
 	public boolean search() {
+		// System.out.println("goalReached: " + goalReached);
+		// System.out.println("step: " + step);
+		// System.out.println("currentNode.col: " + currentNode.col);
+		// System.out.println("currentNode.row: " + currentNode.row);
+
 		while (goalReached == false && step < 500) {
 			int col = currentNode.col;
 			int row = currentNode.row;
 			currentNode.checked = true;
+			//System.out.println("before openList.size: " + openList.size());
 			openList.remove(currentNode);
+			//System.out.println("after openList.size: " + openList.size());
 			if (row - 1 >= 0) {
 				openNode(node[col][row - 1]);
+				//System.out.println("Left N: " + );
 			}
 			if (col - 1 >= 0) {
 				openNode(node[col - 1][row]);
@@ -259,11 +350,15 @@ public class Enemy extends Entity{
 				trackThePath();
 			}
 			step++;
+			//openList.remove(currentNode);
 		}
 		return goalReached;
 	}
 
 	public void openNode(Node node) {
+		// System.out.println("If Open: " + node.open);
+		// System.out.println("If Checked: " + node.open);
+		// System.out.println("If Solid: " + node.open);
 		if (node.open == false && node.checked == false && node.solid == false) {
 			node.open = true;
 			node.parent = currentNode;
@@ -284,7 +379,6 @@ public class Enemy extends Entity{
 		BufferedImage image = null;
         int screenX = worldX - gamePanel.bee.worldX + gamePanel.bee.screenX;
         int screenY = worldY - gamePanel.bee.worldY + gamePanel.bee.screenY;
-
         if(worldX + gamePanel.tileSize > gamePanel.bee.worldX - gamePanel.bee.screenX &&
            worldX - gamePanel.tileSize < gamePanel.bee.worldX + gamePanel.bee.screenX &&
            worldY + gamePanel.tileSize > gamePanel.bee.worldY - gamePanel.bee.screenY &&
