@@ -24,9 +24,7 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-        int keyCode = e.getKeyCode();
-		System.out.println("KeyPressed: " + keyCode);
-		System.out.println("Current GameState: " + gamePanel.gameState);
+		int keyCode = e.getKeyCode();
 
 		// title state
 		if (gamePanel.gameState == GamePanel.titleState) {

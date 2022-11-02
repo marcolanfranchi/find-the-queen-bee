@@ -7,6 +7,11 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
+
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import object.OBJ_ARROW;
 import object.OBJ_HoneyDropReward;
@@ -23,8 +28,18 @@ public class UI {
 	public int commandNum = 0;
 	public int pauseCommandNum = 0;
 
+	Timer timer;
+	int second, minute;
+	String ddSecond, ddMinute;
+
+	DecimalFormat dformat = new DecimalFormat("00");
+
 	public UI(GamePanel gp) {
 		this.gp = gp;
+		second = 0;
+		minute = 3;
+		countDownTimer();
+		timer.start();
 
 		try {
 			InputStream is = getClass().getResourceAsStream("../ui/font/retro_pixel.ttf");
@@ -43,6 +58,7 @@ public class UI {
 		honeyImage = honey.image;
 		arrowKeysImage = arrowKeys.image;
 		wasdKeysImage = wasdKeys.image;
+
 	}
 
 	public void draw(Graphics2D g2) {
@@ -128,17 +144,24 @@ public class UI {
 	}
 
 	public void drawPlayScreen() {
+		timer.start();
+
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40f));
 		g2.setColor(Color.WHITE);
 		g2.drawImage(honeyImage, gp.tileSize / 2, gp.tileSize / 2, gp.tileSize - 10, gp.tileSize - 10, null);
 		// The 100 will be replaced with the current number of points in the bee class
 		g2.drawString("x " + 100, 80, 55);
+
+		// Timer
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40f));
+		g2.drawString(ddMinute + ":" + ddSecond, gp.screenWidth / 2, 55);
 	}
 
 	public void drawPauseScreen() {
 		// Draw Pause Menu
 		// Draw the Paused Text
 		// Draw Button to Resume
+		timer.stop();
 		String text = "PAUSED";
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 100f));
 		int x = getXforCenteredText(text);
@@ -184,6 +207,7 @@ public class UI {
 	}
 
 	public void drawGameOverScreen() {
+		timer.start();
 		g2.setColor(Color.black);
 		g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
 
@@ -201,6 +225,7 @@ public class UI {
 	}
 
 	public void drawWinScreen() {
+		timer.stop();
 		g2.setColor(Color.black);
 		g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
 
@@ -311,5 +336,28 @@ public class UI {
 		int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 		x = gp.screenWidth / 2 - length / 2;
 		return x;
+	}
+
+	public void countDownTimer() {
+		timer = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				second--;
+				ddSecond = dformat.format(second);
+				ddMinute = dformat.format(minute);
+
+				if (second == -1) {
+					second = 59;
+					minute--;
+					ddSecond = dformat.format(second);
+					ddMinute = dformat.format(minute);
+				}
+
+				if (minute == 0 && second == 0) {
+					timer.stop();
+					gp.gameState = GamePanel.gameOverState;
+				}
+			}
+		});
 	}
 }

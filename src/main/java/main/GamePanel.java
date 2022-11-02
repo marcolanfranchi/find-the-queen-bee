@@ -106,10 +106,6 @@ public class GamePanel extends JPanel implements Runnable {
 			enemy.update();
 			//update QueenBee image
 		}
-
-		if (gameState == pauseState) {
-			// do nothing
-		}
 	}
 
 	public void paintComponent(Graphics g) {

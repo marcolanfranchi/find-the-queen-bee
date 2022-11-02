@@ -16,6 +16,7 @@ public class TileManager<BufferedImage> {
 	Tile[] tile;
 	public int mapTileNum[][];
 
+
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
 		tile = new Tile[10];
