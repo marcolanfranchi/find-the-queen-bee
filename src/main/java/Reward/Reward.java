@@ -10,8 +10,8 @@ public abstract class Reward {
     private GamePanel map;
     protected int value;
     protected BufferedImage image;
-    protected int worldX;
-    protected int worldY;
+    public int worldX;
+    public int worldY;
     public boolean collected;
     public int width;
     public int height;

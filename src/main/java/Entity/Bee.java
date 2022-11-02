@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import Reward.Reward;
 import main.GamePanel;
 import main.KeyHandler;
 //import Reward.RewardGenerator;
@@ -23,7 +24,7 @@ public class Bee extends Entity {
 
 	public final int screenX;
 	public final int screenY;
-    private ArrayList<OBJ_HoneyDropReward> regRewardList = new ArrayList<>();
+    private ArrayList<Reward> rewardList = new ArrayList<>();
 
 
     public Bee(GamePanel gp, KeyHandler kh) {
@@ -48,7 +49,7 @@ public class Bee extends Entity {
 		//worldY = gp.tileSize * 2;
         worldX = 48;
         worldY = 48;
-		speed = 48;
+		speed = 48 / 2;
         direction = "down";
         getBeeImage();
     }
@@ -73,9 +74,11 @@ public class Bee extends Entity {
 
         this.checkCollision();
 
-        // for (int i = 2; i < 12; i++) {
-        //     onReward(gamePanel.objects[i]);
-        // }  
+        for (int i = 0; i < gamePanel.rewards.length; i++) {
+            if (gamePanel.rewards[i] != null) {
+                onReward(gamePanel.rewards[i]);
+            }
+        }  
 
         if (keyHandler.upPressed && moveUp) {
 			worldY -= speed;
@@ -173,7 +176,7 @@ public class Bee extends Entity {
     }
 
     private boolean hasAllRewards() {
-        if (regRewardList.size() == 10) {
+        if (rewardList.size() == 10) {
             return true;
         } else {
             return false;
@@ -187,7 +190,7 @@ public class Bee extends Entity {
     public boolean nearQueenMissingRewards() {
         if (this.worldX >= 20 * gamePanel.tileSize && 
             this.worldY >= 20 * gamePanel.tileSize) {
-                if (regRewardList.size() < 10) {
+                if (rewardList.size() < 10) {
                     ((OBJ_TextBubble) gamePanel.objects[1]).setAltImage();
                     return true;
                 }
@@ -197,26 +200,30 @@ public class Bee extends Entity {
 
 
 
-    public void addRegReward(OBJ_HoneyDropReward regReward) {
-        regRewardList.add(regReward);
+    /**
+     * Adds 
+     * @param regReward
+     */
+    public void addReward(Reward reward) {
+        rewardList.add(reward);
     }
 
-    // public boolean onReward(SuperObject reward) {
-    //     int rewardX = reward.worldX;
-    //     int rewardY = reward.worldY;
+    public boolean onReward(Reward reward) {
+        int rewardX = reward.worldX;
+        int rewardY = reward.worldY;
 
-    //     final boolean inTopLeft = this.worldX == rewardX && this.worldY == rewardY;  
-    //     final boolean inTopRight = this.worldX - 24 == rewardX && this.worldY == rewardY;
-    //     final boolean inBottomLeft = this.worldX == rewardX && this.worldY == rewardY + 24;
-    //     final boolean inBottomRight = this.worldX - 24 == rewardX && this.worldY == rewardY + 24;              
+        final boolean inTopLeft = this.worldX == rewardX && this.worldY == rewardY;  
+        final boolean inTopRight = this.worldX - 24 == rewardX && this.worldY == rewardY;
+        final boolean inBottomLeft = this.worldX == rewardX && this.worldY == rewardY + 24;
+        final boolean inBottomRight = this.worldX - 24 == rewardX && this.worldY == rewardY + 24;              
 
-    //     if (inTopLeft || inTopRight || inBottomLeft || inBottomRight) {
-    //         System.out.println("On reward");
-    //         return true;
-    //     } else {
-    //         return false;
-    //                     }
-    // }
+        if (inTopLeft || inTopRight || inBottomLeft || inBottomRight) {
+            System.out.println("On reward");
+            return true;
+        } else {
+            return false;
+                        }
+    }
 
 
 
