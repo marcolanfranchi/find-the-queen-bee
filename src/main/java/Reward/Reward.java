@@ -1,6 +1,6 @@
 package Reward;
 
-import main.GamePanel;
+import main.GamePanel; 
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
