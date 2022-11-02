@@ -1,18 +1,12 @@
 package Reward;
 
-
 import main.GamePanel;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class RewardGenerator {
+
 
     private static ArrayList<Reward> rewardsList = new ArrayList<>();
 
@@ -22,7 +16,7 @@ public class RewardGenerator {
 
     GamePanel map;
 
-    final int maxRegReward = 10;
+    int maxRegReward = 10;
     final int maxBonusReward = 2;
     final int maxCordX = 25;
     final int maxCordY = 15;
@@ -30,62 +24,59 @@ public class RewardGenerator {
     final int bonusRewardVal = 25;
 
     // Generating and adding the new rewards to the list
-    public RewardGenerator(GamePanel map) {
-        this.map = map;
-        for (int i = 0; i <= maxRegReward; i++) {
-            rewardsList.add(generateRegularReward());
+    public RewardGenerator(GamePanel gp) {
+        this.map = gp;
+    }
+
+public void setRewards() {
+        // add maxRegReward # of regular rewards to rewards list
+        for (int i = 0; i < maxRegReward; i++) {
+            map.rewards[i] = new RegularReward(map);
+            
+            int randomX = getRandomNum(0, 24);
+            int randomY = getRandomNum(0, 24);
+            if (randomX % 6 == 0) {
+                randomX++;
+                if (randomX == 25) {
+                    randomX -= 2;
+                }
+            }
+            if (randomY % 6 == 0) {
+                randomY++;
+                if (randomY == 25) {
+                    randomY -= 2;
+                }
+            }
+            map.rewards[i].worldX = randomX * map.tileSize;
+            map.rewards[i].worldY = randomY * map.tileSize;
         }
 
-        for (int i = 0; i <= maxBonusReward; i++) {
-            rewardsList.add(generateBonusReward());
+        // add maxBonusReward # of regular rewards to rewards list
+        for (int i = maxRegReward; i < maxRegReward + maxBonusReward; i++) {
+            map.rewards[i] = new BonusReward(map);
+
+            int randomX = getRandomNum(0, 24);
+            int randomY = getRandomNum(0, 24);
+            if (randomX % 6 == 0) {
+                randomX++;
+                if (randomX == 25) {
+                    randomX -= 2;
+                }
+            }
+            
+            if (randomY % 6 == 0) {
+                randomY++;
+                if (randomY == 25) {
+                    randomY -= 2;
+                }
+            }
+            map.rewards[i].worldX = randomX * map.tileSize;
+            map.rewards[i].worldY = randomY * map.tileSize;
         }
     }
 
-    Random r = new Random();
-
-
-    public Reward generateRegularReward () {
-        BufferedImage regRewardImg;
-        try {
-            BufferedImage bonusRewardImg = ImageIO.read(getClass().getResourceAsStream("../ui/images/HoneyDrop.png"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        int xCord = r.nextInt(maxCordX + 1);
-        int yCord = r.nextInt(maxCordY + 1);
-
-        final Reward regReward = new RegularReward(regRewardVal, regRewardImg, new Point(xCord, yCord), map);
-
-        // Checking if the generated reward's location is equal to another one's in the list, if it is, then we use recursion
-        for (Reward reward : rewardsList) {
-            if (regReward.getLocation() == reward.getLocation())
-                return generateRegularReward();
-        }
-        return regReward;
-    }
-
-    
-
-    public Reward generateBonusReward () {
-        BufferedImage bonusRewardImg;
-        try {
-            bonusRewardImg = ImageIO.read(getClass().getResourceAsStream("../ui/images/HoneyPot.png"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        int xCord = r.nextInt(maxCordX + 1);
-        int yCord = r.nextInt(maxCordY + 1);
-
-        final Reward bonusReward = new BonusReward(bonusRewardVal, bonusRewardImg, new Point(xCord, yCord), map);
-
-        // Checking if the generated reward's location is equal to another one's in the list, if it is, then we use recursion
-        for (Reward reward : rewardsList) {
-            if (bonusReward.getLocation() == reward.getLocation())
-                return generateBonusReward();
-        }
-        return bonusReward;
+public static int getRandomNum(int min, int max) {
+        Random num = new Random();
+        return num.nextInt(max - min + 1) + min;
     }
 }
