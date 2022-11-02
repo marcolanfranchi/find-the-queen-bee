@@ -34,6 +34,10 @@ public abstract class Reward {
         this.map = map;
     }
 
+    // public void setLocation(Point location) {
+    //     this.location = location;
+    // }
+
     public void setValue(int value) {
         this.value = value;
     }
@@ -46,6 +50,10 @@ public abstract class Reward {
     public GamePanel getMap() {
         return map;
     }
+
+    // public Point getLocation() {
+    //     return location;
+    // }
 
     public int getValue() {
         return value;
