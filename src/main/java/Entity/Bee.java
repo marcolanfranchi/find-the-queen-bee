@@ -73,7 +73,7 @@ public class Bee extends Entity {
 
     public void update() {
 
-        this.checkCollision();
+        checkCollision();
 
         for (int i = 0; i < gamePanel.rewards.length; i++) {
             if (gamePanel.rewards[i] != null) {
@@ -102,6 +102,7 @@ public class Bee extends Entity {
         // }
 
         System.out.println("collected " + rewardList.size() +  " rewards");
+        System.out.println("Bee score: " + this.beeScore);
 
         boolean endReached = checkReachedEnd();
 
