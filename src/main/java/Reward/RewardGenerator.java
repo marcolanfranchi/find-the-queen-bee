@@ -66,7 +66,7 @@ public class RewardGenerator {
         return regReward;
     }
 
-    // Generate a bonus reward at some random point
+    
 
     public Reward generateBonusReward () {
         BufferedImage bonusRewardImg;
