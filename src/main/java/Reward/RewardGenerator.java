@@ -47,7 +47,7 @@ public class RewardGenerator {
     public Reward generateRegularReward () {
         BufferedImage regRewardImg;
         try {
-            BufferedImage bonusRewardImg = ImageIO.read(getClass().getResourceAsStream(".../ui/images/Honeydrop.png"));
+            BufferedImage bonusRewardImg = ImageIO.read(getClass().getResourceAsStream("../ui/images/HoneyDrop.png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -71,7 +71,7 @@ public class RewardGenerator {
     public Reward generateBonusReward () {
         BufferedImage bonusRewardImg;
         try {
-            bonusRewardImg = ImageIO.read(getClass().getResourceAsStream(".../ui/images/Honeypot.png"));
+            bonusRewardImg = ImageIO.read(getClass().getResourceAsStream("../ui/images/HoneyPot.png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
