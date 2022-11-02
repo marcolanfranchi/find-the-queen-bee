@@ -73,9 +73,9 @@ public class Bee extends Entity {
 
         this.checkCollision();
 
-        for (int i = 2; i < 12; i++) {
-            onReward(gamePanel.objects[i]);
-        }  
+        // for (int i = 2; i < 12; i++) {
+        //     onReward(gamePanel.objects[i]);
+        // }  
 
         if (keyHandler.upPressed && moveUp) {
 			worldY -= speed;
@@ -201,22 +201,22 @@ public class Bee extends Entity {
         regRewardList.add(regReward);
     }
 
-    public boolean onReward(SuperObject reward) {
-        int rewardX = reward.worldX;
-        int rewardY = reward.worldY;
+    // public boolean onReward(SuperObject reward) {
+    //     int rewardX = reward.worldX;
+    //     int rewardY = reward.worldY;
 
-        final boolean inTopLeft = this.worldX == rewardX && this.worldY == rewardY;  
-        final boolean inTopRight = this.worldX - 24 == rewardX && this.worldY == rewardY;
-        final boolean inBottomLeft = this.worldX == rewardX && this.worldY == rewardY + 24;
-        final boolean inBottomRight = this.worldX - 24 == rewardX && this.worldY == rewardY + 24;              
+    //     final boolean inTopLeft = this.worldX == rewardX && this.worldY == rewardY;  
+    //     final boolean inTopRight = this.worldX - 24 == rewardX && this.worldY == rewardY;
+    //     final boolean inBottomLeft = this.worldX == rewardX && this.worldY == rewardY + 24;
+    //     final boolean inBottomRight = this.worldX - 24 == rewardX && this.worldY == rewardY + 24;              
 
-        if (inTopLeft || inTopRight || inBottomLeft || inBottomRight) {
-            System.out.println("On reward");
-            return true;
-        } else {
-            return false;
-                        }
-    }
+    //     if (inTopLeft || inTopRight || inBottomLeft || inBottomRight) {
+    //         System.out.println("On reward");
+    //         return true;
+    //     } else {
+    //         return false;
+    //                     }
+    // }
 
 
 

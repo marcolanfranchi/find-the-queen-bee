@@ -22,30 +22,31 @@ public class ObjectManager {
         gp.objects[1].worldY = 22 * gp.tileSize;
 
         // drawing 10 honey drop rewards randomly on the map, avoiding walls
-        for (int i = 2; i < 12; i++) {
+    //     for (int i = 2; i < 12; i++) {
 
-            gp.objects[i] = new OBJ_HoneyDropReward();
-            int randomX = getRandomNum(0, 24);
-            int randomY = getRandomNum(0, 24);
-            if (randomX % 6 == 0) {
-                randomX++;
-                if (randomX == 25) {
-                    randomX -= 2;
-                }
-            }
-            if (randomY % 6 == 0) {
-                randomY++;
-                if (randomY == 25) {
-                    randomY -= 2;
-                }
-            }
-            gp.objects[i].worldX = randomX * gp.tileSize;
-            gp.objects[i].worldY = randomY * gp.tileSize;
-        }  
-    }
+    //         gp.objects[i] = new OBJ_HoneyDropReward();
+    //         int randomX = getRandomNum(0, 24);
+    //         int randomY = getRandomNum(0, 24);
+    //         if (randomX % 6 == 0) {
+    //             randomX++;
+    //             if (randomX == 25) {
+    //                 randomX -= 2;
+    //             }
+    //         }
+    //         if (randomY % 6 == 0) {
+    //             randomY++;
+    //             if (randomY == 25) {
+    //                 randomY -= 2;
+    //             }
+    //         }
+    //         gp.objects[i].worldX = randomX * gp.tileSize;
+    //         gp.objects[i].worldY = randomY * gp.tileSize;
+    //     }  
+    // }
 
-    public static int getRandomNum(int min, int max) {
-        Random num = new Random();
-        return num.nextInt(max - min + 1) + min;
-    }
+    // public static int getRandomNum(int min, int max) {
+    //     Random num = new Random();
+    //     return num.nextInt(max - min + 1) + min;
+     }
+    
 }
