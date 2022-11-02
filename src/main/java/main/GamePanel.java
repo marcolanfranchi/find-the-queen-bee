@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import Entity.Bee;
 import Entity.Enemy;
 import Environment.EnvironmentManager;
+import Reward.Reward;
+import Reward.RewardGenerator;
 import Tile.TileManager;
 import object.ObjectManager;
 import object.OBJ_QueenBee;
@@ -38,6 +40,8 @@ public class GamePanel extends JPanel implements Runnable {
 	// Entity and Object
 	public Bee bee = new Bee(this, keyHandler);
 	public Enemy enemy = new Enemy(this);
+	public Reward rewards[] = new Reward[20];
+	public RewardGenerator rewardGenerator = new RewardGenerator(this);
 	public SuperObject objects[] = new SuperObject[20];
 	public ObjectManager objManager = new ObjectManager(this);
 
@@ -74,6 +78,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void setupGame() {
 		eManager.setup();
+		rewardGenerator.setRewards();
 		objManager.setObjects();
 		gameState = titleState;
 	}
@@ -131,6 +136,13 @@ public class GamePanel extends JPanel implements Runnable {
 		} else {
 
 			tileM.draw(g2);
+
+			for (int i = 0; i < rewards.length; i++) {
+				if (rewards[i] != null) {
+					rewards[i].draw(g2, this); 
+				}
+			}
+
 
 			for(int i = 0; i < objects.length; i++) {
 				if (objects[i] != null) {
