@@ -47,36 +47,38 @@ public void setRewards() {
                 }
             }
 
+
             // avoid drawing on queenBee (bottom corner)
             if (randomX == 23 && randomY == 23) {
                 randomX--;
-            }
-            
-            
+            }            
             
 
             map.rewards[i].worldX = randomX * map.tileSize;
             map.rewards[i].worldY = randomY * map.tileSize;
         }
 
+
         // add maxBonusReward # of regular rewards to rewards list
         for (int i = maxRegReward; i < maxRegReward + maxBonusReward; i++) {
             map.rewards[i] = new BonusReward(map);
 
-            int randomX = getRandom(0, 24);
-            int randomY = getRandom(0, 24);
-            if (randomX % 6 == 0) {
-                randomX++;
-                if (randomX == 25) {
-                    randomX -= 2;
+            int randomX = getRandom(1, 24);
+            int randomY = getRandom(1, 24);
+            randomX = avoidWalls(randomX); 
+            randomY = avoidWalls(randomY);
+            
+            for (int j = 0; j < 3; j++) {
+                if (map.tileM.mapTileNum[randomX][randomY] == 3) {
+                    randomX -=2;
                 }
             }
-            if (randomY % 6 == 0) {
-                randomY++;
-                if (randomY == 25) {
-                    randomY -= 2;
-                }
-            }
+
+            // avoid drawing on queenBee (bottom corner)
+            if (randomX == 23 && randomY == 23) {
+                randomX--;
+            }            
+
             map.rewards[i].worldX = randomX * map.tileSize;
             map.rewards[i].worldY = randomY * map.tileSize;
         }
@@ -87,6 +89,7 @@ public void setRewards() {
         return num.nextInt(max - min + 1) + min;
     }
 
+
     public int avoidWalls(int i) {
         if (i % 6 == 0) {
             i++;
@@ -94,6 +97,7 @@ public void setRewards() {
                 i -= 2;
             }
         }
+
         return i;
     }
 }
