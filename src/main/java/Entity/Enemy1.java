@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 
 
-public class Enemy extends Entity{
+public class Enemy1 extends Entity{
 	
 
 
@@ -30,7 +30,7 @@ public class Enemy extends Entity{
 	int randomY;
 	Random num = new Random();
 
-	public Enemy(GamePanel gp) {
+	public Enemy1(GamePanel gp) {
 		super(gp);
 		instantiateNodes();
         onPath = true;

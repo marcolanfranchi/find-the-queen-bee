@@ -5,11 +5,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import Entity.Bee;
+
 import java.awt.*;
 
 public class BonusReward extends Reward {
 
-    public static int bonusRewardVal = 100;
+    public static int bonusRewardVal = 50;
     public boolean displayNow;
 
     public BonusReward(GamePanel gp) {
@@ -17,10 +19,10 @@ public class BonusReward extends Reward {
         this.value = bonusRewardVal;
         this.collected = false;
         this.displayNow = false;
+        this.value = bonusRewardVal;
         try {
             this.image = ImageIO.read(getClass().getResource("../ui/images/HoneyPot.png"));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -39,7 +41,11 @@ public class BonusReward extends Reward {
                     }
     }
 
-    public void update() {
-        checkCollected();
+    // public void update() {
+    //     checkCollected();
+    // }
+
+    public void collectReward(Bee bee) {
+        bee.beeScore += this.value;
     }
 }

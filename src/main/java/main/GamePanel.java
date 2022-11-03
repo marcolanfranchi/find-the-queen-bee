@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 
 import Entity.Bee;
 import Entity.Enemy;
+import Entity.Enemy1;
+import Entity.Enemy2;
 import Environment.EnvironmentManager;
 import Reward.Reward;
 import Reward.RewardGenerator;
@@ -40,6 +42,8 @@ public class GamePanel extends JPanel implements Runnable {
 	// Entities, Rewards, & Objects
 	public Bee bee = new Bee(this, keyHandler);
 	public Enemy enemy = new Enemy(this);
+	public Enemy1 enemy1 = new Enemy1(this);
+	public Enemy2 enemy2 = new Enemy2(this);
 	public Reward rewards[] = new Reward[20];
 	public RewardGenerator rewardGenerator = new RewardGenerator(this);
 	public SuperObject objects[] = new SuperObject[20];
@@ -115,12 +119,10 @@ public class GamePanel extends JPanel implements Runnable {
 		if (gameState == playState) {
 			bee.update();
 			enemy.update();
+			enemy1.update();
+			enemy2.update();
 			updateQueenMessage();
-			//update QueenBee image
-
-			// update message from queen bee
-			//objManager.updateObjects(this);
-			
+			updateGameCompletion();			
 		}
 	}
 
@@ -140,6 +142,8 @@ public class GamePanel extends JPanel implements Runnable {
 			drawObjects(g2);
 
 			enemy.draw(g2);
+			enemy1.draw(g2);
+			enemy2.draw(g2);
 			bee.draw(g2);
 			eManager.draw(g2);
 
@@ -182,6 +186,12 @@ public class GamePanel extends JPanel implements Runnable {
 			if (rewards[i] != null) {
 				rewards[i].draw(g2, this); 
 			}
+		}
+	}
+
+	public void updateGameCompletion() {
+		if (bee.checkDoneGame()) {
+			// send to GameOverState where player's time and score is displayed
 		}
 	}
 }

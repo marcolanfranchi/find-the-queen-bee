@@ -1,11 +1,11 @@
 package Reward;
 import main.GamePanel;
 
-
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import Entity.Bee;
 
 import java.awt.*;
 
@@ -18,6 +18,7 @@ public class RegularReward extends Reward {
         super(gp);
         this.value = regRewardVal;
         this.collected = false;
+        this.value = regRewardVal;
         try {
             this.image = ImageIO.read(getClass().getResource("../ui/images/HoneyDrop.png"));
         } catch (IOException e) {
@@ -42,6 +43,12 @@ public class RegularReward extends Reward {
     }
 
     public void update() {
-        checkCollected();
+        //checkCollected();
+    }
+
+    public void collectReward(Bee bee) {
+        bee.rewardList.add(this);
+        bee.beeScore += this.value;
+        
     }
 }

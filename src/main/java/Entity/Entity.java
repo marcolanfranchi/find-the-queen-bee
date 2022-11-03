@@ -118,15 +118,11 @@ abstract public class Entity {
         target.bounds.y = getY();
     
         return index;
-
     }
 
-    public void checkCollision() {
-		if (getTileNum() == 3) {
-			System.out.println("Collision With Trap Tile");
-			System.out.println("------");
-		}
 
+
+    public void checkWallCollision() {
         if (this.tileNumUp() == 1) {
             moveUp = false;
         } else {
@@ -150,16 +146,10 @@ abstract public class Entity {
         } else {
             moveRight= true;
         }
-
-
 	}
 
     public void enemyCheckCollision() {
-		if (getTileNum() == 3) {
-			System.out.println("Collision With Trap Tile");
-			System.out.println("------");
-		}
-
+        
         if (this.tileNumUp() == 1) {
             enemyCollision = true;
             direction = null;
@@ -187,7 +177,5 @@ abstract public class Entity {
         } else {
             direction = "right";
         }
-
-
 	}
 }

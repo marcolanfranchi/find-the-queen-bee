@@ -5,10 +5,12 @@ import main.GamePanel;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import Entity.Bee;
+
 public abstract class Reward {
 
     private GamePanel map;
-    protected int value;
+    public int value;
     protected BufferedImage image;
     public int worldX;
     public int worldY;
@@ -23,11 +25,9 @@ public abstract class Reward {
         height = 60;
     }
 
-    public void checkCollected() {
-
-    }
-
     public abstract void draw(Graphics2D g2, GamePanel gamePanel);
+
+    public abstract void collectReward(Bee bee);
 
     //Mutators
     public void setMap(GamePanel map) {
@@ -54,5 +54,11 @@ public abstract class Reward {
 
     public BufferedImage getTexture() {
         return image;
+    }
+
+    public void remove() {
+        this.worldX = 0;
+        this.worldY = 0;
+        this.image = null;
     }
 }
