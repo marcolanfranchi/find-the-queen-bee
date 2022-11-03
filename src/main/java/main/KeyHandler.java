@@ -113,6 +113,32 @@ public class KeyHandler implements KeyListener {
 			}
 		}
 
+		// Game Win state
+		if (gamePanel.gameState == GamePanel.winState) {
+			if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
+				gamePanel.ui.winCommandNum--;
+				if (gamePanel.ui.winCommandNum < 0) {
+					gamePanel.ui.winCommandNum = 1;
+				}
+			}
+
+			if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
+				gamePanel.ui.winCommandNum++;
+				if (gamePanel.ui.winCommandNum > 1) {
+					gamePanel.ui.winCommandNum = 0;
+				}
+			}
+
+			if (keyCode == KeyEvent.VK_ENTER) {
+				if (gamePanel.ui.winCommandNum == 0) {
+					gamePanel.gameState = GamePanel.titleState;
+				}
+				if (gamePanel.ui.winCommandNum == 1) {
+					System.exit(0);
+				}
+			}
+		}
+
         if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) { // up
             upPressed = true;
         }

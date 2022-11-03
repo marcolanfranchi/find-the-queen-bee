@@ -32,14 +32,15 @@ public class UI {
 
 	public Timer timer;
 	int second, minute;
+	private int origSecond, origMinute;
 	String ddSecond, ddMinute;
 
 	DecimalFormat dformat = new DecimalFormat("00");
 
 	public UI(GamePanel gp) {
 		this.gp = gp;
-		second = 0;
-		minute = 3;
+		second = origSecond = 0;
+		minute = origMinute = 3;
 		ddSecond = dformat.format(second);
 		ddMinute = dformat.format(minute);
 		countDownTimer();
@@ -233,6 +234,15 @@ public class UI {
 		g2.setColor(Color.WHITE);
 		g2.drawString(text, x, y);
 
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
+		text = "Score: " + gp.bee.beeScore;
+		x = getXforCenteredText(text) - gp.tileSize * 3;
+		y += gp.tileSize * 4;
+		g2.drawString(text, x, y);
+		text = "Time: " + dformat.format(origMinute - minute) + ":" + dformat.format(origSecond - second);
+		x = getXforCenteredText(text) + gp.tileSize * 3;
+		g2.drawString(text, x, y);
+
 		// Draw buttons for the game over screen
 		// Draw go to title screen
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
@@ -274,12 +284,21 @@ public class UI {
 		g2.setColor(Color.WHITE);
 		g2.drawString(text, x, y);
 
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
+		text = "Score: " + gp.bee.beeScore;
+		x = getXforCenteredText(text) - gp.tileSize * 3;
+		y += gp.tileSize * 4;
+		g2.drawString(text, x, y);
+		text = "Time: " + ddMinute + ":" + ddSecond;
+		x = getXforCenteredText(text) + gp.tileSize * 3;
+		g2.drawString(text, x, y);
+
 		// Draw buttons for the game over screen
 		// Draw go to title screen
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
 		text = "TITLE SCREEN";
 		x = getXforCenteredText(text);
-		y += gp.tileSize * 8;
+		y += gp.tileSize * 6;
 		g2.drawString(text, x, y);
 
 		if (winCommandNum == 0) {
@@ -410,6 +429,7 @@ public class UI {
 
 				if (minute == 0 && second == 0) {
 					timer.stop();
+					// TODO: Change this
 					gp.gameState = GamePanel.gameOverState;
 				}
 			}
