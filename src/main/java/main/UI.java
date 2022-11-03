@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import object.OBJ_ARROW;
+import object.OBJ_HoneyDropReward;
 import object.OBJ_WASD;
 
 public class UI {
@@ -54,10 +55,13 @@ public class UI {
 			e.printStackTrace();
 		}
 
+		OBJ_HoneyDropReward honey = new OBJ_HoneyDropReward();
 		OBJ_ARROW arrowKeys = new OBJ_ARROW();
 		OBJ_WASD wasdKeys = new OBJ_WASD();
+
 		arrowKeysImage = arrowKeys.image;
 		wasdKeysImage = wasdKeys.image;
+		honeyImage = honey.image;
 	}
 
 	public void draw(Graphics2D g2) {
