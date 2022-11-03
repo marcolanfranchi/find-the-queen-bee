@@ -27,6 +27,10 @@ abstract public class Entity {
     public boolean onPath = false;
     public boolean enemyCollision;
 
+    public Entity(GamePanel gp){
+        this.gamePanel = gp;
+    }
+
     public Rectangle getBounds() {
         bounds = new Rectangle(getX(), getY(), this.width, this.height);
         return bounds;
@@ -70,9 +74,6 @@ abstract public class Entity {
         return gamePanel.tileM.mapTileNum[posX][posY];
     }
 
-    public Entity(GamePanel gp){
-        this.gamePanel = gp;
-    }
 
     public int checkEntity(Entity entity, Entity target){
         int index = 999;
@@ -149,7 +150,7 @@ abstract public class Entity {
 	}
 
     public void enemyCheckCollision() {
-        
+
         if (this.tileNumUp() == 1) {
             enemyCollision = true;
             direction = null;
