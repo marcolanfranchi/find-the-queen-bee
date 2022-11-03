@@ -192,8 +192,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void updateGameCompletion() {
 		if (bee.checkDoneGame()) {
-			// send to GameOverState where player's time and score is displayed
-		}
+			gameState = winState;
+				}
 	}
 
 	public void updateBonusRewards() {
