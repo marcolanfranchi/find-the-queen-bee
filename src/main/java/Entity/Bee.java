@@ -102,8 +102,8 @@ public class Bee extends Entity {
         checkWallCollision();
         checkPunishmentCollision();
         if(checkGameOver(this, gamePanel.enemies) <= 45){
-            // Game Over Screen should be applied here.
-            System.exit(0);
+            this.gamePanel.gameState = 3; //Game Over Screen should be applied here.
+            //System.exit(0);
         }
         for (int i = 0; i < gamePanel.rewards.length; i++) {
             if (gamePanel.rewards[i] != null) {
