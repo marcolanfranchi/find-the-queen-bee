@@ -101,9 +101,9 @@ public class Bee extends Entity {
 
         checkWallCollision();
         checkPunishmentCollision();
-        if(checkGameOver(this, gamePanel.enemies) <= 34){
+        if(checkGameOver(this, gamePanel.enemies) <= 45){
             // Game Over Screen should be applied here.
-            // System.exit(0);
+            System.exit(0);
         }
         for (int i = 0; i < gamePanel.rewards.length; i++) {
             if (gamePanel.rewards[i] != null) {
@@ -111,8 +111,8 @@ public class Bee extends Entity {
             }
         }
 
-        System.out.println("bee X: " + this.worldX);
-        System.out.println("bee Y: " + this.worldY);
+        // System.out.println("bee X: " + this.worldX);
+        // System.out.println("bee Y: " + this.worldY);
 
         
         updateDirection();
