@@ -243,22 +243,10 @@ public class UI {
 		x = getXforCenteredText(text) + gp.tileSize * 3;
 		g2.drawString(text, x, y);
 
-		// Draw buttons for the game over screen
-		// Draw go to title screen
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
-		text = "TITLE SCREEN";
-		x = getXforCenteredText(text);
-		y += gp.tileSize * 8;
-		g2.drawString(text, x, y);
-
-		if (endCommandNum == 0) {
-			g2.drawString(">", x - gp.tileSize, y);
-		}
-
 		// Draw Quit Button
 		text = "QUIT";
 		x = getXforCenteredText(text);
-		y += gp.tileSize * 1.5;
+		y += gp.tileSize * 9;
 		g2.drawString(text, x, y);
 
 		if (endCommandNum == 1) {
@@ -293,25 +281,13 @@ public class UI {
 		x = getXforCenteredText(text) + gp.tileSize * 3;
 		g2.drawString(text, x, y);
 
-		// Draw buttons for the game over screen
-		// Draw go to title screen
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
-		text = "TITLE SCREEN";
-		x = getXforCenteredText(text);
-		y += gp.tileSize * 6;
-		g2.drawString(text, x, y);
-
-		if (winCommandNum == 0) {
-			g2.drawString(">", x - gp.tileSize, y);
-		}
-
 		// Draw Quit Button
 		text = "QUIT";
 		x = getXforCenteredText(text);
-		y += gp.tileSize * 1.5;
+		y += gp.tileSize * 9;
 		g2.drawString(text, x, y);
 
-		if (winCommandNum == 1) {
+		if (winCommandNum == 0) {
 			g2.drawString(">", x - gp.tileSize, y);
 		}
 	}
