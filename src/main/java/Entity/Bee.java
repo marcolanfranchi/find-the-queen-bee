@@ -107,23 +107,12 @@ public class Bee extends Entity {
                 pickUpReward(gamePanel.rewards[i]);
             }
         }
+
+        // System.out.println("bee X: " + this.worldX);
+        // System.out.println("bee Y: " + this.worldY);
+
         
         updateDirection();
-
-        // To check if the Bee hits the enemy
-        // int collisionNPC = checkEntity(this, gamePanel.enemy);
-        // if(collisionNPC != 999){
-        //     reduceScore();
-        // }
-
-        System.out.println("collected " + rewardList.size() +  " rewards");
-        System.out.println("Bee score: " + this.beeScore);
-
-        boolean endReached = checkReachedEnd();
-
-        if (endReached) {
-            System.out.println("End Reached");
-        }
 
         // counter used to switch bee images to flap wings over and over
         spriteCounter ++;
@@ -255,6 +244,31 @@ public class Bee extends Entity {
             }
         return false;
     }
+
+    public boolean touchingEnemy(Enemy enemy) {
+        int enemyX = enemy.worldX;
+        int enemyY = enemy.worldY; 
+
+        final boolean enemyOverTop = this.worldX == enemyX && this.worldY == enemyY;
+        final boolean enemyLeft = this.worldX - 12 == enemyX && this.worldY == enemyY;  
+        final boolean enemyRight = this.worldX + 12 == enemyX && this.worldY == enemyY;
+        final boolean enemyAbove = this.worldX == enemyX && this.worldY + 12 == enemyY;
+        final boolean enemyUnder = this.worldX == enemyX && this.worldY - 12 == enemyY;
+
+        // if (this.worldX == enemyX && this.worldY == enemyY && this.worldX == en) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+
+        if (enemyOverTop || enemyLeft || enemyRight || enemyAbove || enemyUnder) {
+            //System.out.println("touching enemy");
+            return true;
+        } else {
+            return false;
+                        }
+    }
+    
 
 
     /**

@@ -34,8 +34,8 @@ public void setRewards() {
         for (int i = 0; i < maxRegReward; i++) {
             map.rewards[i] = new RegularReward(map);
             
-            int randomX = getRandom(1, 24);
-            int randomY = getRandom(1, 24);
+            int randomX = getRandom(1, 23);
+            int randomY = getRandom(1, 23);
 
             randomX = avoidWalls(randomX); 
             randomY = avoidWalls(randomY);
@@ -63,8 +63,8 @@ public void setRewards() {
         for (int i = maxRegReward; i < maxRegReward + maxBonusReward; i++) {
             map.rewards[i] = new BonusReward(map);
 
-            int randomX = getRandom(1, 24);
-            int randomY = getRandom(1, 24);
+            int randomX = getRandom(1, 23);
+            int randomY = getRandom(1, 23);
             randomX = avoidWalls(randomX); 
             randomY = avoidWalls(randomY);
             

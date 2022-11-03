@@ -27,7 +27,7 @@ public class BonusReward extends Reward {
         }
     }
 
-    
+
 
     public void draw(Graphics2D g2, GamePanel g) {
         int screenX = worldX - g.bee.worldX + g.bee.screenX;
@@ -43,6 +43,17 @@ public class BonusReward extends Reward {
                     }
     }
 
+    public void showBonusReward() {
+        try {
+            this.image = ImageIO.read(getClass().getResource("../ui/images/HoneyPot.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        this.worldX = 96;
+        this.worldY = 96;
+    }
+
 
     public void collectReward(Bee bee) {
         bee.beeScore += this.value;
@@ -50,7 +61,7 @@ public class BonusReward extends Reward {
 
 
     public boolean timeToDraw() {
-        if (this.getMap().ui.timer.getInitialDelay() >= 5) {
+        if (drawBuffer >= 5) {
             return true;
         } else {
             return false;

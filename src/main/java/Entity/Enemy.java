@@ -91,6 +91,10 @@ public class Enemy extends Entity{
 		int goalRow = gamePanel.bee.worldY / gamePanel.tileSize;
 		searchPath(goalCol, goalRow);
 
+		// System.out.println("Enemy X: " + this.worldX);
+		// System.out.println("Enemy Y: " + this.worldY);
+
+
 		// this.enemyCheckCollision();
 		// actionLockCounter++;
 		// if(actionLockCounter == 10){
