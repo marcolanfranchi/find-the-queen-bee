@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// Entities, Rewards, & Objects
 	public Bee bee = new Bee(this, keyHandler);
-	public Enemy[] enemies = new Enemy[2];
+	public Enemy[] enemies = new Enemy[4];
 	public Reward rewards[] = new Reward[20];
 	public RewardGenerator rewardGenerator = new RewardGenerator(this);
 	public SuperObject objects[] = new SuperObject[20];
@@ -122,7 +122,7 @@ public class GamePanel extends JPanel implements Runnable {
 			for (int i = 0; i < enemies.length; i++) {
 				enemies[i].update();
 			}
-			updateBonusRewards();
+			//updateBonusRewards();
 			updateQueenMessage();
 			updateGameLost();
 			updateGameCompletion();			
@@ -180,19 +180,19 @@ public class GamePanel extends JPanel implements Runnable {
         }
 	}
 
-	public void updateBonusRewards() {
-		for (int i = rewardGenerator.maxRegReward; i < rewardGenerator.maxRegReward + 
-						rewardGenerator.maxBonusReward; i++) {
-							if (((BonusReward) rewards[i]).displayNow) {
-								((BonusReward) rewards[i]).showBonusReward();
-							} else {
-								rewards[i] = new BonusReward(this);
-								rewards[i].setTexture(null);
-								rewards[i].worldX = 0;
-								rewards[i].worldY = 0;
-							}
-						}
-	}
+	// public void updateBonusRewards() {
+	// 	for (int i = rewardGenerator.maxRegReward; i < rewardGenerator.maxRegReward + 
+	// 					rewardGenerator.maxBonusReward; i++) {
+	// 						if (((BonusReward) rewards[i]).displayNow) {
+	// 							((BonusReward) rewards[i]).showBonusReward();
+	// 						} else {
+	// 							rewards[i] = new BonusReward(this);
+	// 							rewards[i].setTexture(null);
+	// 							rewards[i].worldX = 0;
+	// 							rewards[i].worldY = 0;
+	// 						}
+	// 					}
+	// }
 
 	public void drawObjects(Graphics2D g2) {
 		for (int i = 0; i < objects.length; i++) {

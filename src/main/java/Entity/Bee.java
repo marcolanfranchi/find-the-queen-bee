@@ -111,8 +111,8 @@ public class Bee extends Entity {
             }
         }
 
-        // System.out.println("bee X: " + this.worldX);
-        // System.out.println("bee Y: " + this.worldY);
+        System.out.println("bee X: " + this.worldX);
+        System.out.println("bee Y: " + this.worldY);
 
         
         updateDirection();
@@ -213,7 +213,6 @@ public class Bee extends Entity {
         final boolean inBottomRight = this.worldX - 24 == rewardX && this.worldY == rewardY + 24;              
 
         if (inTopLeft || inTopRight || inBottomLeft || inBottomRight) {
-            System.out.println("On reward");
             return true;
         } else {
             return false;

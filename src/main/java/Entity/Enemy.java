@@ -84,8 +84,51 @@ public class Enemy extends Entity{
 		int goalCol = gamePanel.bee.worldX / gamePanel.tileSize;
 		int goalRow = gamePanel.bee.worldY / gamePanel.tileSize;
 		searchPath(goalCol, goalRow);
+
 		//System.out.println("If Reached: " + goalReached);
 		//System.out.println("GCost: " + tempGCost);
+
+
+		System.out.println("Enemy X: " + this.worldX);
+		System.out.println("Enemy Y: " + this.worldY);
+
+
+		// this.enemyCheckCollision();
+		// actionLockCounter++;
+		// if(actionLockCounter == 10){
+		// 	//worldX += speed;
+		// 	//direction = "right";
+		// 	// Random random = new Random();
+		// 	// int i = random.nextInt(100) + 1;
+		// 	// if(i <= 25){
+		// 	// 	worldY -= speed;
+		// 	// 	direction = "up";
+		// 	// }
+		// 	// if(i > 25 && i <= 50){
+		// 	// 	worldY += speed;
+		// 	// 	direction = "down";
+		// 	// }
+		// 	// if(i > 50 && i <= 75){
+		// 	// 	worldX -= speed;
+		// 	// 	direction = "left";
+		// 	// }
+		// 	// if(i > 75 && i <=100){
+		// 	// 	worldX += speed;
+		// 	// 	direction = "right";
+		// 	// }
+		// 	// spriteCounter ++;
+		// 	if (spriteCounter > 2) {
+		// 		if (spriteNum == 1) {
+		// 			spriteNum = 2;
+		// 		} else if (spriteNum == 2) {
+		// 			spriteNum = 1;
+		// 		}
+		// 		spriteCounter = 0;
+		// 	}
+		// 	actionLockCounter = 0;
+
+		// }
+>>>>>>> 06fdf3933bfc4d2029885d9056166d408456b81c
     }
 
 
