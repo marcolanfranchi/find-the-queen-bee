@@ -40,8 +40,9 @@ public class UI {
 		this.gp = gp;
 		second = 0;
 		minute = 3;
+		ddSecond = dformat.format(second);
+		ddMinute = dformat.format(minute);
 		countDownTimer();
-		timer.start();
 
 		try {
 			InputStream is = getClass().getResourceAsStream("../ui/font/retro_pixel.ttf");
