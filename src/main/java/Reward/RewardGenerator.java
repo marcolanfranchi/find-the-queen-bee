@@ -86,7 +86,7 @@ public void setRewards() {
 
     public static int getRandom(int min, int max) {
         Random num = new Random();
-        return num.nextInt(max - min + 1) + min;
+        return num.nextInt(max - min + 1);
     }
 
 
