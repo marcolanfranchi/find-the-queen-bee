@@ -87,6 +87,32 @@ public class KeyHandler implements KeyListener {
 			}
 		}
 
+		// Game Over state
+		if (gamePanel.gameState == GamePanel.gameOverState) {
+			if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
+				gamePanel.ui.endCommandNum--;
+				if (gamePanel.ui.endCommandNum < 0) {
+					gamePanel.ui.endCommandNum = 1;
+				}
+			}
+
+			if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
+				gamePanel.ui.endCommandNum++;
+				if (gamePanel.ui.endCommandNum > 1) {
+					gamePanel.ui.endCommandNum = 0;
+				}
+			}
+
+			if (keyCode == KeyEvent.VK_ENTER) {
+				if (gamePanel.ui.endCommandNum == 0) {
+					gamePanel.gameState = GamePanel.titleState;
+				}
+				if (gamePanel.ui.endCommandNum == 1) {
+					System.exit(0);
+				}
+			}
+		}
+
         if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) { // up
             upPressed = true;
         }
@@ -137,6 +163,5 @@ public class KeyHandler implements KeyListener {
         }
         
     }
-
     
 }

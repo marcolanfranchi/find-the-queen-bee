@@ -27,6 +27,8 @@ public class UI {
 
 	public int commandNum = 0;
 	public int pauseCommandNum = 0;
+	public int endCommandNum = 0;
+	public int winCommandNum = 0;
 
 	Timer timer;
 	int second, minute;
@@ -58,7 +60,6 @@ public class UI {
 		honeyImage = honey.image;
 		arrowKeysImage = arrowKeys.image;
 		wasdKeysImage = wasdKeys.image;
-
 	}
 
 	public void draw(Graphics2D g2) {
@@ -215,13 +216,36 @@ public class UI {
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
 		String text = "YOU LOSE";
 		int x = getXforCenteredText(text);
-		int y = gp.tileSize * 10;
+		int y = gp.tileSize * 5;
 
 		// shadow
 		g2.setColor(Color.BLACK);
 		g2.drawString(text, x + 7, y + 7);
 		g2.setColor(Color.WHITE);
 		g2.drawString(text, x, y);
+
+		// Draw buttons for the game over screen
+		// Draw go to title screen
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
+		text = "TITLE SCREEN";
+		x = getXforCenteredText(text);
+		y += gp.tileSize * 8;
+		g2.drawString(text, x, y);
+
+		if (endCommandNum == 0) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+
+		// Draw Quit Button
+		text = "QUIT";
+		x = getXforCenteredText(text);
+		y += gp.tileSize * 1.5;
+		g2.drawString(text, x, y);
+
+		if (endCommandNum == 1) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+
 	}
 
 	public void drawWinScreen() {
@@ -233,13 +257,35 @@ public class UI {
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
 		String text = "YOU WIN";
 		int x = getXforCenteredText(text);
-		int y = gp.tileSize * 10;
+		int y = gp.tileSize * 5;
 
 		// shadow
 		g2.setColor(Color.BLACK);
 		g2.drawString(text, x + 7, y + 7);
 		g2.setColor(Color.WHITE);
 		g2.drawString(text, x, y);
+
+		// Draw buttons for the game over screen
+		// Draw go to title screen
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
+		text = "TITLE SCREEN";
+		x = getXforCenteredText(text);
+		y += gp.tileSize * 8;
+		g2.drawString(text, x, y);
+
+		if (winCommandNum == 0) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+
+		// Draw Quit Button
+		text = "QUIT";
+		x = getXforCenteredText(text);
+		y += gp.tileSize * 1.5;
+		g2.drawString(text, x, y);
+
+		if (winCommandNum == 1) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
 	}
 
 	public void drawControlState() {

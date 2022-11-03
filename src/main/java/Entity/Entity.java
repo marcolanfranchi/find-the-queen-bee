@@ -124,7 +124,7 @@ abstract public class Entity {
     public void checkCollision() {
 		if (getTileNum() == 3) {
 			System.out.println("Collision With Trap Tile");
-            System.out.println("------");
+			System.out.println("------");
 		}
 
         if (this.tileNumUp() == 1) {
@@ -157,7 +157,7 @@ abstract public class Entity {
     public void enemyCheckCollision() {
 		if (getTileNum() == 3) {
 			System.out.println("Collision With Trap Tile");
-            System.out.println("------");
+			System.out.println("------");
 		}
 
         if (this.tileNumUp() == 1) {
