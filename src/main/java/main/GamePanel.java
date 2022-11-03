@@ -19,9 +19,9 @@ import Entity.Enemy2;
 import Environment.EnvironmentManager;
 import Reward.Reward;
 import Reward.RewardGenerator;
+import Reward.BonusReward;
 import Tile.TileManager;
 import object.ObjectManager;
-import object.OBJ_QueenBee;
 import object.OBJ_TextBubble;
 import object.SuperObject;
 
@@ -121,6 +121,7 @@ public class GamePanel extends JPanel implements Runnable {
 			enemy.update();
 			enemy1.update();
 			enemy2.update();
+			updateBonusRewards();
 			updateQueenMessage();
 			updateGameCompletion();			
 		}
@@ -193,5 +194,12 @@ public class GamePanel extends JPanel implements Runnable {
 		if (bee.checkDoneGame()) {
 			// send to GameOverState where player's time and score is displayed
 		}
+	}
+
+	public void updateBonusRewards() {
+		for (int i = rewardGenerator.maxRegReward; i < rewardGenerator.maxRegReward + 
+						rewardGenerator.maxBonusReward; i++) {
+							((BonusReward) rewards[i]).update();
+						}
 	}
 }
