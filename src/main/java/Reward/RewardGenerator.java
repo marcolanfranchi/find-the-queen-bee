@@ -43,7 +43,7 @@ public void setRewards() {
             
             for (int j = 0; j < 3; j++) {
                 if (map.tileM.mapTileNum[randomX][randomY] == 3) {
-                    randomX -=2;
+                    randomX +=2;
                 }
             }
 
@@ -70,7 +70,7 @@ public void setRewards() {
             
             for (int j = 0; j < 3; j++) {
                 if (map.tileM.mapTileNum[randomX][randomY] == 3) {
-                    randomX -=2;
+                    randomX +=2;
                 }
             }
 
