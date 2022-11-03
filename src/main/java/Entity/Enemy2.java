@@ -64,7 +64,7 @@ public class Enemy2 extends Entity{
 		}
 		worldX = randomX * gp.tileSize;
 		worldY = randomY * gp.tileSize;
-		speed = 48 / 4;
+		speed = 48 / 6;
 		direction = "up";
 		//contact = false;
 		getEnemyImage();
