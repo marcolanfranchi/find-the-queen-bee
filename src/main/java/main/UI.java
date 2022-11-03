@@ -8,6 +8,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
@@ -218,7 +221,7 @@ public class UI {
 	}
 
 	public void drawGameOverScreen() {
-		timer.start();
+		timer.stop();
 		g2.setColor(Color.black);
 		g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
 
@@ -239,7 +242,25 @@ public class UI {
 		x = getXforCenteredText(text) - gp.tileSize * 3;
 		y += gp.tileSize * 4;
 		g2.drawString(text, x, y);
-		text = "Time: " + dformat.format(origMinute - minute) + ":" + dformat.format(origSecond - second);
+
+		// subtract start time and current time
+		String time1 = minute + ":" + second;
+		String time2 = origMinute + ":" + origSecond;
+		SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+		Date date1 = null;
+		Date date2 = null;
+		try {
+			date1 = format.parse(time1);
+			date2 = format.parse(time2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		long difference = date2.getTime() - date1.getTime();
+		long diffSeconds = difference / 1000 % 60;
+		long diffMinutes = difference / (60 * 1000) % 60;
+
+		text = "Time: " + dformat.format(diffMinutes) + ":" + dformat.format(diffSeconds);
 		x = getXforCenteredText(text) + gp.tileSize * 3;
 		g2.drawString(text, x, y);
 
@@ -249,7 +270,7 @@ public class UI {
 		y += gp.tileSize * 9;
 		g2.drawString(text, x, y);
 
-		if (endCommandNum == 1) {
+		if (endCommandNum == 0) {
 			g2.drawString(">", x - gp.tileSize, y);
 		}
 
@@ -277,7 +298,24 @@ public class UI {
 		x = getXforCenteredText(text) - gp.tileSize * 3;
 		y += gp.tileSize * 4;
 		g2.drawString(text, x, y);
-		text = "Time: " + ddMinute + ":" + ddSecond;
+
+		String time1 = minute + ":" + second;
+		String time2 = origMinute + ":" + origSecond;
+		SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+		Date date1 = null;
+		Date date2 = null;
+		try {
+			date1 = format.parse(time1);
+			date2 = format.parse(time2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		long difference = date2.getTime() - date1.getTime();
+		long diffSeconds = difference / 1000 % 60;
+		long diffMinutes = difference / (60 * 1000) % 60;
+
+		text = "Time: " + dformat.format(diffMinutes) + ":" + dformat.format(diffSeconds);
 		x = getXforCenteredText(text) + gp.tileSize * 3;
 		g2.drawString(text, x, y);
 
