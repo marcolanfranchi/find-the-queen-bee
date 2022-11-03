@@ -74,50 +74,15 @@ abstract public class Entity {
         return gamePanel.tileM.mapTileNum[posX][posY];
     }
 
-
-    public int checkEntity(Entity entity, Entity target){
-        int index = 999;
-        //for(int i = 0; i < target.length; i++){
-        entity.bounds.x = entity.worldX + entity.bounds.x;
-        entity.bounds.y = entity.worldY + entity.bounds.y;
-        target.bounds.x = target.worldX + target.bounds.x;
-        target.bounds.y = target.worldY + target.bounds.y;
-        if(direction == "up"){
-            entity.bounds.y -= entity.speed;
-            //System.out.println("test3");
-		    //System.out.println(entity.bounds.intersects(target.bounds));
-            if(entity.bounds.intersects(target.bounds)){
-                index = 1;
-                moveUp = false;
+    // 
+    public double checkGameOver(Entity entity, Entity[] enemies){
+        double index = 999;
+        for(int i = 0; i < enemies.length; i++){
+            index = Math.sqrt(Math.pow((entity.worldX - enemies[i].worldX), 2) + Math.pow((entity.worldY - enemies[i].worldY), 2));
+            if(index <= 34){
+                break;
             }
-            //break;
-        }else if(direction == "down"){
-            entity.bounds.y += entity.speed;
-            if(entity.bounds.intersects(target.bounds)){
-                index = 2;
-                moveDown = false;
-            }
-            //break;
-        }else if(direction == "left"){
-            entity.bounds.x -= entity.speed;
-            if(entity.bounds.intersects(target.bounds)){
-                index = 3;
-                moveLeft = false;
-            }
-            //break;
-        }else if(direction == "right"){
-            entity.bounds.x += entity.speed;
-            if(entity.bounds.intersects(target.bounds)){
-                index = 4;
-                moveRight = false;
-            }
-            //break;
         }
-        entity.bounds.x = getX();
-        entity.bounds.y = getY();
-        target.bounds.x = getX();
-        target.bounds.y = getY();
-    
         return index;
     }
 
@@ -133,19 +98,19 @@ abstract public class Entity {
         if (this.tileNumDown() == 1) {
             moveDown = false;
         } else {
-            moveDown= true;
+            moveDown = true;
         }
 
         if (this.tileNumLeft() == 1) {
             moveLeft = false;
         } else {
-            moveLeft= true;
+            moveLeft = true;
         }
 
         if (this.tileNumRight() == 1) {
             moveRight = false;
         } else {
-            moveRight= true;
+            moveRight = true;
         }
 	}
 
