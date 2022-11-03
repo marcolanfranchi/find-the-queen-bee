@@ -14,8 +14,6 @@ import main.GamePanel;
 
 
 public class Enemy extends Entity{
-	
-
 
 	public final int screenX;
 	public final int screenY;

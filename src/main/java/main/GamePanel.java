@@ -14,8 +14,6 @@ import javax.swing.JPanel;
 
 import Entity.Bee;
 import Entity.Enemy;
-import Entity.Enemy1;
-import Entity.Enemy2;
 import Environment.EnvironmentManager;
 import Reward.Reward;
 import Reward.RewardGenerator;
@@ -41,9 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// Entities, Rewards, & Objects
 	public Bee bee = new Bee(this, keyHandler);
-	public Enemy enemy = new Enemy(this);
-	public Enemy1 enemy1 = new Enemy1(this);
-	public Enemy2 enemy2 = new Enemy2(this);
+	public Enemy[] enemies = new Enemy[3];
 	public Reward rewards[] = new Reward[20];
 	public RewardGenerator rewardGenerator = new RewardGenerator(this);
 	public SuperObject objects[] = new SuperObject[20];
@@ -84,6 +80,10 @@ public class GamePanel extends JPanel implements Runnable {
 		eManager.setup();
 		rewardGenerator.setRewards();
 		objManager.setObjects();
+		// instances of enemies
+		for (int i = 0; i < enemies.length; i++) {
+			enemies[i] = new Enemy(this);
+		}
 		gameState = titleState;
 	}
 
@@ -118,9 +118,10 @@ public class GamePanel extends JPanel implements Runnable {
 	public void update() {
 		if (gameState == playState) {
 			bee.update();
-			enemy.update();
-			enemy1.update();
-			enemy2.update();
+			// update all enemies in enemies
+			for (int i = 0; i < enemies.length; i++) {
+				enemies[i].update();
+			}
 			updateBonusRewards();
 			updateQueenMessage();
 			updateGameCompletion();			
@@ -142,9 +143,13 @@ public class GamePanel extends JPanel implements Runnable {
 			drawRewards(g2);
 			drawObjects(g2);
 
-			enemy.draw(g2);
-			enemy1.draw(g2);
-			enemy2.draw(g2);
+			// draw all enemies in enemy
+			for (int i = 0; i < enemies.length; i++) {
+				enemies[i].draw(g2);
+			}
+			// enemy.draw(g2);
+			// enemy1.draw(g2);
+			// enemy2.draw(g2);
 			bee.draw(g2);
 			eManager.draw(g2);
 
