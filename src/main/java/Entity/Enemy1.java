@@ -89,7 +89,7 @@ public class Enemy1 extends Entity{
 
 	public void update(){
 	
-		this.checkCollision();
+		this.checkWallCollision();
 		int goalCol = gamePanel.bee.worldX / gamePanel.tileSize; //(gamePanel.bee.worldX + gamePanel.bee.bounds.x) / gamePanel.tileSize;
 		int goalRow = gamePanel.bee.worldY / gamePanel.tileSize; //(gamePanel.bee.worldY + gamePanel.bee.bounds.y) / gamePanel.tileSize;
 		searchPath(goalCol, goalRow);

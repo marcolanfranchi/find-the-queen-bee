@@ -24,7 +24,9 @@ public class TileManager<BufferedImage> {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
 		getTileImage();
-		loadMap("../ui/maps/trap-tile.txt");
+		//loadMap("../ui/maps/trap-tile.txt");
+		loadMap("../ui/maps/more-traps.txt");
+
 	}
 
 	public void getTileImage() {

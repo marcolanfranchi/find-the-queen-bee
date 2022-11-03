@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class BonusReward extends Reward {
 
-    public static int bonusRewardVal = 100;
+    public static int bonusRewardVal = 50;
     public boolean displayNow;
 
     public BonusReward(GamePanel gp) {
