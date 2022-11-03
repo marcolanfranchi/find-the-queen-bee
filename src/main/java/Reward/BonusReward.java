@@ -13,6 +13,7 @@ public class BonusReward extends Reward {
 
     public static int bonusRewardVal = 50;
     public boolean displayNow;
+    public int drawBuffer = 10;
 
     public BonusReward(GamePanel gp) {
         super(gp);
@@ -41,11 +42,26 @@ public class BonusReward extends Reward {
                     }
     }
 
-    // public void update() {
-    //     checkCollected();
-    // }
 
     public void collectReward(Bee bee) {
         bee.beeScore += this.value;
+    }
+
+
+    public boolean timeToDraw() {
+        if (this.getMap().ui.timer.getInitialDelay() >= 5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void update() {
+        drawBuffer++;
+        if (!timeToDraw()) {
+            this.image = null;
+            this.worldX = 0;
+            this.worldY = 0;
+        }
     }
 }

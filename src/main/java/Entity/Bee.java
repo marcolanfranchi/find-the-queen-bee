@@ -22,13 +22,14 @@ public class Bee extends Entity {
     public ArrayList<Reward> rewardList = new ArrayList<>();
 
     public int beeScore;
-    public int punishment = 5;
-    public int bufferPunishment = 0;
+    public int punishment = 10;
+    public int punishmentBuffer = 0;
 
 
     public Bee(GamePanel gp, KeyHandler kh) {
         super(gp);
         this.keyHandler = kh;
+        beeScore = 30; // bee starts with 30 points
         bounds = new Rectangle();
 		bounds.x = getX();
 		bounds.y = getY();
@@ -135,6 +136,7 @@ public class Bee extends Entity {
             spriteCounter = 0;
         }
     }
+    
 
     /**
      * 
@@ -259,7 +261,7 @@ public class Bee extends Entity {
      * 
      */
     public void checkPunishmentCollision() {
-        bufferPunishment++;
+        punishmentBuffer++;
         if (getTileNum() == 3) {
 			reduceScore();
 		}
@@ -269,7 +271,7 @@ public class Bee extends Entity {
      * 
      */
     public void reduceScore(){
-        if (bufferPunishment % 2 == 0) {
+        if (punishmentBuffer % 2 == 0) {
             beeScore -= punishment;
         }
     }
