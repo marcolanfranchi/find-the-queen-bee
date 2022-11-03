@@ -18,7 +18,6 @@ public class BonusReward extends Reward {
     public BonusReward(GamePanel gp) {
         super(gp);
         this.value = bonusRewardVal;
-        this.collected = false;
         this.displayNow = false;
         this.value = bonusRewardVal;
         try {
@@ -27,6 +26,8 @@ public class BonusReward extends Reward {
             e.printStackTrace();
         }
     }
+
+    
 
     public void draw(Graphics2D g2, GamePanel g) {
         int screenX = worldX - g.bee.worldX + g.bee.screenX;
