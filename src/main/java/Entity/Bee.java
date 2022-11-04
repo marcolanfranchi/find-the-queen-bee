@@ -182,6 +182,7 @@ public class Bee extends Entity {
         if (onReward(reward)) {
             reward.collectReward(this);
             reward.remove();
+            gamePanel.playSoundEffect(0);
         }
     }
 
@@ -243,32 +244,6 @@ public class Bee extends Entity {
         return false;
     }
 
-    // public boolean touchingEnemy(Enemy enemy) {
-    //     int enemyX = enemy.worldX;
-    //     int enemyY = enemy.worldY; 
-
-    //     final boolean enemyOverTop = this.worldX == enemyX && this.worldY == enemyY;
-    //     final boolean enemyLeft = this.worldX - 12 == enemyX && this.worldY == enemyY;  
-    //     final boolean enemyRight = this.worldX + 12 == enemyX && this.worldY == enemyY;
-    //     final boolean enemyAbove = this.worldX == enemyX && this.worldY + 12 == enemyY;
-    //     final boolean enemyUnder = this.worldX == enemyX && this.worldY - 12 == enemyY;
-
-    //     // if (this.worldX == enemyX && this.worldY == enemyY && this.worldX == en) {
-    //     //     return true;
-    //     // } else {
-    //     //     return false;
-    //     // }
-
-    //     if (enemyOverTop || enemyLeft || enemyRight || enemyAbove || enemyUnder) {
-    //         //System.out.println("touching enemy");
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-    
-
-
     /**
      * 
      */
@@ -285,6 +260,7 @@ public class Bee extends Entity {
     public void reduceScore(){
         if (punishmentBuffer % 2 == 0) {
             beeScore -= punishment;
+            gamePanel.playSoundEffect(2);
         }
     }
 }

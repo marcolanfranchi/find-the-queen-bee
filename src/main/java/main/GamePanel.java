@@ -31,6 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Thread gameThread;
 	KeyHandler keyHandler = new KeyHandler(this);
 	public UI ui = new UI(this);
+	Sound sound = new Sound();
 
 	// Screen Setting
 	final int originalTileSize = 16;
@@ -178,20 +179,6 @@ public class GamePanel extends JPanel implements Runnable {
         }
 	}
 
-	// public void updateBonusRewards() {
-	// 	for (int i = rewardGenerator.maxRegReward; i < rewardGenerator.maxRegReward + 
-	// 					rewardGenerator.maxBonusReward; i++) {
-	// 						if (((BonusReward) rewards[i]).displayNow) {
-	// 							((BonusReward) rewards[i]).showBonusReward();
-	// 						} else {
-	// 							rewards[i] = new BonusReward(this);
-	// 							rewards[i].setTexture(null);
-	// 							rewards[i].worldX = 0;
-	// 							rewards[i].worldY = 0;
-	// 						}
-	// 					}
-	// }
-
 	public void drawObjects(Graphics2D g2) {
 		for (int i = 0; i < objects.length; i++) {
 			if (objects[i] != null) {
@@ -211,24 +198,35 @@ public class GamePanel extends JPanel implements Runnable {
 	public void updateGameCompletion() {
 		if (bee.checkDoneGameWon()) {
 			gameState = winState;
+			playMusic(1);
 				}
 	}
 
 	public void updateGameLost() {
 		if (bee.beeScore < 0) {
 			gameState = gameOverState;
+			playMusic(3);
+
 		}
 
 		if(bee.checkGameOver(bee, this.enemies) <= 45){
             gameState = gameOverState; 
+			playMusic(3);
         }
 	}
 
-	// 	for (int i = 0; i < enemies.length; i++) {
-	// 		if (bee.touchingEnemy(enemies[i])) {
-	// 			gameState = gameOverState;
-	// 		}
-	// 	}
-	// }
+	public void playMusic(int i) {
+		sound.setFile(i);
+		sound.play();
+		sound.loop();
+	}
 
+	public void stopMusic() {
+		sound.stop();
+	}
+
+	public void playSoundEffect(int i) {
+		sound.setFile(i);
+		sound.play();
+	}
 }

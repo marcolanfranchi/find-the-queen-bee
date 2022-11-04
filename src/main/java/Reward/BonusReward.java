@@ -65,37 +65,8 @@ public class BonusReward extends Reward {
 
 	}
 
-    // public void showBonusReward() {
-    //     try {
-    //         this.image = ImageIO.read(getClass().getResource("../ui/images/HoneyPot.png"));
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //     }
-
-    //     this.worldX = 96;
-    //     this.worldY = 96;
-    // }
-
 
     public void collectReward(Bee bee) {
         bee.beeScore += this.value;
     }
-
-
-    // public boolean timeToDraw() {
-    //     if (drawBuffer >= 5) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-    // public void update() {
-    //     drawBuffer++;
-    //     if (!timeToDraw()) {
-    //         this.image = null;
-    //         this.worldX = 0;
-    //         this.worldY = 0;
-    //     }
-    // }
 }
