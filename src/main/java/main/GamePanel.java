@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// Entities, Rewards, & Objects
 	public Bee bee = new Bee(this, keyHandler);
-	public Enemy[] enemies = new Enemy[3];
+	public Enemy[] enemies = new Enemy[2];
 	public RewardGenerator rewardGenerator = new RewardGenerator(this);
 	public Reward rewards[] = new Reward[rewardGenerator.totalRewards];
 	public SuperObject objects[] = new SuperObject[20];

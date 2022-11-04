@@ -72,7 +72,7 @@ public void setRewards() {
 		int randomY = 0;
 
         // add maxBonusReward # of regular rewards to rewards list
-        for (int i = 0; i < maxBonusReward; i++) {
+        for (int i = maxRegReward; i < maxBonusReward + maxRegReward; i++) {
             map.rewards[i] = new BonusReward(map);
 
 			randomX = getRandom(0, map.tileM.mapTileNum.length - 1);
