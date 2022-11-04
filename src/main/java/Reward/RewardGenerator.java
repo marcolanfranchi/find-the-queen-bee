@@ -16,8 +16,9 @@ public class RewardGenerator {
 
     GamePanel map;
 
-    public int maxRegReward = 10;
+    public static int maxRegReward = 10;
     public final int maxBonusReward = 2;
+    public final int totalRewards = maxRegReward + maxBonusReward;
     final int maxCordX = 25;
     final int maxCordY = 15;
     final int regRewardVal = 10;
@@ -30,7 +31,11 @@ public class RewardGenerator {
 
     
 public void setRewards() {
-        // add maxRegReward # of regular rewards to rewards list
+        setRegRewards();
+        setBonusRewards();
+    }
+
+    public void setRegRewards() {
         for (int i = 0; i < maxRegReward; i++) {
             map.rewards[i] = new RegularReward(map);
             
@@ -40,13 +45,17 @@ public void setRewards() {
             randomX = avoidWalls(randomX); 
             randomY = avoidWalls(randomY);
 
-            
-            for (int j = 0; j < 3; j++) {
+            // checks if randomly geenerated position is on a trap tile, if it 
+            // is then generate another random X, avoid walls for that new randomX
+            // and continue the loop to check again (total of 20 times)
+            for (int j = 0; j < 20; j++) {
                 if (map.tileM.mapTileNum[randomX][randomY] == 3) {
-                    randomX +=2;
+                    randomX = getRandom(1, 23);
+                    randomY = getRandom(1, 23);
+                    randomX = avoidWalls(randomX); 
+                    randomY = avoidWalls(randomY);
                 }
             }
-
 
             // avoid drawing on queenBee (bottom corner)
             if (randomX == 23 && randomY == 23) {
@@ -57,8 +66,9 @@ public void setRewards() {
             map.rewards[i].worldX = randomX * map.tileSize;
             map.rewards[i].worldY = randomY * map.tileSize;
         }
+    }
 
-
+    public void setBonusRewards() {
         // add maxBonusReward # of regular rewards to rewards list
         for (int i = maxRegReward; i < maxRegReward + maxBonusReward; i++) {
             map.rewards[i] = new BonusReward(map);
@@ -67,10 +77,16 @@ public void setRewards() {
             int randomY = getRandom(1, 23);
             randomX = avoidWalls(randomX); 
             randomY = avoidWalls(randomY);
-            
-            for (int j = 0; j < 3; j++) {
+
+            // checks if randomly geenerated position is on a trap tile, if it 
+            // is then generate another random X, avoid walls for that new randomX
+            // and continue the loop to check again (total of 20 times)
+            for (int j = 0; j < 20; j++) {
                 if (map.tileM.mapTileNum[randomX][randomY] == 3) {
-                    randomX +=2;
+                    randomX = getRandom(1, 23);
+                    randomY = getRandom(1, 23);
+                    randomX = avoidWalls(randomX); 
+                    randomY = avoidWalls(randomY);
                 }
             }
 
