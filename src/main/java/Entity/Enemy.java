@@ -63,9 +63,11 @@ public class Enemy extends Entity{
 		}
 		worldX = randomX * gp.tileSize;
 		worldY = randomY * gp.tileSize;
-		speed = 48 / 4;
+		//setRandomStartPoint();
+		speed = gamePanel.tileSize / 4;
 		direction = "up";
 		getEnemyImage();
+
 	}
 
 	public void getEnemyImage() {
@@ -78,6 +80,24 @@ public class Enemy extends Entity{
             e.printStackTrace();
         }       
 	}
+
+	// NEW METHOD CURRENTLY NOT WORKING
+	// public void setRandomStartPoint() {
+	// 	for (int i = 0; i < 1; i++) {
+	// 		int randomX = getRandom(0, gamePanel.tileM.mapTileNum.length - 1);
+	// 		int randomY = getRandom(0, gamePanel.tileM.mapTileNum[0].length - 1);
+
+	// 		if (gamePanel.tileM.mapTileNum[randomX][randomY] == 1
+	// 				|| gamePanel.tileM.mapTileNum[randomX][randomY] == 2
+	// 				/*|| inFirstRoom(randomX, randomY)*/) {
+	// 					i--;
+	// 					//continue;
+	// 			//setRandomStartPoint(); *** want to try again here
+	// 		}
+	// 		this.worldX = randomX * gamePanel.tileSize;
+	// 		this.worldY = randomY * gamePanel.tileSize;
+	// 	}
+	// }
 
 	public void update(){
 		this.checkWallCollision();
@@ -349,5 +369,10 @@ public class Enemy extends Entity{
             }
             g2.drawImage(image, screenX, screenY, width, height, null);
         }
+    }
+
+	public static int getRandom(int min, int max) {
+        Random num = new Random();
+        return num.nextInt(max - min + 1);
     }
 }

@@ -144,4 +144,13 @@ abstract public class Entity {
             direction = "right";
         }
 	}
+
+    public boolean inFirstRoom(int x, int y) {
+        if (x >= 0 && x <= 5 * gamePanel.tileSize &&
+            y >= 0 && y <= 5 * gamePanel.tileSize) {
+                return true;
+            } else {
+                return false;
+            }
+    }
 }

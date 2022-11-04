@@ -103,14 +103,14 @@ public void setRewards() {
     }
 
 
-    public int avoidWalls(int i) {
-        if (i % 6 == 0) {
-            i++;
-            if (i == 25) {
-                i -= 2;
-            }
-        }
+    // public int avoidWalls(int i) {
+    //     if (i % 6 == 0) {
+    //         i++;
+    //         if (i == 25) {
+    //             i -= 2;
+    //         }
+    //     }
 
-        return i;
-    }
+    //     return i;
+    // }
 }
