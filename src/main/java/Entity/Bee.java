@@ -101,10 +101,7 @@ public class Bee extends Entity {
 
         checkWallCollision();
         checkPunishmentCollision();
-        if(checkGameOver(this, gamePanel.enemies) <= 45){
-            this.gamePanel.gameState = 3; //Game Over Screen should be applied here.
-            //System.exit(0);
-        }
+        
         for (int i = 0; i < gamePanel.rewards.length; i++) {
             if (gamePanel.rewards[i] != null) {
                 pickUpReward(gamePanel.rewards[i]);
@@ -114,7 +111,6 @@ public class Bee extends Entity {
         // System.out.println("bee X: " + this.worldX);
         // System.out.println("bee Y: " + this.worldY);
 
-        
         updateDirection();
 
         // counter used to switch bee images to flap wings over and over
@@ -170,7 +166,7 @@ public class Bee extends Entity {
     /**
      * 
      */
-    public boolean checkDoneGame() {
+    public boolean checkDoneGameWon() {
         if (checkReachedEnd() && hasAllRewards()) {
             return true;
         } else {
@@ -247,29 +243,29 @@ public class Bee extends Entity {
         return false;
     }
 
-    public boolean touchingEnemy(Enemy enemy) {
-        int enemyX = enemy.worldX;
-        int enemyY = enemy.worldY; 
+    // public boolean touchingEnemy(Enemy enemy) {
+    //     int enemyX = enemy.worldX;
+    //     int enemyY = enemy.worldY; 
 
-        final boolean enemyOverTop = this.worldX == enemyX && this.worldY == enemyY;
-        final boolean enemyLeft = this.worldX - 12 == enemyX && this.worldY == enemyY;  
-        final boolean enemyRight = this.worldX + 12 == enemyX && this.worldY == enemyY;
-        final boolean enemyAbove = this.worldX == enemyX && this.worldY + 12 == enemyY;
-        final boolean enemyUnder = this.worldX == enemyX && this.worldY - 12 == enemyY;
+    //     final boolean enemyOverTop = this.worldX == enemyX && this.worldY == enemyY;
+    //     final boolean enemyLeft = this.worldX - 12 == enemyX && this.worldY == enemyY;  
+    //     final boolean enemyRight = this.worldX + 12 == enemyX && this.worldY == enemyY;
+    //     final boolean enemyAbove = this.worldX == enemyX && this.worldY + 12 == enemyY;
+    //     final boolean enemyUnder = this.worldX == enemyX && this.worldY - 12 == enemyY;
 
-        // if (this.worldX == enemyX && this.worldY == enemyY && this.worldX == en) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+    //     // if (this.worldX == enemyX && this.worldY == enemyY && this.worldX == en) {
+    //     //     return true;
+    //     // } else {
+    //     //     return false;
+    //     // }
 
-        if (enemyOverTop || enemyLeft || enemyRight || enemyAbove || enemyUnder) {
-            //System.out.println("touching enemy");
-            return true;
-        } else {
-            return false;
-        }
-    }
+    //     if (enemyOverTop || enemyLeft || enemyRight || enemyAbove || enemyUnder) {
+    //         //System.out.println("touching enemy");
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
     
 
 

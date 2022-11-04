@@ -16,8 +16,9 @@ public class RewardGenerator {
 
     GamePanel map;
 
-    public int maxRegReward = 10;
+    public static int maxRegReward = 10;
     public final int maxBonusReward = 2;
+    public final int totalRewards = maxRegReward + maxBonusReward;
     final int maxCordX = 25;
     final int maxCordY = 15;
     final int regRewardVal = 10;
@@ -52,7 +53,6 @@ public void setRewards() {
 				continue;
 			}
 
-
             // avoid drawing on queenBee (bottom corner)
 			if (randomX == map.tileM.mapTileNum.length - 1 && randomY == map.tileM.mapTileNum[0].length - 1) {
 				// System.out.println("-------Queen Bee-------");
@@ -65,16 +65,20 @@ public void setRewards() {
             map.rewards[i].worldX = randomX * map.tileSize;
             map.rewards[i].worldY = randomY * map.tileSize;
         }
+    }
 
+    public void setBonusRewards() {
+		int randomX = 0;
+		int randomY = 0;
 
         // add maxBonusReward # of regular rewards to rewards list
-        for (int i = maxRegReward; i < maxRegReward + maxBonusReward; i++) {
+        for (int i = 0; i < maxBonusReward; i++) {
             map.rewards[i] = new BonusReward(map);
 
 			randomX = getRandom(0, map.tileM.mapTileNum.length - 1);
 			randomY = getRandom(0, map.tileM.mapTileNum[0].length - 1);
 
-			// Avoiding the traps and walls
+			// Avoiding the door and walls
 			if (map.tileM.mapTileNum[randomX][randomY] == 1
 					|| map.tileM.mapTileNum[randomX][randomY] == 2) {
 				i--;

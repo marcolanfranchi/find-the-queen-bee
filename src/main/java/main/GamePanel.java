@@ -39,9 +39,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// Entities, Rewards, & Objects
 	public Bee bee = new Bee(this, keyHandler);
-	public Enemy[] enemies = new Enemy[2];
-	public Reward rewards[] = new Reward[20];
+	public Enemy[] enemies = new Enemy[3];
 	public RewardGenerator rewardGenerator = new RewardGenerator(this);
+	public Reward rewards[] = new Reward[rewardGenerator.totalRewards];
 	public SuperObject objects[] = new SuperObject[20];
 	public ObjectManager objManager = new ObjectManager(this);
 
@@ -122,7 +122,6 @@ public class GamePanel extends JPanel implements Runnable {
 			for (int i = 0; i < enemies.length; i++) {
 				enemies[i].update();
 			}
-			//updateBonusRewards();
 			updateQueenMessage();
 			updateGameLost();
 			updateGameCompletion();			
@@ -148,9 +147,7 @@ public class GamePanel extends JPanel implements Runnable {
 			for (int i = 0; i < enemies.length; i++) {
 				enemies[i].draw(g2);
 			}
-			// enemy.draw(g2);
-			// enemy1.draw(g2);
-			// enemy2.draw(g2);
+
 			bee.draw(g2);
 			eManager.draw(g2);
 
@@ -211,7 +208,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void updateGameCompletion() {
-		if (bee.checkDoneGame()) {
+		if (bee.checkDoneGameWon()) {
 			gameState = winState;
 				}
 	}
@@ -221,11 +218,16 @@ public class GamePanel extends JPanel implements Runnable {
 			gameState = gameOverState;
 		}
 
-		for (int i = 0; i < enemies.length; i++) {
-			if (bee.touchingEnemy(enemies[i])) {
-				gameState = gameOverState;
-			}
-		}
+		if(bee.checkGameOver(bee, this.enemies) <= 45){
+            gameState = gameOverState; 
+        }
 	}
+
+	// 	for (int i = 0; i < enemies.length; i++) {
+	// 		if (bee.touchingEnemy(enemies[i])) {
+	// 			gameState = gameOverState;
+	// 		}
+	// 	}
+	// }
 
 }
