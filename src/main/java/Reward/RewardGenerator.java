@@ -30,30 +30,38 @@ public class RewardGenerator {
 
     
 public void setRewards() {
+	int randomX = 0;
+	int randomY = 0;
+
         // add maxRegReward # of regular rewards to rewards list
         for (int i = 0; i < maxRegReward; i++) {
             map.rewards[i] = new RegularReward(map);
             
-            int randomX = getRandom(1, 23);
-            int randomY = getRandom(1, 23);
+			randomX = getRandom(0, map.tileM.mapTileNum.length - 1);
+			randomY = getRandom(0, map.tileM.mapTileNum[0].length - 1);
+			// System.out.println("randomX: " + randomX + " randomY: " + randomY);
+			// System.out.println("Len X: " + map.tileM.mapTileNum.length + " Len Y: " +
+			// map.tileM.mapTileNum[0].length);
 
-            randomX = avoidWalls(randomX); 
-            randomY = avoidWalls(randomY);
-
-            
-            for (int j = 0; j < 3; j++) {
-                if (map.tileM.mapTileNum[randomX][randomY] == 3) {
-                    randomX +=2;
-                }
-            }
+			// Avoiding the traps and walls and door
+			// System.out.println("mapTileNum: " + map.tileM.mapTileNum[randomX][randomY]);
+			if (map.tileM.mapTileNum[randomX][randomY] == 3 || map.tileM.mapTileNum[randomX][randomY] == 1
+					|| map.tileM.mapTileNum[randomX][randomY] == 2) {
+				// System.out.println("-------Trap or Wall or Door-------");
+				i--;
+				continue;
+			}
 
 
             // avoid drawing on queenBee (bottom corner)
-            if (randomX == 23 && randomY == 23) {
-                randomX--;
-            }            
+			if (randomX == map.tileM.mapTileNum.length - 1 && randomY == map.tileM.mapTileNum[0].length - 1) {
+				// System.out.println("-------Queen Bee-------");
+				i--;
+				continue;
+			}
             
 
+			// System.out.println("-------Setting reward-------");
             map.rewards[i].worldX = randomX * map.tileSize;
             map.rewards[i].worldY = randomY * map.tileSize;
         }
@@ -63,21 +71,22 @@ public void setRewards() {
         for (int i = maxRegReward; i < maxRegReward + maxBonusReward; i++) {
             map.rewards[i] = new BonusReward(map);
 
-            int randomX = getRandom(1, 23);
-            int randomY = getRandom(1, 23);
-            randomX = avoidWalls(randomX); 
-            randomY = avoidWalls(randomY);
-            
-            for (int j = 0; j < 3; j++) {
-                if (map.tileM.mapTileNum[randomX][randomY] == 3) {
-                    randomX +=2;
-                }
-            }
+			randomX = getRandom(0, map.tileM.mapTileNum.length - 1);
+			randomY = getRandom(0, map.tileM.mapTileNum[0].length - 1);
+
+			// Avoiding the traps and walls
+			if (map.tileM.mapTileNum[randomX][randomY] == 1
+					|| map.tileM.mapTileNum[randomX][randomY] == 2) {
+				i--;
+				continue;
+			}
+
 
             // avoid drawing on queenBee (bottom corner)
-            if (randomX == 23 && randomY == 23) {
-                randomX--;
-            }            
+			if (randomX == map.tileM.mapTileNum.length - 1 && randomY == map.tileM.mapTileNum[0].length - 1) {
+				i--;
+				continue;
+			}
 
             map.rewards[i].worldX = randomX * map.tileSize;
             map.rewards[i].worldY = randomY * map.tileSize;
