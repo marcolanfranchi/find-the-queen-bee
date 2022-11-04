@@ -61,9 +61,9 @@ public class Enemy extends Entity{
 				randomY -= 2;
 			}
 		}
-		worldX = randomX * gp.tileSize;
-		worldY = randomY * gp.tileSize;
-		//setRandomStartPoint();
+		// worldX = randomX * gp.tileSize;
+		// worldY = randomY * gp.tileSize;
+		setRandomStartPoint();
 		speed = gamePanel.tileSize / 4;
 		direction = "up";
 		getEnemyImage();
@@ -82,22 +82,28 @@ public class Enemy extends Entity{
 	}
 
 	// NEW METHOD CURRENTLY NOT WORKING
-	// public void setRandomStartPoint() {
-	// 	for (int i = 0; i < 1; i++) {
-	// 		int randomX = getRandom(0, gamePanel.tileM.mapTileNum.length - 1);
-	// 		int randomY = getRandom(0, gamePanel.tileM.mapTileNum[0].length - 1);
+	public void setRandomStartPoint() {
+		for (int i = 0; i < 1; i++) {
+			int randomX = getRandom(0, gamePanel.tileM.mapTileNum.length - 1);
+			int randomY = getRandom(0, gamePanel.tileM.mapTileNum[0].length - 1);
 
-	// 		if (gamePanel.tileM.mapTileNum[randomX][randomY] == 1
-	// 				|| gamePanel.tileM.mapTileNum[randomX][randomY] == 2
-	// 				/*|| inFirstRoom(randomX, randomY)*/) {
-	// 					i--;
-	// 					//continue;
-	// 			//setRandomStartPoint(); *** want to try again here
-	// 		}
-	// 		this.worldX = randomX * gamePanel.tileSize;
-	// 		this.worldY = randomY * gamePanel.tileSize;
-	// 	}
-	// }
+			// System.out.println("Random X: " + randomX);
+			// System.out.println("Random Y: " + randomY);
+			// System.out.println("Map Tile Num: " +
+			// gamePanel.tileM.mapTileNum[randomX][randomY]);
+			// System.out.println("FirstRoom: " + inFirstRoom(randomX, randomY));
+			if (gamePanel.tileM.mapTileNum[randomX][randomY] == 1
+					|| gamePanel.tileM.mapTileNum[randomX][randomY] == 2
+					|| inFirstRoom(randomX, randomY)) {
+				i--;
+				continue;
+				// setRandomStartPoint(); *** want to try again here
+			}
+
+			this.worldX = randomX * gamePanel.tileSize;
+			this.worldY = randomY * gamePanel.tileSize;
+		}
+	}
 
 	public void update(){
 		this.checkWallCollision();

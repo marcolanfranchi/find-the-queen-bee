@@ -146,8 +146,9 @@ abstract public class Entity {
 	}
 
     public boolean inFirstRoom(int x, int y) {
-        if (x >= 0 && x <= 5 * gamePanel.tileSize &&
-            y >= 0 && y <= 5 * gamePanel.tileSize) {
+		System.out.println("x: " + x + " y: " + y);
+		if ((x >= 0 && x <= (5)) &&
+				(y >= 0 && y <= (5))) {
                 return true;
             } else {
                 return false;
