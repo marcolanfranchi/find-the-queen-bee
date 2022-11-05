@@ -1,4 +1,4 @@
-package Tile;
+package tile;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,12 +11,24 @@ import java.awt.Graphics2D;
 
 import main.GamePanel;
 
+/**
+ * This class is a manager for all the tiles in the game. It is used to load the
+ * tiles from the file and draw them to the screen using the file created
+ * from the MapCreator class.
+ * 
+ * @author Satvik Garg
+ */
 public class TileManager<BufferedImage> {
 	GamePanel gp;
 	Tile[] tile;
 	public int mapTileNum[][];
 
-
+	/**
+	 * Constructor for the TileManager class
+	 * It loads the tile images and the map file
+	 * 
+	 * @param gp The GamePanel object
+	 */
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
 		tile = new Tile[10];
@@ -29,6 +41,9 @@ public class TileManager<BufferedImage> {
 
 	}
 
+	/**
+	 * Loads the tile images from the file
+	 */
 	public void getTileImage() {
 		try {
 			tile[0] = new Tile();
@@ -49,10 +64,11 @@ public class TileManager<BufferedImage> {
 		}
 	}
 
-	// public void addImage(BufferedImage i1, BufferedImage i2) {
-
-	// }
-
+	/**
+	 * Loads the map from the file and stores it in the mapTileNum array
+	 * 
+	 * @param filename The name of the file to load
+	 */
 	public void loadMap(String mapPath) {
 		try {
 			InputStream is = getClass().getResourceAsStream(mapPath);
@@ -80,10 +96,15 @@ public class TileManager<BufferedImage> {
 
 			br.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	} 
 
+	/**
+	 * Draws the tiles to the screen that are only in the view of the player
+	 * 
+	 * @param g The Graphics2D object
+	 */
 	public void draw(Graphics2D g2) {
 		int worldCol = 0;
 		int worldRow = 0;

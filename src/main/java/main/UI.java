@@ -20,6 +20,13 @@ import object.OBJ_ARROW;
 import object.OBJ_HoneyDropReward;
 import object.OBJ_WASD;
 
+/**
+ * This class is used to create the user interface for the game. It is used to
+ * display the score, time, and the player's health.
+ * As well as all the screens for the various states of the game
+ * 
+ * @author Satvik Garg
+ */
 public class UI {
 	GamePanel gp;
 	Graphics2D g2;
@@ -40,6 +47,11 @@ public class UI {
 
 	DecimalFormat dformat = new DecimalFormat("00");
 
+	/**
+	 * Constructor for the UI class
+	 * 
+	 * @param gp The GamePanel object
+	 */
 	public UI(GamePanel gp) {
 		this.gp = gp;
 		second = origSecond = 0;
@@ -52,10 +64,8 @@ public class UI {
 			InputStream is = getClass().getResourceAsStream("../ui/font/retro_pixel.ttf");
 			retroPixel = Font.createFont(Font.TRUETYPE_FONT, is);
 		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -68,6 +78,12 @@ public class UI {
 		honeyImage = honey.image;
 	}
 
+	/**
+	 * This method is used to draw the UI to the screen depending on the state of
+	 * the game
+	 * 
+	 * @param g2 The Graphics2D object
+	 */
 	public void draw(Graphics2D g2) {
 		this.g2 = g2;
 
@@ -98,6 +114,9 @@ public class UI {
 
 	}
 
+	/**
+	 * This method is used to draw the title screen to the graphics object
+	 */
 	public void drawTitleScreen() {
 		g2.setColor(new Color(244, 187, 68));
 		g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
@@ -150,6 +169,9 @@ public class UI {
 
 	}
 
+	/**
+	 * This method is used to draw the play screen to the graphics object
+	 */
 	public void drawPlayScreen() {
 		timer.start();
 
@@ -171,6 +193,9 @@ public class UI {
 		g2.drawString(ddMinute + ":" + ddSecond, gp.screenWidth / 2, 55);
 	}
 
+	/**
+	 * This method is used to draw the pause screen to the graphics object
+	 */
 	public void drawPauseScreen() {
 		// Draw Pause Menu
 		// Draw the Paused Text
@@ -220,6 +245,9 @@ public class UI {
 
 	}
 
+	/**
+	 * This method is used to draw the game over screen to the graphics object
+	 */
 	public void drawGameOverScreen() {
 		timer.stop();
 		g2.setColor(Color.black);
@@ -276,6 +304,9 @@ public class UI {
 
 	}
 
+	/**
+	 * This method is used to draw the game win screen to the graphics object
+	 */
 	public void drawWinScreen() {
 		timer.stop();
 		g2.setColor(Color.black);
@@ -330,6 +361,9 @@ public class UI {
 		}
 	}
 
+	/**
+	 * This method is used to draw the controls screen to the graphics object
+	 */
 	public void drawControlState() {
 		g2.setColor(Color.black);
 		g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
@@ -419,14 +453,23 @@ public class UI {
 		g2.drawString(text, x, y);
 	}
 
-	public int getXforCenteredText(String text) {
+	/**
+	 * This method is used to get the x coordinate for given text text
+	 * 
+	 * @param text
+	 * @return The center for the given text
+	 */
+	private int getXforCenteredText(String text) {
 		int x;
 		int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 		x = gp.screenWidth / 2 - length / 2;
 		return x;
 	}
 
-	public void countDownTimer() {
+	/**
+	 * This method is used as a countdown timer for the game
+	 */
+	private void countDownTimer() {
 		timer = new Timer(1000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

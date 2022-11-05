@@ -1,4 +1,4 @@
-package Entity;
+package entity;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -9,10 +9,10 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import Reward.Reward;
 import main.GamePanel;
 import main.KeyHandler;
 import object.OBJ_TextBubble;
+import reward.Reward;
 
 public class Bee extends Entity {
 

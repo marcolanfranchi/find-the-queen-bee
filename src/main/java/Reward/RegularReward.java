@@ -1,11 +1,11 @@
-package Reward;
+package reward;
 import main.GamePanel;
 
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import Entity.Bee;
+import entity.Bee;
 
 import java.awt.*;
 

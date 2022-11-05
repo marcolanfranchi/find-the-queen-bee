@@ -12,16 +12,17 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import Entity.Bee;
-import Entity.Enemy;
-import Environment.EnvironmentManager;
-import Reward.Reward;
-import Reward.RewardGenerator;
-import Reward.BonusReward;
-import Tile.TileManager;
+import entity.Bee;
+import entity.Enemy;
+import environment.EnvironmentManager;
+import environment.Sound;
 import object.ObjectManager;
 import object.OBJ_TextBubble;
 import object.SuperObject;
+import reward.BonusReward;
+import reward.Reward;
+import reward.RewardGenerator;
+import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
 

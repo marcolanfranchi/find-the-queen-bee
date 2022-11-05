@@ -1,15 +1,16 @@
-package Reward;
+package reward;
 import main.GamePanel;
 
 import java.io.IOException;
 
 import javax.swing.Timer;
+
+import entity.Bee;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.imageio.ImageIO;
-
-import Entity.Bee;
 
 import java.awt.*;
 

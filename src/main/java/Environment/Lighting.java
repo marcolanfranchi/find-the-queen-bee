@@ -1,20 +1,30 @@
-package Environment;
+package environment;
 
 import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Graphics2D;
-// import java.awt.geom.Rectangle2D;
-// import java.awt.geom.Area;
-// import java.awt.geom.Ellipse2D;
-// import java.awt.Shape;
 import java.awt.RadialGradientPaint;
 
 import main.GamePanel;
 
+/**
+ * This class is used to create the lighting effect for the game. It creates a
+ * black circle around the player that is used to create the illusion of
+ * darkness
+ * in the game.
+ * 
+ * @author Satvik Garg
+ */
 public class Lighting {
 	GamePanel gp;
 	BufferedImage darknessFilter;
 
+	/**
+	 * Constructor for the Lighting class
+	 * 
+	 * @param gp     The GamePanel object
+	 * @param radius The radius of the circle
+	 */
 	public Lighting(GamePanel gp, int circleSize) {
 
 		// Create a buffered image
@@ -46,6 +56,11 @@ public class Lighting {
 		g2.dispose();
 	}
 
+	/**
+	 * This method is used to create the color array for the gradation effect
+	 * 
+	 * @param color The color array
+	 */
 	private void initColors(Color[] color) {
 		color[0] = new Color(0, 0, 0, 0.1f);
 		color[1] = new Color(0, 0, 0, 0.42f);
@@ -61,6 +76,11 @@ public class Lighting {
 		color[11] = new Color(0, 0, 0, 0.98f);
 	}
 
+	/**
+	 * This method is used to create the fraction array for the gradation effect
+	 * 
+	 * @param fraction The fraction array
+	 */
 	private void initFractions(float[] fraction) {
 		fraction[0] = 0f;
 		fraction[1] = 0.4f;
@@ -76,6 +96,11 @@ public class Lighting {
 		fraction[11] = 1f;
 	}
 
+	/**
+	 * This method is used to draw the lighting effect to the screen
+	 * 
+	 * @param g2d The Graphics2D object
+	 */
 	public void draw(Graphics2D g2) {
 		g2.drawImage(darknessFilter, 0, 0, null);
 	}

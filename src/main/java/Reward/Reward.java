@@ -1,11 +1,11 @@
-package Reward;
+package reward;
 
 import main.GamePanel; 
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import Entity.Bee;
+import entity.Bee;
 
 public abstract class Reward {
 
