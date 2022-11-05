@@ -30,7 +30,7 @@ public class EnvironmentManager {
 	 * @param g2d The Graphics2D object
 	 */
 	public void setup() {
-		lighting = new Lighting(gp, 500);
+		lighting = new Lighting(gp, 575);
 	}
 
 	/**

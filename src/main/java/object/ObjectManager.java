@@ -1,7 +1,5 @@
 package object;
 
-import java.util.Random;
-
 import main.GamePanel;
 
 public class ObjectManager {

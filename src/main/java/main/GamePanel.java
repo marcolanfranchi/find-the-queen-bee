@@ -12,10 +12,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import entity.Bee;
-import entity.Enemy;
-import environment.EnvironmentManager;
-import environment.Sound;
 import object.ObjectManager;
 import object.OBJ_TextBubble;
 import object.SuperObject;
@@ -23,6 +19,10 @@ import reward.BonusReward;
 import reward.Reward;
 import reward.RewardGenerator;
 import tile.TileManager;
+import entity.Bee;
+import entity.Enemy;
+import environment.EnvironmentManager;
+import environment.Sound;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -168,6 +168,13 @@ public class GamePanel extends JPanel implements Runnable {
 		g2.dispose();
 	}
 
+
+	/**
+	 * Checks if this GamePanel's Bee is near the Queen Bee and does not have all
+	 * of the rewards and if so, set's the Text Bubble object's image to a warning
+	 * to collect all regular rewards. If not, set the text bubble object to it's 
+	 * original image.
+	 */
 	public void updateQueenMessage() {
 		if (bee.nearQueenMissingRewards()) {
             ((OBJ_TextBubble) objects[1]).setAltImage();
@@ -180,6 +187,11 @@ public class GamePanel extends JPanel implements Runnable {
         }
 	}
 
+	/**
+	 * For all Objects in this GamePanel's objects list, calls draw on the
+	 * objects if it is not null.
+	 * @param g2 Graphics2D object used to contain all images and text for the UI.
+	 */
 	public void drawObjects(Graphics2D g2) {
 		for (int i = 0; i < objects.length; i++) {
 			if (objects[i] != null) {
@@ -188,6 +200,11 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
+	/**
+	 * For all Rewards in this GamePanel's rewards list, calls draw on the
+	 * rewards if it is not null.
+	 * @param g2 Graphics2D object used to contain all images and text for the UI.
+	 */
 	public void drawRewards(Graphics2D g2) {
 		for (int i = 0; i < rewards.length; i++) {
 			if (rewards[i] != null) {
@@ -196,6 +213,10 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
+	/**
+	 * Checks if this GamePanel's Bee won the game, if so sets the game state
+	 * to the win state and plays the corresponding music.
+	 */
 	public void updateGameCompletion() {
 		if (bee.checkDoneGameWon()) {
 			gameState = winState;
@@ -203,6 +224,12 @@ public class GamePanel extends JPanel implements Runnable {
 				}
 	}
 
+	/**
+	 * Checks if this GamePanel's Bee's score is below 0, if so sets the game
+	 * state to the game over state and plays the corresponding music. Checks 
+	 * if Bee dies to one of this GamePanel's enemies, if so sets the game state
+	 * to the game over state and plays the corresponding music.
+	 */
 	public void updateGameLost() {
 		if (bee.beeScore < 0) {
 			gameState = gameOverState;
@@ -216,16 +243,29 @@ public class GamePanel extends JPanel implements Runnable {
         }
 	}
 
+	/**
+	 * Sets this GamePanel's Sound to the Sound at the given index i, plays
+	 * the audio and loops the audio.
+	 * @param i an int representing an index containing a Sound in Sound's soundURL list
+	 */
 	public void playMusic(int i) {
 		sound.setFile(i);
 		sound.play();
 		sound.loop();
 	}
 
+	/**
+	 * Stops the audio playing from this GamePanel's Sound.
+	 */
 	public void stopMusic() {
 		sound.stop();
 	}
 
+	/**
+	 * Sets this GamePanel's Sound to the Sound at the given index i and plays
+	 * the audio.
+	 * @param i an int representing an index containing a Sound in Sound's soundURL list
+	 */
 	public void playSoundEffect(int i) {
 		sound.setFile(i);
 		sound.play();

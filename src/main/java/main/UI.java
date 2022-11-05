@@ -54,8 +54,8 @@ public class UI {
 	 */
 	public UI(GamePanel gp) {
 		this.gp = gp;
-		second = origSecond = 0;
-		minute = origMinute = 3;
+		second = origSecond = 30;
+		minute = origMinute = 1;
 		ddSecond = dformat.format(second);
 		ddMinute = dformat.format(minute);
 		countDownTimer();
@@ -191,6 +191,10 @@ public class UI {
 		// Timer
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40f));
 		g2.drawString(ddMinute + ":" + ddSecond, gp.screenWidth / 2, 55);
+
+		// Draw pause instruction text
+		g2.drawString("Press ESC to Pause", gp.screenWidth - gp.tileSize * 7, gp.tileSize * 19);
+
 	}
 
 	/**

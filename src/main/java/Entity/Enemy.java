@@ -12,7 +12,11 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 
-
+/**
+	 * This class represents an Enemy character in the game.
+	 * 
+	 * @author Stuart 
+	 */
 public class Enemy extends Entity{
 
 	public final int screenX;
@@ -29,6 +33,10 @@ public class Enemy extends Entity{
 	Random num = new Random();
 	int tempGCost = 0;
 
+	/**
+	 * 
+	 * @param gp
+	 */
 	public Enemy(GamePanel gp) {
 		super(gp);
 		instantiateNodes();

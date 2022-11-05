@@ -31,10 +31,20 @@ public abstract class Reward {
         height = 60;
     }
 
+    /**
+     * 
+     * @param g2
+     * @param gamePanel
+     */
     public abstract void draw(Graphics2D g2, GamePanel gamePanel);
 
+   /**
+    * 
+    * @param bee
+    */
     public abstract void collectReward(Bee bee);
 
+    
     //Mutators
     public void setMap(GamePanel map) {
         this.map = map;
@@ -62,6 +72,10 @@ public abstract class Reward {
         return image;
     }
 
+    /**
+     * Set this Reward's image to null, and sets it's location to an
+     * unaccessible position on the map.
+     */
     public void remove() {
         this.worldX = 0;
         this.worldY = 0;
