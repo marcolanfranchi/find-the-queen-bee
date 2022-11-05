@@ -29,11 +29,13 @@ public class RewardGenerator {
         this.map = gp;
     }
 
-    
+// Generate a regular reward at some  point 
+// Generate a bonus reward at some random point
 public void setRewards() {
 	int randomX = 0;
 	int randomY = 0;
 
+        // Checking generated reward's location
         // add maxRegReward # of regular rewards to rewards list
         for (int i = 0; i < maxRegReward; i++) {
             map.rewards[i] = new RegularReward(map);

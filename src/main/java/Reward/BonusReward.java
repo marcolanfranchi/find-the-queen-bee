@@ -13,6 +13,7 @@ import Entity.Bee;
 
 import java.awt.*;
 
+// Randomly appears!!
 public class BonusReward extends Reward {
 
     public static int bonusRewardVal = 50;
