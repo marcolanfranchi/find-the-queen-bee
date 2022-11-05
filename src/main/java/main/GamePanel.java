@@ -2,20 +2,14 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import object.ObjectManager;
 import object.OBJ_TextBubble;
 import object.SuperObject;
-import reward.BonusReward;
 import reward.Reward;
 import reward.RewardGenerator;
 import tile.TileManager;

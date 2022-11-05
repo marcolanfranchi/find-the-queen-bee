@@ -10,7 +10,7 @@ import javax.sound.sampled.Clip;
  * This class represents a Sound which has a Clip object used to play and stop
  * sounds and a soundURL list for the game's different sounds.
  * 
- * @author Marco LAnfranchi 
+ * @author Marco Lanfranchi 
  */
 public class Sound {
 

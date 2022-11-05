@@ -4,24 +4,44 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
+/**
+ * This class is used to observe and handle the game player's 
+ * keyboard inputs.
+ * 
+ * @author Marco Lanfranchi
+ * @author Satvik Garg
+ */
 public class KeyHandler implements KeyListener {
 
     GamePanel gamePanel;
-    public KeyHandler(GamePanel gp) {
-        this.gamePanel = gp;
-    }
 
     public boolean upPressed, downPressed, 
                     leftPressed, rightPressed;
 
 	private int prevState = GamePanel.titleState;
 
-    @Override
-    public void keyTyped(KeyEvent e) {
+	/**
+	 * Creates an instance of KeyHandler and sets it's GamePanel to the given GamePanel
+	 * @param gp a GamePanel which this KeyListener will observe
+	 */
+    public KeyHandler(GamePanel gp) {
+        this.gamePanel = gp;
+    }
+
+    
+    /**
+	 * 
+	 */
+	public void keyTyped(KeyEvent e) {
         
     }
 
-    @Override
+    /**
+	 * Observes the given KeyEvent and applies the appropriate UI change based on this
+	 * KeyHandler's GamePanel's current state. Sets the boolean values for indicating
+	 * the directional change attempting to be made using the player's move keys.
+	 * @param e a KeyEvent indicating the keyboard stroke by the game player
+	 */
     public void keyPressed(KeyEvent e) {
 
 		int keyCode = e.getKeyCode();
@@ -105,6 +125,18 @@ public class KeyHandler implements KeyListener {
 			}
 		}
 
+		// Game Play state
+		if (keyCode == KeyEvent.VK_ESCAPE) {
+			if (gamePanel.gameState == GamePanel.playState) {
+				gamePanel.gameState = GamePanel.pauseState;
+			} else if (gamePanel.gameState == GamePanel.pauseState) {
+				gamePanel.gameState = GamePanel.playState;
+			} else if (gamePanel.gameState == GamePanel.controlState) {
+				System.out.println("PrevState == " + prevState);
+				gamePanel.gameState = prevState;
+			}
+		}
+
         if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) { // up
             upPressed = true;
         }
@@ -119,22 +151,15 @@ public class KeyHandler implements KeyListener {
 
         if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) { // right
             rightPressed = true;
-        }
-
-		if (keyCode == KeyEvent.VK_ESCAPE) {
-			if (gamePanel.gameState == GamePanel.playState) {
-				gamePanel.gameState = GamePanel.pauseState;
-			} else if (gamePanel.gameState == GamePanel.pauseState) {
-				gamePanel.gameState = GamePanel.playState;
-			} else if (gamePanel.gameState == GamePanel.controlState) {
-				System.out.println("PrevState == " + prevState);
-				gamePanel.gameState = prevState;
-			}
-		}
-        
+        }        
     }
 
-    @Override
+
+    /**
+	 * Sets the boolean values for indicating the directional move being made to
+	 * False for the given KeyEvent to indicate when they Key was released
+	 * @param e a KeyEvent indicating the keyboard key released the game player
+	 */
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
@@ -152,8 +177,7 @@ public class KeyHandler implements KeyListener {
 
         if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) { // right
             rightPressed = false;
-        }
-        
+        }  
     }
     
 }
