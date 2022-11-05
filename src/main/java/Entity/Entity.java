@@ -10,7 +10,7 @@ import main.GamePanel;
      * by the Game's different types of characters.
      * 
      * @author Marco Lanfranchi
-     * @author Stuart
+     * @author Jinshuo Zhang
      */
 abstract public class Entity {
 

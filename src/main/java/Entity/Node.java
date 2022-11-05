@@ -1,7 +1,9 @@
 package entity;
 
 /**
- * Initialize variables for Node that will be used in A* algorithm later
+ * Initialize variables for Node that will be used in A algorithm for Path Finding
+ * 
+ * @author Jinshuo Zhang
  */
 public class Node {
     Node parent;

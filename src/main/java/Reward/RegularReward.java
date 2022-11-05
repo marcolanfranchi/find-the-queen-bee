@@ -42,10 +42,6 @@ public class RegularReward extends Reward {
 
     }
 
-    public void update() {
-        //checkCollected();
-    }
-
     public void collectReward(Bee bee) {
         bee.rewardList.add(this);
         bee.beeScore += this.value;

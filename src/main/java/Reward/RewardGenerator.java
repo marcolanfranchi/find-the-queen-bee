@@ -42,28 +42,19 @@ public void setRewards() {
             
 			randomX = getRandom(0, map.tileM.mapTileNum.length - 1);
 			randomY = getRandom(0, map.tileM.mapTileNum[0].length - 1);
-			// System.out.println("randomX: " + randomX + " randomY: " + randomY);
-			// System.out.println("Len X: " + map.tileM.mapTileNum.length + " Len Y: " +
-			// map.tileM.mapTileNum[0].length);
 
 			// Avoiding the traps and walls and door
-			// System.out.println("mapTileNum: " + map.tileM.mapTileNum[randomX][randomY]);
 			if (map.tileM.mapTileNum[randomX][randomY] == 3 || map.tileM.mapTileNum[randomX][randomY] == 1
 					|| map.tileM.mapTileNum[randomX][randomY] == 2) {
-				// System.out.println("-------Trap or Wall or Door-------");
 				i--;
 				continue;
 			}
 
             // avoid drawing on queenBee (bottom corner)
 			if (randomX == map.tileM.mapTileNum.length - 1 && randomY == map.tileM.mapTileNum[0].length - 1) {
-				// System.out.println("-------Queen Bee-------");
 				i--;
 				continue;
 			}
-            
-
-			// System.out.println("-------Setting reward-------");
             map.rewards[i].worldX = randomX * map.tileSize;
             map.rewards[i].worldY = randomY * map.tileSize;
         }
@@ -103,16 +94,4 @@ public void setRewards() {
         Random num = new Random();
         return num.nextInt(max - min + 1);
     }
-
-
-    // public int avoidWalls(int i) {
-    //     if (i % 6 == 0) {
-    //         i++;
-    //         if (i == 25) {
-    //             i -= 2;
-    //         }
-    //     }
-
-    //     return i;
-    // }
 }
