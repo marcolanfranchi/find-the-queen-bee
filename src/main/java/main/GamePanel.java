@@ -24,6 +24,13 @@ import entity.Enemy;
 import environment.EnvironmentManager;
 import environment.Sound;
 
+/**
+ * This class is the Game Panel which contains the UI at all different states of 
+ * the game, the map and all of its components, and methods to run and update the game.
+ * 
+ * @author Satvik Garg
+ * @author Marco Lanfranchi
+ */
 public class GamePanel extends JPanel implements Runnable {
 
 	// SYSTEM
@@ -33,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
 	KeyHandler keyHandler = new KeyHandler(this);
 	public UI ui = new UI(this);
 	Sound sound = new Sound();
+	Sound music = new Sound();
 
 	// Screen Setting
 	final int originalTileSize = 16;
@@ -69,6 +77,10 @@ public class GamePanel extends JPanel implements Runnable {
 	public static final int controlState = 5;
 
 
+	/**
+	 * Creates an instance of a GamePanel and sets it's size, background color,
+	 * and KeyHandler.
+	 */
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.black);
@@ -78,6 +90,10 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 
+	/**
+	 * Calls setup methods to create instances of this GamePanels components with set 
+	 * fields and sets the starting game state as the title state.
+	 */
 	public void setupGame() {
 		eManager.setup();
 		rewardGenerator.setRewards();
@@ -90,12 +106,19 @@ public class GamePanel extends JPanel implements Runnable {
 		gameState = titleState;
 	}
 
+	
+	/**
+	 * Creates a new Game thread and starts it.
+	 */
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 
-	@Override
+	/**
+	 * Runs the game by calling this GamePanel's update method
+	 * each frame per second.
+	 */
 	public void run() {
 
 		double tick = 1000000000/FPS;
@@ -114,10 +137,13 @@ public class GamePanel extends JPanel implements Runnable {
 				repaint();
 				delta--;
 			}
-
 		}
 	}
 
+	/**
+	 * Updates all items needing to be updated in this GamePanel and checks
+	 * if the game has been won or lost while it is in the play state.
+	 */
 	public void update() {
 		if (gameState == playState) {
 			bee.update();
@@ -131,6 +157,12 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
+
+	/**
+	 * Draws all of this GamePanel's items to the given Graphics object according
+	 * to the game state.
+	 * @param g a Graphics object used to paint on all components in the GamePanel
+	 */
 	public void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
@@ -141,7 +173,6 @@ public class GamePanel extends JPanel implements Runnable {
 		if (gameState == titleState) {
 			ui.draw(g2);
 		} else {
-
 			tileM.draw(g2);
 			drawRewards(g2);
 			drawObjects(g2);
@@ -153,13 +184,6 @@ public class GamePanel extends JPanel implements Runnable {
 
 			bee.draw(g2);
 			eManager.draw(g2);
-
-			// Temporary Text for Testing
-			// if (false) {
-			// 	g2.setFont(new Font("TimesRoman", Font.BOLD, 25));
-			// 	g2.drawString("Bee WorldX: " + bee.worldX, 50, 50);
-			// 	g2.drawString("Bee WorldY: " + bee.worldY, 50, 80);
-			// }
 
 			// UI
 			ui.draw(g2);
@@ -249,16 +273,16 @@ public class GamePanel extends JPanel implements Runnable {
 	 * @param i an int representing an index containing a Sound in Sound's soundURL list
 	 */
 	public void playMusic(int i) {
-		sound.setFile(i);
-		sound.play();
-		sound.loop();
+		music.setFile(i);
+		music.play();
+		music.loop();
 	}
 
 	/**
 	 * Stops the audio playing from this GamePanel's Sound.
 	 */
 	public void stopMusic() {
-		sound.stop();
+		music.stop();
 	}
 
 	/**
