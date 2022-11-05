@@ -1,5 +1,8 @@
 package entity;
 
+/**
+ * Initialize variables for Node that will be used in A* algorithm later
+ */
 public class Node {
     Node parent;
     public int col;

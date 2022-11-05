@@ -12,7 +12,6 @@ import main.GamePanel;
  */
 public class EnvironmentManager {
 	GamePanel gp;
-
 	Lighting lighting;
 
 	/**

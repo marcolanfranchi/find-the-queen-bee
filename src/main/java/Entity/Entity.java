@@ -113,9 +113,10 @@ abstract public class Entity {
     }
 
     /**
-     * 
-     * @param entity
-     * @param enemies
+     * Check the distance between the Bee and enemies, if they hit each other which means
+     * the enemy reaches the Bee and the game is over.
+     * @param entity    The Bee's current location
+     * @param enemies   Enemies' current location
      */
     public double checkGameOver(Entity entity, Entity[] enemies){
         double index = 999;
@@ -160,7 +161,9 @@ abstract public class Entity {
 	}
 
     /**
-     * 
+     * For all 4 directions, checks if the tile 1 position away from this Entity
+     * is a Wall Tile. If it is, sets the enemyCollision value to True, and the
+     * direction to null in order to stop or help enemies to choose directions.
      */
     public void enemyCheckCollision() {
 
