@@ -18,6 +18,12 @@ public abstract class Reward {
     public int width;
     public int height;
 
+    /*
+     * Creates a reward given the parameters
+     * @param value
+     * @param image
+     */
+
     //Creates a reward given the parameters value, image, location
     public Reward(GamePanel gp) {
         map = gp;

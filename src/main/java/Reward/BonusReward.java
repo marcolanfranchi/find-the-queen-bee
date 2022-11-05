@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 
 import java.awt.*;
 
+// Randomly appears!!
 public class BonusReward extends Reward {
 
     public static int bonusRewardVal = 50;
