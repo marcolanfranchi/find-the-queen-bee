@@ -18,15 +18,15 @@ public class MapCreator {
 	public static void main(String[] args) {
 
 		try {
-			FileWriter myWriter = new FileWriter("filename.txt");
+			FileWriter myWriter = new FileWriter("./trap-tile6.txt");
 
-			int x = 60;
-			int y = 60;
+			int x = 25;
+			int y = 25;
 			int[][] map = new int[x][y];
 
-			map = createBasicGrid(x, y, 5);
+			map = createBasicGrid(x, y, 4);
 
-			placeObjects(map, 100);
+			placeObjects(map, 36);
 
 			// now write the map to the file
 			for (int i = 0; i < map.length; i++) {

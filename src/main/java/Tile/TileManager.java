@@ -1,9 +1,13 @@
 package tile;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -36,9 +40,12 @@ public class TileManager<BufferedImage> {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
 		getTileImage();
-		//loadMap("../ui/maps/trap-tile.txt");
-		loadMap("../ui/maps/more-traps.txt");
 
+		Random rand = new Random();
+		File[] files = new File("./src/main/java/ui/maps/txt-maps").listFiles();
+		File file = files[rand.nextInt(files.length)];
+
+		loadMap(file.getPath());
 	}
 
 	/**
@@ -71,7 +78,7 @@ public class TileManager<BufferedImage> {
 	 */
 	public void loadMap(String mapPath) {
 		try {
-			InputStream is = getClass().getResourceAsStream(mapPath);
+			InputStream is = Files.newInputStream(Paths.get(mapPath));
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 			int col = 0;
