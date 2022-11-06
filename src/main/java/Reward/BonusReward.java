@@ -33,9 +33,10 @@ public class BonusReward extends Reward {
 	/**
     * Sets Bonus Reward's image which randomely appears
 	* @param gp a GamelPanel which will contain bonus rewards
+	*
     * @author Sana Dallalzadeh Atoufi
+	* @author Satvik Garg
     */   
-
 	public BonusReward(GamePanel gp) {
 		super(gp);
 		this.value = bonusRewardVal;
@@ -60,7 +61,6 @@ public class BonusReward extends Reward {
      * @param g2 Graphics2D object used 
 	 * @param g a Graphics object used to paint on all components in the GamePanel
      */
-
 	public void draw(Graphics2D g2, GamePanel g) {
 		int screenX = worldX - g.bee.worldX + g.bee.screenX;
 		int screenY = worldY - g.bee.worldY + g.bee.screenY;

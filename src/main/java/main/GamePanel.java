@@ -90,7 +90,7 @@ public class GamePanel extends JPanel implements Runnable {
 	 */
 	public void setupGame() {
 		eManager.setup();
-		rewardGenerator.setRewards();
+		rewardGenerator.setRegRewards();
 		rewardGenerator.setBonusRewards();
 		objManager.setObjects();
 		// instances of enemies
