@@ -5,6 +5,17 @@ import main.GamePanel;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+/**
+* Creates RewardGenerator in the given GamePanel
+* and gets the appropriate image.
+* Generates and adds the new rewards to the list
+* @param gp a GamePanel which will contain Reward
+* @return new list of rewards
+* @author Sana Dallalzadeh Atoufi
+*/
+
+
 public class RewardGenerator {
 
 
@@ -21,36 +32,41 @@ public class RewardGenerator {
     public final int totalRewards = maxRegReward + maxBonusReward;
     final int maxCordX = 25;
     final int maxCordY = 15;
-    final int regRewardVal = 10;
-    final int bonusRewardVal = 25;
+    final int regRewardVal = 10; //bee collects 10 points for collecting honey drops
+    final int bonusRewardVal = 25; //bee collects 25 points for collecting honey pots
 
-    // Generating and adding the new rewards to the list
+
+
+    
     public RewardGenerator(GamePanel gp) {
         this.map = gp;
     }
 
-// Generate a regular reward at some  point 
-// Generate a bonus reward at some random point
-public void setRewards() {
+
+    /**
+     * generating regular rewards at some point and bonus reward at some random point
+     * checking generated reward's location and add maxRegReward # of regular rewards to rewards list
+     * avoding walls,tile, and door and avoid drawing on queenBee (bottom corner)
+     */
+
+
+
+    public void setRewards() {
 	int randomX = 0;
 	int randomY = 0;
 
-        // Checking generated reward's location
-        // add maxRegReward # of regular rewards to rewards list
         for (int i = 0; i < maxRegReward; i++) {
             map.rewards[i] = new RegularReward(map);
             
 			randomX = getRandom(0, map.tileM.mapTileNum.length - 1);
 			randomY = getRandom(0, map.tileM.mapTileNum[0].length - 1);
 
-			// Avoiding the traps and walls and door
 			if (map.tileM.mapTileNum[randomX][randomY] == 3 || map.tileM.mapTileNum[randomX][randomY] == 1
 					|| map.tileM.mapTileNum[randomX][randomY] == 2) {
 				i--;
 				continue;
 			}
 
-            // avoid drawing on queenBee (bottom corner)
 			if (randomX == map.tileM.mapTileNum.length - 1 && randomY == map.tileM.mapTileNum[0].length - 1) {
 				i--;
 				continue;
