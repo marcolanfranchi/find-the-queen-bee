@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -29,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// SYSTEM
 	EnvironmentManager eManager = new EnvironmentManager(this);
-	public TileManager tileM = new TileManager(this);
+	public TileManager<BufferedImage> tileM = new TileManager<BufferedImage>(this);
 	Thread gameThread;
 	KeyHandler keyHandler = new KeyHandler(this);
 	public UI ui = new UI(this);
