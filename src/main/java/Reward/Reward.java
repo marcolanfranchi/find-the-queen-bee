@@ -7,6 +7,13 @@ import java.awt.image.BufferedImage;
 
 import entity.Bee;
 
+/**
+ * This class represents Rewards in the game which has to be
+ * collected by the bee.
+ * 
+ * @author Sana Dallalzadeh Atoufi
+ */
+
 public abstract class Reward {
 
     private GamePanel map;
@@ -18,13 +25,8 @@ public abstract class Reward {
     public int width;
     public int height;
 
-    /*
-     * Creates a reward given the parameters
-     * @param value
-     * @param image
-     */
+    
 
-    //Creates a reward given the parameters value, image, location
     public Reward(GamePanel gp) {
         map = gp;
         width = 60;
@@ -32,20 +34,23 @@ public abstract class Reward {
     }
 
     /**
-     * 
-     * @param g2
-     * @param gamePanel
+     * @param g2 Graphics2D object used to
+     * @param gamePanel  gamepanel access
      */
     public abstract void draw(Graphics2D g2, GamePanel gamePanel);
 
    /**
-    * 
-    * @param bee
+    * @param bee bee's location
     */
     public abstract void collectReward(Bee bee);
 
+    /**
+     * Creates a reward given the parameters (mutators)
+     * @param value
+     * @param image
+     * @param map
+     */
     
-    //Mutators
     public void setMap(GamePanel map) {
         this.map = map;
     }
@@ -58,7 +63,10 @@ public abstract class Reward {
         this.image = image;
     }
 
-    //Accessors
+    /**
+     * @return accessors
+     */
+    
     public GamePanel getMap() {
         return map;
     }

@@ -3,10 +3,18 @@ package object;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+/**
+ * This class represents a Honey Drop image which is used 
+ * in the UI next to the player's number of rewards collected.
+ * 
+ * @author Satvik Garg
+ */
 public class OBJ_HoneyDropReward extends SuperObject {
 
-	public int rewardValue;
-
+	/**
+	 * Creates an instance of a Honey Drop with the appropriate image and sets 
+	 * its width and height.
+	 */
 	public OBJ_HoneyDropReward() {
 		name = "Honey";
 
@@ -18,13 +26,5 @@ public class OBJ_HoneyDropReward extends SuperObject {
 
 		width = 48;
 		height = 48;
-
-		rewardValue = 10;
 	}
-
-	public void setSize(int width, int height) {
-		this.width = width;
-		this.height = height;
-	}
-
 }

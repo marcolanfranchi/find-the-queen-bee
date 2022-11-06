@@ -490,7 +490,6 @@ public class UI {
 
 				if (minute == 0 && second == 0) {
 					timer.stop();
-					// TODO: Change this
 					gp.gameState = GamePanel.gameOverState;
 				}
 			}

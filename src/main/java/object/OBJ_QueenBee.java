@@ -4,10 +4,18 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * This class represents a text Bubble Object with an image which is used 
+ * to display the Queen Bee.
+ * 
+ * @author Marco Lanfranchi
+ */
 public class OBJ_QueenBee extends SuperObject {
 
-    public int count = 1;
-
+    /**
+     * Creates an instance of a Queen Bee Object and sets its image to the
+     * appropriate image and sets its width and height.
+     */
     public OBJ_QueenBee() {
         name = "Queen Bee";
         try {
