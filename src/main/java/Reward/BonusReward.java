@@ -16,13 +16,9 @@ import javax.imageio.ImageIO;
 
 import java.awt.*;
 
-
-
-
 public class BonusReward extends Reward {
 
 	public static int bonusRewardVal = 50;
-	public boolean displayNow;
 	private Timer timer;
 
 	private int minimal = 1000;
@@ -31,12 +27,13 @@ public class BonusReward extends Reward {
 	Random randomTime;
 
 	/**
-    * Sets Bonus Reward's image which randomely appears
-	* @param gp a GamelPanel which will contain bonus rewards
-	*
-    * @author Sana Dallalzadeh Atoufi
-	* @author Satvik Garg
-    */   
+	 * Sets Bonus Reward's image which randomely appears
+	 * 
+	 * @param gp a GamelPanel which will contain bonus rewards
+	 *
+	 * @author Sana Dallalzadeh Atoufi
+	 * @author Satvik Garg
+	 */
 	public BonusReward(GamePanel gp) {
 		super(gp);
 		this.value = bonusRewardVal;
@@ -55,12 +52,13 @@ public class BonusReward extends Reward {
 		}
 	}
 
-    /**
-     * Draws bonus rewards on the given Graphics2D where the X and Y position 
-     * is the game map's starting point
-     * @param g2 Graphics2D object used 
-	 * @param g a Graphics object used to paint on all components in the GamePanel
-     */
+	/**
+	 * Draws bonus rewards on the given Graphics2D where the X and Y position
+	 * is the game map's starting point
+	 * 
+	 * @param g2 Graphics2D object used
+	 * @param g  a Graphics object used to paint on all components in the GamePanel
+	 */
 	public void draw(Graphics2D g2, GamePanel g) {
 		int screenX = worldX - g.bee.worldX + g.bee.screenX;
 		int screenY = worldY - g.bee.worldY + g.bee.screenY;
@@ -74,6 +72,7 @@ public class BonusReward extends Reward {
 			}
 		}
 	}
+
 	/**
 	 * bonus rewards appear randomly
 	 */
@@ -104,11 +103,14 @@ public class BonusReward extends Reward {
 		timer.restart();
 	}
 
-    /**
-    * collecting rewards and adding to the score
-	@param bee bee's location
-    */
+	/**
+	 * collecting rewards and adding to the score
+	 * 
+	 * @param bee bee's location
+	 */
 	public void collectReward(Bee bee) {
-		bee.beeScore += this.value;
+		if (this.displayNow == true) {
+			bee.beeScore += this.value;
+		}
 	}
 }
