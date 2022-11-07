@@ -1,4 +1,4 @@
-package com.beemaze.app;
+// package java;
 
 import static org.junit.Assert.assertTrue;
 
