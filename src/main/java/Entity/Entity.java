@@ -10,7 +10,6 @@ import main.GamePanel;
      * by the Game's different types of characters.
      * 
      * @author Marco Lanfranchi
-     * @author Jinshuo Zhang
      */
 abstract public class Entity {
 
@@ -160,41 +159,7 @@ abstract public class Entity {
         }
 	}
 
-    /**
-     * For all 4 directions, checks if the tile 1 position away from this Entity
-     * is a Wall Tile. If it is, sets the enemyCollision value to True, and the
-     * direction to null in order to stop or help enemies to choose directions.
-     */
-    public void enemyCheckCollision() {
-
-        if (this.tileNumUp() == 1) {
-            enemyCollision = true;
-            direction = null;
-        } else {
-            direction = "up";
-        }
-
-        if (this.tileNumDown() == 1) {
-            enemyCollision = true;
-            direction = null;
-        } else {
-            direction = "down";
-        }
-
-        if (this.tileNumLeft() == 1) {
-            enemyCollision = true;
-            direction = null;
-        } else {
-            direction = "left";
-        }
-
-        if (this.tileNumRight() == 1) {
-            enemyCollision = true;
-            direction = null;
-        } else {
-            direction = "right";
-        }
-	}
+    
 
     /**
      * Returns true if the given x and y ints give a location of a tile number in
