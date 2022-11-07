@@ -20,7 +20,7 @@ public class RewardGenerator {
 	GamePanel gamePanel;
 
 	public int maxRegReward = 10;
-	public final int maxBonusReward = 10;
+	public final int maxBonusReward = 3;
 	public final int totalRewards = maxRegReward + maxBonusReward;
 	final int maxCordX = 25;
 	final int maxCordY = 15;
@@ -106,8 +106,6 @@ public class RewardGenerator {
 				i--;
 				continue;
 			}
-
-			System.out.println("Bonus reward at: " + randomX + ", " + randomY);
 			gamePanel.rewards[i].worldX = randomX * gamePanel.tileSize;
 			gamePanel.rewards[i].worldY = randomY * gamePanel.tileSize;
 		}

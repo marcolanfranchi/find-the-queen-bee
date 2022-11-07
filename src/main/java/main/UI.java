@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import object.OBJ_ARROW;
-import object.OBJ_HoneyDropReward;
+import object.OBJ_HoneyDrop;
 import object.OBJ_WASD;
 
 /**
@@ -69,7 +69,7 @@ public class UI {
 			e.printStackTrace();
 		}
 
-		OBJ_HoneyDropReward honey = new OBJ_HoneyDropReward();
+		OBJ_HoneyDrop honey = new OBJ_HoneyDrop();
 		OBJ_ARROW arrowKeys = new OBJ_ARROW();
 		OBJ_WASD wasdKeys = new OBJ_WASD();
 

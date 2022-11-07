@@ -9,13 +9,13 @@ import javax.imageio.ImageIO;
  * 
  * @author Satvik Garg
  */
-public class OBJ_HoneyDropReward extends SuperObject {
+public class OBJ_HoneyDrop extends SuperObject {
 
 	/**
 	 * Creates an instance of a Honey Drop with the appropriate image and sets 
 	 * its width and height.
 	 */
-	public OBJ_HoneyDropReward() {
+	public OBJ_HoneyDrop() {
 		name = "Honey";
 
 		try {
