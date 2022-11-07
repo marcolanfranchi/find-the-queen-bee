@@ -68,7 +68,7 @@ public class Enemy extends Entity{
 		setRandomStartPoint();
 		speed = gamePanel.tileSize / 4;
 		direction = "up";
-		getEnemyImage();
+		setImages();
 
 	}
 
@@ -76,7 +76,7 @@ public class Enemy extends Entity{
 	 * Load Enemy's images for differnt directions and apply these images
 	 * when its moving to different directions.
 	 */
-	public void getEnemyImage() {
+	public void setImages() {
 		try {
             up1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-up.png"));
             down1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-down.png"));

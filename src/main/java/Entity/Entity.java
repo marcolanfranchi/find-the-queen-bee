@@ -3,6 +3,8 @@ package entity;
 import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 import main.GamePanel;
+import java.awt.Graphics2D;
+
 
 
 /** 
@@ -40,6 +42,27 @@ abstract public class Entity {
     public Entity(GamePanel gp){
         this.gamePanel = gp;
     }
+
+    // abstract methods:
+
+    /**
+     * Abstact method for drawing an entity on the given Graphics2D object
+     * @param g Graphics2D object used to contain all images and text for the UI.
+     */
+    public abstract void draw(Graphics2D g);
+
+    /**
+     * Abstract setImages method for setting an entities images.
+     */
+    public abstract void setImages();
+
+    /**
+     * Abstract update method called every frame per second updating an Entity.
+     */
+    public abstract void update();
+    
+
+
 
     
     /**

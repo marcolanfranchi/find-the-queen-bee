@@ -56,7 +56,7 @@ public class Bee extends Entity {
 		worldY = 1 * gp.tileSize;
 		speed = gp.tileSize / 2;
 		direction = "down";
-		setBeeImages();
+		setImages();
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class Bee extends Entity {
 	 * direction
 	 * to illustrate the bees wings flapping .
 	 */
-	public void setBeeImages() {
+	public void setImages() {
 		try {
 
 			up1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-up.png"));
