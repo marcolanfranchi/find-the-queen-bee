@@ -135,7 +135,7 @@ public class Bee extends Entity {
 			}
 		}
 
-		updateBeeMove();
+		moveBee();
 
 		// counter used to switch bee images to flap wings over and over
 		spriteCounter++;
@@ -153,7 +153,7 @@ public class Bee extends Entity {
 	 * Update this Bee's X or Y position according to the key pressed and
 	 * switches the direction it is facing after this move.
 	 */
-	private void updateBeeMove() {
+	public void moveBee() {
 		if (keyHandler.upPressed && moveUp) {
 			worldY -= speed;
 			direction = "up";
@@ -315,6 +315,25 @@ public class Bee extends Entity {
 		if (punishmentBuffer % 2 == 0) {
 			beeScore -= punishment;
 			gamePanel.playSoundEffect(2);
+		}
+	}
+
+	// method only used in BeeTests
+	public void setDirectionPressed(String s, boolean b) {
+		if (s == "up") {
+			this.keyHandler.upPressed = b;
+		}
+
+		if (s == "down") {
+			this.keyHandler.downPressed = b;
+		}
+
+		if (s == "left") {
+			this.keyHandler.leftPressed = b;
+		}
+
+		if (s == "right") {
+			this.keyHandler.rightPressed = b;
 		}
 	}
 }

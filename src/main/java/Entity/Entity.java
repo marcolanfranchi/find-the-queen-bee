@@ -209,4 +209,24 @@ abstract public class Entity {
                 return false;
             }
     }
+
+    // method only used for testing
+    public void setCanMove(String s, boolean b) {
+        if (s == "up") {
+			this.moveUp = b;
+		}
+
+		if (s == "down") {
+			this.moveDown = b;
+		}
+
+		if (s == "left") {
+			this.moveLeft = b;
+		}
+
+		if (s == "right") {
+			this.moveRight = b;
+		}
+
+    }
 }

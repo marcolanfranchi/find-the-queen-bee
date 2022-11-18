@@ -23,7 +23,7 @@ public class EntityTest {
       GamePanel gp = new GamePanel();
       // setting a specific map to use for testing
       gp.tileM.setMap("./src/main/java/ui/maps/txt-maps/trap-tile.txt");
-      KeyHandler kh = new main.KeyHandler(gp);
+      KeyHandler kh = new KeyHandler(gp);
       entity = new Bee(gp, kh);
    }
 
