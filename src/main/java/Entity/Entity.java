@@ -60,10 +60,19 @@ abstract public class Entity {
      * Abstract update method called every frame per second updating an Entity.
      */
     public abstract void update();
-    
 
+    public void setX(int x) {
+        this.worldX = x;
+    }
 
+    public void setY(int y) {
+        this.worldY = y;
+    }
 
+    public void setLocation(int x, int y) {
+        setX(x);
+        setY(y);
+    }
     
     /**
      * Returns this Entity's X position on the map.

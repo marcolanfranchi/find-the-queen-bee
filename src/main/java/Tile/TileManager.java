@@ -71,6 +71,10 @@ public class TileManager<BufferedImage> {
 		}
 	}
 
+	public void setMap(String mapPath) {
+		loadMap(mapPath);
+	}
+
 	/**
 	 * Loads the map from the file and stores it in the mapTileNum array
 	 * 
