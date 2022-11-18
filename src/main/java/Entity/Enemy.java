@@ -66,7 +66,7 @@ public class Enemy extends Entity{
 			}
 		}
 		setRandomStartPoint();
-		speed = gamePanel.tileSize / 4;
+		speed = gamePanel.tileSize / 8;
 		direction = "up";
 		setImages();
 
