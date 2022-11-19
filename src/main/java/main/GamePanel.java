@@ -237,7 +237,7 @@ public class GamePanel extends JPanel implements Runnable {
 	 * to the win state and plays the corresponding music.
 	 */
 	public void updateGameCompletion() {
-		if (bee.checkDoneGameWon()) {
+		if (bee.checkGameWon()) {
 			gameState = winState;
 			playMusic(1);
 				}

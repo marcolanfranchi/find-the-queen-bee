@@ -15,7 +15,7 @@ import java.awt.Graphics2D;
      */
 abstract public class Entity {
 
-    GamePanel gamePanel;
+    public GamePanel gamePanel;
 
     public int worldX;
     public int worldY;

@@ -88,4 +88,10 @@ public abstract class Reward {
 		this.worldY = 0;
 		this.image = null;
 	}
+
+	// method used for testing
+	public void setLocation(int x, int y) {
+		this.worldX = x;
+		this.worldY = y;
+	}
 }

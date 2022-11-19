@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import reward.RegularReward;
 import reward.Reward;
 
 /**
@@ -179,8 +180,10 @@ public class Bee extends Entity {
 	 */
 	public boolean checkReachedEnd() {
 
-		int endTileX = gamePanel.objects[0].worldX;
-		int endTileY = gamePanel.objects[0].worldY;
+		//int endTileX = gamePanel.objects[0].worldX;
+		int endTileX = 23 * gamePanel.tileSize;
+		//int endTileY = gamePanel.objects[0].worldY;
+		int endTileY = 23 * gamePanel.tileSize;
 
 		if (this.worldX >= endTileX && this.worldY >= endTileY) {
 			return true;
@@ -197,7 +200,7 @@ public class Bee extends Entity {
 	 * @return a boolean value indicating if this Bee completed all requirements and
 	 *         won the game or not.
 	 */
-	public boolean checkDoneGameWon() {
+	public boolean checkGameWon() {
 		if (checkReachedEnd() && hasAllRegRewards()) {
 			return true;
 		} else {
@@ -335,5 +338,14 @@ public class Bee extends Entity {
 		if (s == "right") {
 			this.keyHandler.rightPressed = b;
 		}
+	}
+
+	// method only used in BeeTests
+	public void addNumRewards(int i) {
+		for (int j = 0; j < i; j++) {
+			Reward reward = new RegularReward(this.gamePanel);
+			rewardList.add(reward);
+		}
+
 	}
 }
