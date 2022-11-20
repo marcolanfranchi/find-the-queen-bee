@@ -35,7 +35,7 @@ public class TileManager<BufferedImage> {
 	 */
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
-		tile = new Tile[10];
+		tile = new Tile[4];
 
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
@@ -73,6 +73,15 @@ public class TileManager<BufferedImage> {
 
 	public void setMap(String mapPath) {
 		loadMap(mapPath);
+	}
+
+	/**
+	 * Used to test Tile array
+	 * 
+	 * @return The tile array
+	 */
+	public Tile[] getTile() {
+		return tile;
 	}
 
 	/**

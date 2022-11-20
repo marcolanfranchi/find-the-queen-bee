@@ -33,6 +33,13 @@ public class EnvironmentManager {
 	}
 
 	/**
+	 * Gets the Lighting object for test
+	 */
+	public Lighting getLighting() {
+		return lighting;
+	}
+
+	/**
 	 * Draws the lighting effect to the screen using the Lighting class
 	 * 
 	 * @param g2d The Graphics2D object
