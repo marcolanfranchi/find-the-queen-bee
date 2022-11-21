@@ -75,7 +75,7 @@ public abstract class Reward {
 		return value;
 	}
 
-	public BufferedImage getTexture() {
+	public BufferedImage getImage() {
 		return image;
 	}
 

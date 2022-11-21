@@ -2,6 +2,7 @@ package entityTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -363,12 +364,17 @@ public class BeeTest {
         bee.setLocation(x_on, y_on);
         RegularReward regReward = new RegularReward(bee.gamePanel);
         regReward.setLocation(x_on, y_on); // set reward location on same tile as the bee
+        bee.gamePanel.rewards[0] = regReward; // add reward to gamePanel's reward list
+        
         boolean display_in = true;
         regReward.displayNow = display_in;
 
         bee.pickUpReward(regReward);
-        boolean result = bee.rewardList.contains(regReward);
-        assertTrue(result);
+        boolean collectResult = bee.rewardList.contains(regReward);
+        assertTrue(collectResult);
+    
+        // assert the index in the gamepanel's reward list is now null after collecting the reward
+        assertNull(bee.gamePanel.rewards[0].getImage());
     }
 
     @Test
@@ -420,11 +426,6 @@ public class BeeTest {
         boolean result = bee.rewardList.contains(regReward);
         assertFalse(result);
     }
-
-
-
-    
-
 
 
     

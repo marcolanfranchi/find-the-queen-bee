@@ -124,70 +124,6 @@ public class EntityTest {
    }
 
    @Test
-   void testinFirstRoomX1_onY_in() {
-      int x1_on = 0;
-      int y_in = 3;
-      boolean result = entity.inFirstRoom(x1_on, y_in);
-      assertTrue(result);
-   }
-
-   @Test
-   void testinFirstRoomX1_offY_in() {
-      int x1_off = -1;
-      int y_in = 3;
-      boolean result = entity.inFirstRoom(x1_off, y_in);
-      assertFalse(result);
-   }
-
-   @Test
-   void testinFirstRoomX2_onY_in() {
-      int x2_on = 5;
-      int y_in = 3;
-      boolean result = entity.inFirstRoom(x2_on, y_in);
-      assertTrue(result);
-   }
-
-   @Test
-   void testinFirstRoomX2_offY_in() {
-      int x2_off = 6;
-      int y_in = 3;
-      boolean result = entity.inFirstRoom(x2_off, y_in);
-      assertFalse(result);
-   }
-
-   @Test
-   void testinFirstRoomX_inY1_on() {
-      int x_in = 3;
-      int y1_on = 0;
-      boolean result = entity.inFirstRoom(x_in, y1_on);
-      assertTrue(result);
-   }
-
-   @Test
-   void testinFirstRoomX_inY1_off() {
-      int x_in = 3;
-      int y1_off = -1;
-      boolean result = entity.inFirstRoom(x_in, y1_off);
-      assertFalse(result);
-   }
-
-   @Test
-   void testinFirstRoomX_inY2_on() {
-      int x_in = 3;
-      int y2_on = 5;
-      boolean result = entity.inFirstRoom(x_in, y2_on);
-      assertTrue(result);
-   }
-
-   @Test
-   void testinFirstRoomX_inY2_off() {
-      int x_in = 3;
-      int y2_off = 6;
-      boolean result = entity.inFirstRoom(x_in, y2_off);
-      assertFalse(result);
-   }
-
-   @Test
    void testCheckWallCollisionUpTrue() {
       int x = 1 * 48;
       int y = 1 * 48;
@@ -267,4 +203,67 @@ public class EntityTest {
       assertEquals(true, result);
    }
 
+   @Test
+   void testinFirstRoomX1_onY_in() {
+      int x1_on = 0;
+      int y_in = 3;
+      boolean result = entity.inFirstRoom(x1_on, y_in);
+      assertTrue(result);
+   }
+
+   @Test
+   void testinFirstRoomX1_offY_in() {
+      int x1_off = -1;
+      int y_in = 3;
+      boolean result = entity.inFirstRoom(x1_off, y_in);
+      assertFalse(result);
+   }
+
+   @Test
+   void testinFirstRoomX2_onY_in() {
+      int x2_on = 5;
+      int y_in = 3;
+      boolean result = entity.inFirstRoom(x2_on, y_in);
+      assertTrue(result);
+   }
+
+   @Test
+   void testinFirstRoomX2_offY_in() {
+      int x2_off = 6;
+      int y_in = 3;
+      boolean result = entity.inFirstRoom(x2_off, y_in);
+      assertFalse(result);
+   }
+
+   @Test
+   void testinFirstRoomX_inY1_on() {
+      int x_in = 3;
+      int y1_on = 0;
+      boolean result = entity.inFirstRoom(x_in, y1_on);
+      assertTrue(result);
+   }
+
+   @Test
+   void testinFirstRoomX_inY1_off() {
+      int x_in = 3;
+      int y1_off = -1;
+      boolean result = entity.inFirstRoom(x_in, y1_off);
+      assertFalse(result);
+   }
+
+   @Test
+   void testinFirstRoomX_inY2_on() {
+      int x_in = 3;
+      int y2_on = 5;
+      boolean result = entity.inFirstRoom(x_in, y2_on);
+      assertTrue(result);
+   }
+
+   @Test
+   void testinFirstRoomX_inY2_off() {
+      int x_in = 3;
+      int y2_off = 6;
+      boolean result = entity.inFirstRoom(x_in, y2_off);
+      assertFalse(result);
+   }
 }

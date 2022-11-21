@@ -250,9 +250,9 @@ public class Bee extends Entity {
 		int rewardY = reward.worldY;
 
 		final boolean inTopLeft = this.worldX == rewardX && this.worldY == rewardY;
-		final boolean inTopRight = this.worldX - 24 == rewardX && this.worldY == rewardY;
-		final boolean inBottomLeft = this.worldX == rewardX && this.worldY == rewardY + 24;
-		final boolean inBottomRight = this.worldX - 24 == rewardX && this.worldY == rewardY + 24;
+		final boolean inTopRight = this.worldX - speed == rewardX && this.worldY == rewardY;
+		final boolean inBottomLeft = this.worldX == rewardX && this.worldY == rewardY + speed;
+		final boolean inBottomRight = this.worldX - speed == rewardX && this.worldY == rewardY + speed;
 
 		if (inTopLeft || inTopRight || inBottomLeft || inBottomRight) {
 			return true;

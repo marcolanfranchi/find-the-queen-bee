@@ -69,6 +69,7 @@ abstract public class Entity {
         this.worldY = y;
     }
 
+    // method only used for testing
     public void setLocation(int x, int y) {
         setX(x);
         setY(y);
