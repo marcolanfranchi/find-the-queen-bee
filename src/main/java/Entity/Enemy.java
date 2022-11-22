@@ -32,8 +32,6 @@ public class Enemy extends Entity{
 	Node startNode, goalNode, currentNode;
 	ArrayList<Node> openList = new ArrayList<>();
     public ArrayList<Node> pathList = new ArrayList<>();
-	public int tempX;
-	public int tempY;
     
 	/**
 	 * Creates number's enemies which is born randomly on the map except the first room.
@@ -156,59 +154,47 @@ public class Enemy extends Entity{
 			if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
 				worldY -= speed;
 				direction = "up";
-				tempY = worldY;
 			} else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
 				worldY += speed;
 				direction = "down";
-				tempY = worldY;
 			} else if (enTopY >= nextY && enDownY < nextY + gamePanel.tileSize) {
 				if (enLeftX > nextX) {
 					worldX -= speed;
 					direction = "left";
-					tempX = worldX;
 				}
 				if (enLeftX < nextX) {
 					worldX += speed;
 					direction = "right";
-					tempX = worldX;
 				}
 			}
 			else if(enTopY > nextY && enLeftX > nextX){
 				worldY -= speed;
 				direction = "up";
-				tempY = worldY;
 				enemyCheckCollision();
 				if(enemyCollision == true){
 					worldX -= speed;
 					direction = "left";
-					tempX = worldX;
 				}
 			}else if(enTopY > nextY && enLeftX < nextX){
 				direction = "up";
-				tempY = worldY;
 				enemyCheckCollision();
 				if(enemyCollision == true){
 					worldX += speed;
 					direction = "right";
-					tempX = worldX;
 				}
 			}else if(enTopY < nextY && enLeftX > nextX){
 				direction = "down";
-				tempY = worldY;
 				enemyCheckCollision();
 				if(enemyCollision == true){
 					worldX -= speed;
 					direction = "left";
-					tempX = worldX;
 				}
 			}else if(enTopY < nextY && enLeftX < nextX){
 				direction = "down";
-				tempY = worldY;
 				enemyCheckCollision();
 				if(enemyCollision == true){
 					worldX += speed;
 					direction = "right";
-					tempX = worldX;
 				}
 			}
 		}
