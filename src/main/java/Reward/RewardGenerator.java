@@ -17,7 +17,7 @@ public class RewardGenerator {
 
 	private static ArrayList<Reward> rewardsList = new ArrayList<>();
 
-	GamePanel gamePanel;
+	public GamePanel gamePanel;
 
 	public int maxRegReward = 10;
 	public final int maxBonusReward = 3;

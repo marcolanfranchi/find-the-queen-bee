@@ -5,6 +5,8 @@ import main.KeyHandler;
 
 import org.junit.jupiter.api.Test;
 
+import reward.BonusReward;
+import reward.RegularReward;
 import reward.Reward;
 import reward.RewardGenerator;
 
@@ -17,42 +19,38 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RewardGeneratorTest {
 
-    GamePanel map = new GamePanel();
+    private RewardGenerator rewardGenerator;
 
     @BeforeEach
     void setup() {
         GamePanel gp = new GamePanel();
         gp.tileM.setMap("./src/main/java/ui/maps/txt-maps/trap-tile.txt");
+        rewardGenerator = new RewardGenerator(gp);
     }
 
     @Test
-    void generateAllRewards()
-    {
-        assertEquals(12,RewardGenerator.getRewardsList().size(), "Failed to create all rewards by the generator");
+    void testSetRegRewards() {
+        rewardGenerator.setRegRewards();
+        RegularReward r = new RegularReward(null);
+        for (int i = 0; i < rewardGenerator.maxRegReward; i++) {
+            Reward result = rewardGenerator.gamePanel.rewards[i];
+            assertInstanceOf(r.getClass(), result);    
+        }
     }
 
     @Test
-    void generateRegularReward()
-    {
-        // Test generateRegularReward
-    
-        RewardGenerator rewardGenerator = new RewardGenerator(map);
-        assertNotNull(rewardGenerator.getRewardsList(), "Failed to create a regular reward by the generator");
-    }
-
-    @Test
-    void generateBonusReward()
-    {
-        // Test generateBonusReward
-        RewardGenerator rewardGenerator = new RewardGenerator(map);
-        assertNotNull(rewardGenerator.getRewardsList(), "Failed to create a bonus reward by the generator");
+    void testSetBonusRewards() {
+        rewardGenerator.setBonusRewards();
+        BonusReward b = new BonusReward(null);
+        for (int i = rewardGenerator.maxRegReward; i < rewardGenerator.totalRewards; i++) {
+            Reward result = rewardGenerator.gamePanel.rewards[i];
+            assertInstanceOf(b.getClass(), result);
+        }
     }
 
     @Test
     void rewardOnRoad()
     {
-    
-        RewardGenerator rewardGenerator = new RewardGenerator(map);
         ArrayList<Reward> rewardsList = rewardGenerator.getRewardsList();
         boolean check = true;
         for(Reward e:rewardsList)
@@ -68,8 +66,6 @@ class RewardGeneratorTest {
     @Test
     void rewardInTheSamePosition()
     {
-
-        RewardGenerator rewardGenerator = new RewardGenerator(map);
         ArrayList<Reward> rewardsList = rewardGenerator.getRewardsList();
         boolean check = true;
         for(Reward e:rewardsList)
