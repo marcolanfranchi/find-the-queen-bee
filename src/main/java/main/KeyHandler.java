@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
  */
 public class KeyHandler implements KeyListener {
 
-    GamePanel gamePanel;
+    public GamePanel gamePanel;
 
     public boolean upPressed, downPressed, 
                     leftPressed, rightPressed;

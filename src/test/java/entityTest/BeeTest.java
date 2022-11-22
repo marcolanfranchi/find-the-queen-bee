@@ -12,9 +12,7 @@ import org.junit.jupiter.api.Test;
 import entity.Bee;
 import main.GamePanel;
 import main.KeyHandler;
-import reward.BonusReward;
 import reward.RegularReward;
-import reward.Reward;
 
 public class BeeTest {
 

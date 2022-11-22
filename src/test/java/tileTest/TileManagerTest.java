@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import main.GamePanel;
 import tile.TileManager;
 
-public class TileTest {
+public class TileManagerTest {
 	private TileManager<BufferedImage> tileManager;
 	GamePanel gp;
 

@@ -17,7 +17,7 @@ public class OBJ_TextBubble extends SuperObject {
      * text bubble "down here" and set its height and width.
      */
     public OBJ_TextBubble() {
-		name = "Down Here Text Bubble";
+		name = "Text Bubble";
         try {
             image = ImageIO.read(getClass().getResource("../ui/images/DownHereText.png"));
             
