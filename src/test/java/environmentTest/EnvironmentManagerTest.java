@@ -25,6 +25,7 @@ public class EnvironmentManagerTest {
 
 	@Test
 	public void testGetLighting() {
+		environmentManager.setup();
 		assertNotNull(environmentManager.getLighting());
 	}
 

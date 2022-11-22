@@ -3,6 +3,12 @@ package tileTest;
 import static org.junit.Assert.*;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,11 +18,12 @@ import tile.TileManager;
 
 public class TileTest {
 	private TileManager<BufferedImage> tileManager;
+	GamePanel gp;
 
 	@BeforeEach
 	public void setUp() throws Exception {
 		// Define new game panel
-		GamePanel gp = new GamePanel();
+		gp = new GamePanel();
 		tileManager = new TileManager<BufferedImage>(gp);
 	}
 
@@ -47,6 +54,26 @@ public class TileTest {
 				assertNotNull(tileManager.mapTileNum[i][j]);
 			}
 		}
+	}
+
+	@Test
+	public void testMapAssignNumbers() throws IOException {
+		String mapPath = "./src/main/java/ui/maps/txt-maps/trap-tile.txt";
+		tileManager.loadMap(mapPath);
+
+		InputStream is = Files.newInputStream(Paths.get(mapPath));
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+		for (int i = 0; i < tileManager.mapTileNum.length; i++) {
+			String line = br.readLine();
+			for (int j = 0; j < tileManager.mapTileNum[i].length; j++) {
+				String numbers[] = line.split(" ");
+				int num = Integer.parseInt(numbers[j]);
+				assertEquals(num, tileManager.mapTileNum[j][i]);
+			}
+		}
+		br.close();
 	}
 
 }
