@@ -33,8 +33,8 @@ public class ObjectManagerTest {
 	@Test
 	void testQueenBeeObject() {
 		objectManager.setObjects();
-		assertEquals(1104, gp.objects[0].worldX);
-		assertEquals(1104, gp.objects[0].worldY);
+		assertEquals(23 * gp.tileSize, gp.objects[0].worldX);
+		assertEquals(23 * gp.tileSize, gp.objects[0].worldY);
 	}
 
 	@Test
