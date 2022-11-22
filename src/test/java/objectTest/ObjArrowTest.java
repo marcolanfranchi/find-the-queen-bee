@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.awt.image.BufferedImage;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import object.OBJ_ARROW;

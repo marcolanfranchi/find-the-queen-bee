@@ -85,8 +85,6 @@ public class BeeTest {
         assertEquals("up", resultDir); // assert direction changed to "up"
     }
 
-    
-
     @Test
     void testMoveBeeDownKeyNotPressedInValidMove() {
         int x = 1 * tileSize;;
@@ -535,7 +533,6 @@ public class BeeTest {
     @Test
     void testHasAllRegRewardsNoRewards() {
         // bee has 0 regular rewards at its instantiation
-        //int allRewards = bee.gamePanel.rewardGenerator.maxRegReward;
         boolean result = bee.hasAllRegRewards();
         assertFalse(result);
     }
@@ -557,13 +554,12 @@ public class BeeTest {
         assertTrue(result);
     }
 
-    // Used MC/DC to choose the following test cases for testing
-    // Bee's nearQueenMissingRewards() method
+    // Used MC/DC to choose the following test cases for testing the
+    // Bee's nearQueenMissingRewards() method.
     // variable p: bee's x is near the queen bee
     // variable q: bee's y is near the queen bee
     // variable r: bee has all regular rewards
     // expression: p ^ q ^ ~r, therefore X_On, Y_On, Rewards_Off is the only true case
-    // 3, 5, 7, 8
     @Test
     void testNearQueenMissingRewardsX_OnY_OnRewards_Off() {
         int x_on = 23 * tileSize - (3 * tileSize);
@@ -658,10 +654,5 @@ public class BeeTest {
         int resultAfterTwoCalls = bee.beeScore;
         // assert the second call of reduceScore() did not change the bee's score
         assertEquals(resultAfterOneCall, resultAfterTwoCalls);
-    }
-
-
-
-
-    
+    }    
 }
