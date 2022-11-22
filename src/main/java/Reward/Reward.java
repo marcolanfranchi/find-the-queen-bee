@@ -59,7 +59,7 @@ public abstract class Reward {
 		this.value = value;
 	}
 
-	public void setTexture(BufferedImage image) {
+	public void setImage(BufferedImage image) {
 		this.image = image;
 	}
 
