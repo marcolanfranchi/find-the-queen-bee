@@ -225,17 +225,6 @@ public class Bee extends Entity {
 	}
 
 	/**
-	 * Adds the given Reward to this Bee's list of Rewards collected and
-	 * increases this Bee's score by the value of the Reward.
-	 * 
-	 * @param reward a Reward which is being collected by this Bee
-	 */
-	public void addReward(Reward reward) {
-		rewardList.add(reward);
-		beeScore += reward.value;
-	}
-
-	/**
 	 * Returns True if this Bee is currently located on a Reward. False otherwise.
 	 * Since this Bee moves up and down by half of a tile size and a Reward takes up
 	 * an entire Tile size, the method checks if the bee is located on any 4 corners
@@ -267,7 +256,7 @@ public class Bee extends Entity {
 	 * 
 	 * @return a boolean value indicating if the Bee has all of the Rewards or not
 	 */
-	private boolean hasAllRegRewards() {
+	public boolean hasAllRegRewards() {
 		if (rewardList.size() == gamePanel.rewardGenerator.maxRegReward) {
 			return true;
 		} else {
@@ -284,10 +273,9 @@ public class Bee extends Entity {
 	 *         end tile and it has not collected all rewards.
 	 */
 	public boolean nearQueenMissingRewards() {
-		if (this.worldX >= gamePanel.objects[0].worldX - 3 * gamePanel.tileSize &&
-				this.worldY >= gamePanel.objects[0].worldY - 3 * gamePanel.tileSize) {
+		if (this.worldX >= (23 * gamePanel.tileSize) - 3 * gamePanel.tileSize &&
+				this.worldY >= (23 * gamePanel.tileSize) - 3 * gamePanel.tileSize) {
 			if (!hasAllRegRewards()) {
-				// ((OBJ_TextBubble) gamePanel.objects[1]).setAltImage();
 				return true;
 			}
 		}
@@ -314,11 +302,12 @@ public class Bee extends Entity {
 	 * sound effect.
 	 */
 	public void reduceScore() {
-		punishmentBuffer++;
 		if (punishmentBuffer % 2 == 0) {
 			beeScore -= punishment;
 			gamePanel.playSoundEffect(2);
 		}
+		punishmentBuffer++;
+
 	}
 
 	// method only used in BeeTests
