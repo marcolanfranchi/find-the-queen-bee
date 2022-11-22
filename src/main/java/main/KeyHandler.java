@@ -15,10 +15,12 @@ public class KeyHandler implements KeyListener {
 
     public GamePanel gamePanel;
 
-    public boolean upPressed, downPressed, 
-                    leftPressed, rightPressed;
+    public static boolean upPressed;
+    public static boolean downPressed;
+    public static boolean leftPressed;
+    public static boolean rightPressed;
 
-	private int prevState = GamePanel.titleState;
+	public int prevState = GamePanel.titleState;
 
 	/**
 	 * Creates an instance of KeyHandler and sets it's GamePanel to the given GamePanel
@@ -32,9 +34,8 @@ public class KeyHandler implements KeyListener {
     /**
 	 * 
 	 */
-	public void keyTyped(KeyEvent e) {
-        
-    }
+	public void keyTyped(KeyEvent e) {}
+
 
     /**
 	 * Observes the given KeyEvent and applies the appropriate UI change based on this
@@ -132,7 +133,6 @@ public class KeyHandler implements KeyListener {
 			} else if (gamePanel.gameState == GamePanel.pauseState) {
 				gamePanel.gameState = GamePanel.playState;
 			} else if (gamePanel.gameState == GamePanel.controlState) {
-				System.out.println("PrevState == " + prevState);
 				gamePanel.gameState = prevState;
 			}
 		}
