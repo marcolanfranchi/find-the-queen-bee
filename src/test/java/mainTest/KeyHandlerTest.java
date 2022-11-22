@@ -18,12 +18,10 @@ public class KeyHandlerTest {
         keyHandler = new KeyHandler(gp);
     }
 
-    @Test
-    void testKeyPressedPlayStateEsc_Pressed() {
-        // keyHandler.gamePanel.gameState = GamePanel.playState;
-        // int esc_Pressed = KeyEvent.VK_ESCAPE;
-        // keyHandler.keyPressed(esc_Pressed);
-    }
-
-
+    // @Test
+    // void testKeyPressedPlayStateEsc_Pressed() {
+    //     keyHandler.gamePanel.gameState = GamePanel.playState;
+    //     int esc_Pressed = KeyEvent.VK_ESCAPE;
+    //     keyHandler.keyPressed(esc_Pressed);
+    // }
 }
