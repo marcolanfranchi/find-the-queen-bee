@@ -36,8 +36,8 @@ public class EnemyTest {
     @Test
     void testEnemyIsPlacedOnMap(){
         enemy.setRandomStartPoint();
-        assertTrue(enemy.worldX > 0);
-        assertTrue(enemy.worldY > 0);
+        assertTrue(enemy.worldX > 0 && enemy.worldX <= 23 * enemy.gamePanel.tileSize);
+        assertTrue(enemy.worldY > 0  && enemy.worldY <= 23 * enemy.gamePanel.tileSize);
     }
 
     @Test
