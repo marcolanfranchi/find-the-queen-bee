@@ -9,27 +9,29 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>BeeMaze</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+
+  <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
   <dependencies>
 
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.9.1</version>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.8.1</version>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -76,6 +78,15 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.0.0</version>
+          <configuration>
+            <mainClass>main.Main</mainClass>
+          </configuration>
+        </plugin>
+
       </plugins>
     </pluginManagement>
   </build>

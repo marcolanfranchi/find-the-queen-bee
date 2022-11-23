@@ -1,7 +1,6 @@
 package rewardTest;
 
 import main.GamePanel;
-import main.KeyHandler;
 
 import org.junit.jupiter.api.Test;
 
