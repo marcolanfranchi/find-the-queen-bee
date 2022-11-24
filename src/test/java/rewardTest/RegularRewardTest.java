@@ -29,18 +29,8 @@ public class RegularRewardTest {
         regReward = new RegularReward(gp);
     }
 
-    // @Test
-    // public void regRewardConstructorTest() {
-    //     assertNotNull(regularReward, "Failed to create the regular reward");
-    //     assertEquals(regularReward.getImage(), regRewardImg, "Failed to connect the object with the right texture");
-    //     assertEquals(regularReward.getValue(), 10, "Failed to create an object with the correct value");
-    //     assertEquals(regularReward.getMap(), panel, "Failed to create an object on the correct panel");
-    //     //assertEquals(regularReward.getLocation(), point, "Failed to create an object in the correct cell location");
-    // }
-
     @Test
     public void regRewardConstructorTest() throws IOException {
-        //BufferedImage img = ImageIO.read(getClass().getResource("../ui/images/HoneyDrop.png"));
         assertNotNull(regReward);
         assertNotNull(regReward.getImage());
         int valueResult = regReward.getValue();

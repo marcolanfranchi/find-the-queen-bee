@@ -30,18 +30,8 @@ public class BonusRewardTest {
         bonusReward = new BonusReward(gp);
     }
 
-    // @Test
-    // public void regRewardConstructorTest() {
-    //     assertNotNull(regularReward, "Failed to create the regular reward");
-    //     assertEquals(regularReward.getImage(), regRewardImg, "Failed to connect the object with the right texture");
-    //     assertEquals(regularReward.getValue(), 10, "Failed to create an object with the correct value");
-    //     assertEquals(regularReward.getMap(), panel, "Failed to create an object on the correct panel");
-    //     //assertEquals(regularReward.getLocation(), point, "Failed to create an object in the correct cell location");
-    // }
-
     @Test
     public void bonusRewardConstructorTest() throws IOException {
-        //BufferedImage img = ImageIO.read(getClass().getResource("../ui/images/HoneyDrop.png"));
         assertNotNull(bonusReward);
         assertNotNull(bonusReward.getImage());
         int valueResult = bonusReward.getValue();
@@ -53,24 +43,47 @@ public class BonusRewardTest {
     }
 
     @Test
-    void testCollectReward() {
+    void testCollectRewardNotDisplayed() {
         GamePanel gp = bonusReward.getMap();
         KeyHandler kh = new KeyHandler(gp);
         Bee bee = new Bee(gp, kh);
 
-        // assert the bee's reward list does not already contain this reward
-        boolean inListInitially = bee.rewardList.contains(bonusReward);
-        assertFalse(inListInitially); 
         int initial_score = bee.beeScore;
+        // set the Bonus Rewards displayNow field to false;
+        bonusReward.displayNow = false;
         
         bonusReward.collectReward(bee);
 
-        // assert the bee's reward list contains this reward after calling collectReward(bee)
+        // assert the bee's reward list does not contains this bonus reward after calling collectReward(bee)
+        // because Bonus Rewards are not to be added to the rewardList
         boolean inListResult = bee.rewardList.contains(bonusReward);
-        assertTrue(inListResult);
-        // assert the bee's score increased by the value of a bonus reward
+        assertFalse(inListResult);
+        // assert the bee's score did not increase by the value of a bonus reward because it is not
+        // being displayed
         int scoreResult = bee.beeScore;
-        assertEquals(initial_score + bonusReward.value ,scoreResult); 
+        assertEquals(initial_score, scoreResult); 
+    }
+
+    @Test
+    void testCollectRewardDisplayed() {
+        GamePanel gp = bonusReward.getMap();
+        KeyHandler kh = new KeyHandler(gp);
+        Bee bee = new Bee(gp, kh);
+
+        int initial_score = bee.beeScore;
+        // set the Bonus Rewards displayNow field to true;
+        bonusReward.displayNow = true;
+        
+        bonusReward.collectReward(bee);
+
+        // assert the bee's reward list does not contains this bonus reward after calling collectReward(bee)
+        // because Bonus Rewards are not to be added to the rewardList
+        boolean inListResult = bee.rewardList.contains(bonusReward);
+        assertFalse(inListResult);
+        // assert the bee's score did increased by the value of a bonus reward because it is 
+        // being displayed
+        int scoreResult = bee.beeScore;
+        assertEquals(initial_score + bonusReward.getValue(), scoreResult); 
     }
 
     @Test
