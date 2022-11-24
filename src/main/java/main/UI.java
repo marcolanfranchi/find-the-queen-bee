@@ -142,7 +142,7 @@ public class UI {
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
 		text = "NEW GAME";
 		x = getXforCenteredText(text);
-		y += gp.tileSize * 7;
+		y += gp.tileSize * 5;
 		g2.drawString(text, x, y);
 
 		if (commandNum == 0) {
@@ -221,7 +221,7 @@ public class UI {
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
 		text = "RESUME GAME";
 		x = getXforCenteredText(text);
-		y += gp.tileSize * 8;
+		y += gp.tileSize * 6;
 		g2.drawString(text, x, y);
 
 		if (pauseCommandNum == 0) {
@@ -299,7 +299,7 @@ public class UI {
 		// Draw Quit Button
 		text = "QUIT";
 		x = getXforCenteredText(text);
-		y += gp.tileSize * 9;
+		y += gp.tileSize * 5;
 		g2.drawString(text, x, y);
 
 		if (endCommandNum == 0) {
@@ -388,7 +388,7 @@ public class UI {
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
 		text = "Movement";
 		x = getXforCenteredText(text);
-		y = gp.tileSize * 7;
+		y = gp.tileSize * 5;
 
 		// shadow
 		g2.setColor(Color.gray);
@@ -422,7 +422,7 @@ public class UI {
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
 		text = "Rules";
 		x = getXforCenteredText(text);
-		y = gp.tileSize * 13;
+		y += gp.tileSize * 4;
 
 		// shadow
 		g2.setColor(Color.gray);
@@ -431,7 +431,7 @@ public class UI {
 		g2.drawString(text, x, y);
 
 		// Rules
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25f));
 		text = "Your goal is to reach the end of the maze by going through doors that";
 		x = getXforCenteredText(text);
 		y += gp.tileSize * 2;
