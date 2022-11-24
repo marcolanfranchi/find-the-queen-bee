@@ -193,7 +193,7 @@ public class UI {
 		g2.drawString(ddMinute + ":" + ddSecond, gp.screenWidth / 2, 55);
 
 		// Draw pause instruction text
-		g2.drawString("Press ESC to Pause", gp.screenWidth - gp.tileSize * 7, gp.tileSize * 19);
+		g2.drawString("Press ESC to Pause", gp.screenWidth - gp.tileSize * 7, gp.tileSize * 15);
 
 	}
 
