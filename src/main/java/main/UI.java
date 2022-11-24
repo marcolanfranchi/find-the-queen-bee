@@ -357,7 +357,7 @@ public class UI {
 		// Draw Quit Button
 		text = "QUIT";
 		x = getXforCenteredText(text);
-		y += gp.tileSize * 9;
+		y += gp.tileSize * 5;
 		g2.drawString(text, x, y);
 
 		if (winCommandNum == 0) {
