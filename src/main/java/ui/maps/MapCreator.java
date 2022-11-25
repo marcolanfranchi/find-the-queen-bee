@@ -50,7 +50,7 @@ public class MapCreator {
 	 * @param numberOfRooms Number of rooms to create
 	 * @return A 2D array of integers representing the map
 	 */
-	private static int[][] createBasicGrid(int sizeX, int sizeY, int numberOfRooms) {
+	public static int[][] createBasicGrid(int sizeX, int sizeY, int numberOfRooms) {
 		int walls = (int) Math.floor((double) sizeX / numberOfRooms);
 		int[][] map = new int[sizeX][sizeY];
 
@@ -112,7 +112,7 @@ public class MapCreator {
 	 * @param map The map to place objects on
 	 * @param num The number of traps to place randomly on the map
 	 */
-	private static void placeObjects(int[][] map, int numberOfTraps) {
+	public static void placeObjects(int[][] map, int numberOfTraps) {
 		int sizeX = map.length;
 		int sizeY = map[0].length;
 
