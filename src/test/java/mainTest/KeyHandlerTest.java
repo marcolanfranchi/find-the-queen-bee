@@ -1,6 +1,7 @@
 package mainTest;
 
 import org.junit.jupiter.api.Test;
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 
 import main.GamePanel;
@@ -18,7 +19,7 @@ import javax.swing.JPanel;
 public class KeyHandlerTest {
 
     private KeyHandler keyHandler;
-    
+
     @BeforeEach
     void setup() {
         GamePanel gp = new GamePanel();
@@ -332,7 +333,6 @@ public class KeyHandlerTest {
 				KeyEvent.VK_W, (char) 1);
 
 		keyHandler.keyPressed(wEvent);
-		// assert pressing the esc key sets the game state to pause state
 
 		int result = keyHandler.gamePanel.ui.commandNum;
 		assertEquals(2, result);
@@ -357,8 +357,125 @@ public class KeyHandlerTest {
 
 		int result = keyHandler.gamePanel.ui.commandNum;
 		assertEquals(1, result);
+
+		keyHandler.gamePanel.ui.commandNum = 2;
+		keyHandler.keyPressed(sEvent);
+		result = keyHandler.gamePanel.ui.commandNum;
+		assertEquals(0, result);
 	}
 
+	@Test
+	void testGameStateTitleState_Enter() {
+		keyHandler.gamePanel.gameState = GamePanel.titleState;
+		// create instance of pressing esc key
+		JPanel j = new JPanel();
+		KeyEvent enterEvent = new KeyEvent(j, 1, 1, 1,
+				KeyEvent.VK_ENTER, (char) 1);
 
+		keyHandler.gamePanel.ui.commandNum = 0;
+		keyHandler.keyPressed(enterEvent);
+		// assert pressing the esc key sets the game state to pause state
+
+		int result = keyHandler.gamePanel.gameState;
+
+		assertEquals(GamePanel.playState, result);
+	}
+
+	@Test
+	void testGameStatePauseState_W_UP() {
+		keyHandler.gamePanel.gameState = GamePanel.pauseState;
+		// create instance of pressing esc key
+		JPanel j = new JPanel();
+		KeyEvent wEvent = new KeyEvent(j, 1, 1, 1,
+				KeyEvent.VK_W, (char) 1);
+
+		keyHandler.gamePanel.ui.pauseCommandNum = 0;
+		keyHandler.keyPressed(wEvent);
+
+		int result = keyHandler.gamePanel.ui.pauseCommandNum;
+		assertEquals(2, result);
+
+		keyHandler.gamePanel.ui.pauseCommandNum = 1;
+		keyHandler.keyPressed(wEvent);
+		result = keyHandler.gamePanel.ui.pauseCommandNum;
+		assertEquals(0, result);
+	}
+
+	@Test
+	void testGameStatePauseState_S_Down() {
+		keyHandler.gamePanel.gameState = GamePanel.pauseState;
+		// create instance of pressing esc key
+		JPanel j = new JPanel();
+		KeyEvent sEvent = new KeyEvent(j, 1, 1, 1,
+				KeyEvent.VK_S, (char) 1);
+
+		keyHandler.gamePanel.ui.pauseCommandNum = 0;
+		keyHandler.keyPressed(sEvent);
+		// assert pressing the esc key sets the game state to pause state
+
+		int result = keyHandler.gamePanel.ui.pauseCommandNum;
+		assertEquals(1, result);
+
+		keyHandler.gamePanel.ui.pauseCommandNum = 2;
+		keyHandler.keyPressed(sEvent);
+		result = keyHandler.gamePanel.ui.pauseCommandNum;
+		assertEquals(0, result);
+	}
+
+	@Test
+	void testGameStatePauseState_Enter() {
+		keyHandler.gamePanel.gameState = GamePanel.pauseState;
+		// create instance of pressing esc key
+		JPanel j = new JPanel();
+		KeyEvent enterEvent = new KeyEvent(j, 1, 1, 1,
+				KeyEvent.VK_ENTER, (char) 1);
+
+		keyHandler.gamePanel.ui.pauseCommandNum = 0;
+		keyHandler.keyPressed(enterEvent);
+		// assert pressing the esc key sets the game state to pause state
+
+		int result = keyHandler.gamePanel.gameState;
+
+		assertEquals(GamePanel.playState, result);
+
+		keyHandler.gamePanel.ui.pauseCommandNum = 1;
+		keyHandler.gamePanel.gameState = GamePanel.pauseState;
+		keyHandler.keyPressed(enterEvent);
+
+		result = keyHandler.gamePanel.gameState;
+		assertEquals(GamePanel.controlState, result);
+	}
+
+	@Test
+	void testGameStateGameOverState() {
+		keyHandler.gamePanel.gameState = GamePanel.gameOverState;
+		// create instance of pressing esc key
+		JPanel j = new JPanel();
+		KeyEvent enterEvent = new KeyEvent(j, 1, 1, 1,
+				KeyEvent.VK_ENTER, (char) 1);
+
+		keyHandler.gamePanel.ui.endCommandNum = 1;
+		keyHandler.keyPressed(enterEvent);
+		// assert pressing the esc key sets the game state to pause state
+		int result = keyHandler.gamePanel.ui.endCommandNum;
+
+		assertEquals(1, result);
+	}
+
+	@Test
+	void testGameStateGameWinState() {
+		keyHandler.gamePanel.gameState = GamePanel.winState;
+		// create instance of pressing esc key
+		JPanel j = new JPanel();
+		KeyEvent enterEvent = new KeyEvent(j, 1, 1, 1,
+				KeyEvent.VK_ENTER, (char) 1);
+
+		keyHandler.gamePanel.ui.winCommandNum = 1;
+		keyHandler.keyPressed(enterEvent);
+		// assert pressing the esc key sets the game state to pause state
+		int result = keyHandler.gamePanel.ui.winCommandNum;
+
+		assertEquals(1, result);
+	}
 
 }
