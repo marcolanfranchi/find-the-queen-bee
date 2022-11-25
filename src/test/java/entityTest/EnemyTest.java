@@ -25,6 +25,18 @@ public class EnemyTest {
     int tempGoalRow;
     int tempStartCol;
     int tempStartRow;
+    int nextX;
+    int nextY;
+    int enLeftX;
+    int enRightX;
+    int enTopY;
+    int enDownY;
+    boolean collision = false;
+    boolean enemyCollision = false;
+    int tileNumUp;
+    int tileNumDown;
+    int tileNumLeft;
+    int tileNumRight;
 
     @BeforeEach
     void setup(){
@@ -37,7 +49,7 @@ public class EnemyTest {
     void testEnemyIsPlacedOnMap(){
         enemy.setRandomStartPoint();
         assertTrue(enemy.worldX > 0 && enemy.worldX <= 23 * enemy.gamePanel.tileSize);
-        assertTrue(enemy.worldY > 0  && enemy.worldY <= 23 * enemy.gamePanel.tileSize);
+        assertTrue(enemy.worldY > 0 && enemy.worldY <= 23 * enemy.gamePanel.tileSize);
     }
 
     @Test
@@ -111,107 +123,364 @@ public class EnemyTest {
     }
 
     @Test
-    void testEnemyCollision(){
-        enemy.enemyCheckCollision();
-        if (enemy.tileNumUp() == 1) {
-            enemy.enemyCollision = true;
+    void testEnemyCanMoveUp(){
+        int tileNumUp = 0;
+        if (tileNumUp == 1) {
+            enemyCollision = true;
             enemy.direction = null;
         } else {
             enemy.direction = "up";
         }
+        assertNotNull(enemy.direction);
+        assertFalse(enemyCollision);
+    }
 
-        if (enemy.tileNumDown() == 1) {
-            enemy.enemyCollision = true;
+    @Test
+    void testEnemyCanNotMoveUp(){
+        int tileNumUp = 1;
+        if (tileNumUp == 1) {
+            enemyCollision = true;
+            enemy.direction = null;
+        } else {
+            enemy.direction = "up";
+        }
+        assertNull(enemy.direction);
+        assertTrue(enemyCollision);
+    }
+
+    @Test
+    void testEnemyCanMoveDown(){
+        int tileNumDown = 0;
+        if (tileNumDown == 1) {
+            enemyCollision = true;
             enemy.direction = null;
         } else {
             enemy.direction = "down";
         }
+        assertNotNull(enemy.direction);
+        assertFalse(enemyCollision);
+    }
 
-        if (enemy.tileNumLeft() == 1) {
-            enemy.enemyCollision = true;
+    @Test
+    void testEnemyCanNotMoveDown(){
+        int tileNumDown = 1;
+        if (tileNumDown == 1) {
+            enemyCollision = true;
+            enemy.direction = null;
+        } else {
+            enemy.direction = "down";
+        }
+        assertNull(enemy.direction);
+        assertTrue(enemyCollision);
+    }
+
+    @Test
+    void testEnemyCanMoveLeft(){
+        int tileNumLeft = 0;
+        if (tileNumLeft == 1) {
+            enemyCollision = true;
             enemy.direction = null;
         } else {
             enemy.direction = "left";
         }
+        assertNotNull(enemy.direction);
+        assertFalse(enemyCollision);
+    }
 
-        if (enemy.tileNumRight() == 1) {
-            enemy.enemyCollision = true;
+    @Test
+    void testEnemyCanNotMoveLeft(){
+        int tileNumLeft = 1;
+        if (tileNumLeft == 1) {
+            enemyCollision = true;
+            enemy.direction = null;
+        } else {
+            enemy.direction = "left";
+        }
+        assertNull(enemy.direction);
+        assertTrue(enemyCollision);
+    }
+
+    @Test
+    void testEnemyCanMoveRight(){
+        int tileNumRight = 0;
+        if (tileNumRight == 1) {
+            enemyCollision = true;
             enemy.direction = null;
         } else {
             enemy.direction = "right";
         }
-        assertNotNull(enemy.tileNumUp());
         assertNotNull(enemy.direction);
-        assertNotNull(enemy.enemyCollision);
+        assertFalse(enemyCollision);
     }
 
     @Test
-    void testSearchPath(){
-        testNodeIsInstantiated();
-        testNodeIsSetted();
-        int nextX = startNode.col * enemy.gamePanel.tileSize;
-        int nextY = startNode.row * enemy.gamePanel.tileSize;
-        int enLeftX = enemy.worldX + enemy.bounds.x;
-        int enRightX = enemy.worldX + enemy.bounds.x + enemy.bounds.width;
-        int enTopY = enemy.worldY + enemy.bounds.y;
-        int enDownY = enemy.worldY + enemy.bounds.y + enemy.bounds.height;
+    void testEnemyCanNotMoveRight(){
+        int tileNumRight = 1;
+        if (tileNumRight == 1) {
+            enemyCollision = true;
+            enemy.direction = null;
+        } else {
+            enemy.direction = "right";
+        }
+        assertNull(enemy.direction);
+        assertTrue(enemyCollision);
+    }
 
-        // Enemies' moving method which contains directions for different situations
+    @Test
+    void testEnemyMovesUp(){
+        enTopY = 10;
+        nextY = 1;
+        enLeftX = 10;
+        nextX = 1;
+        enRightX = 1;
+        nextX = 10;
         if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + enemy.gamePanel.tileSize) {
             enemy.worldY -= enemy.speed;
             enemy.direction = "up";
-        } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + enemy.gamePanel.tileSize) {
+        }
+
+        assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+    }
+
+    @Test
+    void testEnemyMovesDown(){
+        enTopY = 1;
+        nextY = 10;
+        enLeftX = 10;
+        nextX = 1;
+        enRightX = 1;
+        nextX = 10;
+        if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + enemy.gamePanel.tileSize) {
             enemy.worldY += enemy.speed;
             enemy.direction = "down";
-        } else if (enTopY >= nextY && enDownY < nextY + enemy.gamePanel.tileSize) {
+        }
+
+        assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+    }
+
+    @Test
+    void testEnemyMovesLeft(){
+        enTopY = 10;
+        nextY = 1;
+        enLeftX = 10;
+        nextX = 1;
+        enRightX = 1;
+        nextX = 10;
+        enDownY = 1;
+        nextY = 10;
+        if (enTopY >= nextY && enDownY < nextY + enemy.gamePanel.tileSize) {
             if (enLeftX > nextX) {
                 enemy.worldX -= enemy.speed;
                 enemy.direction = "left";
             }
+        }
+
+        assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+    }
+
+    @Test
+    void testEnemyMovesRight(){
+        enTopY = 10;
+        nextY = 1;
+        enLeftX = 1;
+        nextX = 10;
+        enRightX = 1;
+        nextX = 10;
+        enDownY = 1;
+        nextY = 10;
+        if (enTopY >= nextY && enDownY < nextY + enemy.gamePanel.tileSize) {
             if (enLeftX < nextX) {
                 enemy.worldX += enemy.speed;
                 enemy.direction = "right";
             }
         }
-        else if(enTopY > nextY && enLeftX > nextX){
+
+        assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+    }
+
+    @Test
+    void testEnemyMovesUp2(){
+        enTopY = 10;
+        nextY = 1;
+        enLeftX = 10;
+        nextX = 1;
+        enRightX = 1;
+        nextX = 10;
+        enDownY = 1;
+        nextY = 10;
+        if (enTopY > nextY && enLeftX > nextX){
             enemy.worldY -= enemy.speed;
             enemy.direction = "up";
-            enemy.enemyCheckCollision();
-            if(enemy.enemyCollision == true){
+            if(collision == true){
                 enemy.worldX -= enemy.speed;
                 enemy.direction = "left";
             }
-        }else if(enTopY > nextY && enLeftX < nextX){
-            enemy.direction = "up";
-            enemy.enemyCheckCollision();
-            if(enemy.enemyCollision == true){
-                enemy.worldX += enemy.speed;
-                enemy.direction = "right";
-            }
-        }else if(enTopY < nextY && enLeftX > nextX){
-            enemy.direction = "down";
-            enemy.enemyCheckCollision();
-            if(enemy.enemyCollision == true){
-                enemy.worldX -= enemy.speed;
-                enemy.direction = "left";
-            }
-        }else if(enTopY < nextY && enLeftX < nextX){
-            enemy.direction = "down";
-            enemy.enemyCheckCollision();
-            if(enemy.enemyCollision == true){
-                enemy.worldX += enemy.speed;
-                enemy.direction = "right";
-			}
-		}
-        assertNotNull(nextX);
-        assertNotNull(nextY);
-        assertNotNull(enLeftX);
-        assertNotNull(enRightX);
-        assertNotNull(enTopY);
-        assertNotNull(enDownY);
-        assertNotNull(enemy.direction);
-        assertNotNull(enemy.speed);
-        assertNotNull(enemy.worldX);
+        }
+
         assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+    }
+
+    @Test
+    void testEnemyMovesLeft2(){
+        enTopY = 10;
+        nextY = 1;
+        enLeftX = 10;
+        nextX = 1;
+        enRightX = 1;
+        nextX = 10;
+        enDownY = 1;
+        nextY = 10;
+        collision = true;
+        if (enTopY > nextY && enLeftX > nextX){
+            enemy.worldY -= enemy.speed;
+            enemy.direction = "up";
+            if(collision == true){
+                enemy.worldX -= enemy.speed;
+                enemy.direction = "left";
+            }
+        }
+
+        assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+    }
+
+    @Test
+    void testEnemyMovesUp3(){
+        enTopY = 10;
+        nextY = 1;
+        enLeftX = 1;
+        nextX = 10;
+        enRightX = 1;
+        nextX = 10;
+        enDownY = 1;
+        nextY = 10;
+        if (enTopY > nextY && enLeftX < nextX){
+            enemy.direction = "up";
+            if(collision == true){
+                enemy.worldX += enemy.speed;
+                enemy.direction = "right";
+            }
+        }
+
+        assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+    }
+
+    @Test
+    void testEnemyMovesRight2(){
+        enTopY = 10;
+        nextY = 1;
+        enLeftX = 1;
+        nextX = 10;
+        enRightX = 1;
+        nextX = 10;
+        enDownY = 1;
+        nextY = 10;
+        collision = true;
+        if (enTopY > nextY && enLeftX < nextX){
+            enemy.direction = "up";
+            if(collision == true){
+                enemy.worldX += enemy.speed;
+                enemy.direction = "right";
+            }
+        }
+
+        assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+    }
+
+    @Test
+    void testEnemyMovesDown2(){
+        enTopY = 1;
+        nextY = 10;
+        enLeftX = 10;
+        nextX = 1;
+        enRightX = 1;
+        nextX = 10;
+        enDownY = 1;
+        nextY = 10;
+        if (enTopY < nextY && enLeftX > nextX){
+            enemy.direction = "down";
+            if(collision == true){
+                enemy.worldX -= enemy.speed;
+                enemy.direction = "left";
+            }
+        }
+
+        assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+    }
+
+    @Test
+    void testEnemyMovesLeft3(){
+        enTopY = 1;
+        nextY = 10;
+        enLeftX = 10;
+        nextX = 1;
+        enRightX = 1;
+        nextX = 10;
+        enDownY = 1;
+        nextY = 10;
+        collision = true;
+        if (enTopY < nextY && enLeftX > nextX){
+            enemy.direction = "down";
+            if(collision == true){
+                enemy.worldX -= enemy.speed;
+                enemy.direction = "left";
+            }
+        }
+
+        assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+    }
+
+    @Test
+    void testEnemyMovesDown3(){
+        enTopY = 1;
+        nextY = 10;
+        enLeftX = 1;
+        nextX = 10;
+        enRightX = 1;
+        nextX = 10;
+        enDownY = 1;
+        nextY = 10;
+        if (enTopY < nextY && enLeftX < nextX){
+            enemy.direction = "down";
+            if(collision == true){
+                enemy.worldX -= enemy.speed;
+                enemy.direction = "left";
+            }
+        }
+
+        assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+    }
+
+    @Test
+    void testEnemyMovesRight3(){
+        enTopY = 1;
+        nextY = 10;
+        enLeftX = 1;
+        nextX = 10;
+        enRightX = 1;
+        nextX = 10;
+        enDownY = 1;
+        nextY = 10;
+        collision = true;
+        if (enTopY < nextY && enLeftX < nextX){
+            enemy.direction = "down";
+            if(collision == true){
+                enemy.worldX -= enemy.speed;
+                enemy.direction = "left";
+            }
+        }
+
+        assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
     }
 }
