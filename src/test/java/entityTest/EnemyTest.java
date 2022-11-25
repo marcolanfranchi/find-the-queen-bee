@@ -110,4 +110,108 @@ public class EnemyTest {
         assertNotNull(gCost + hCost);
     }
 
+    @Test
+    void testEnemyCollision(){
+        enemy.enemyCheckCollision();
+        if (enemy.tileNumUp() == 1) {
+            enemy.enemyCollision = true;
+            enemy.direction = null;
+        } else {
+            enemy.direction = "up";
+        }
+
+        if (enemy.tileNumDown() == 1) {
+            enemy.enemyCollision = true;
+            enemy.direction = null;
+        } else {
+            enemy.direction = "down";
+        }
+
+        if (enemy.tileNumLeft() == 1) {
+            enemy.enemyCollision = true;
+            enemy.direction = null;
+        } else {
+            enemy.direction = "left";
+        }
+
+        if (enemy.tileNumRight() == 1) {
+            enemy.enemyCollision = true;
+            enemy.direction = null;
+        } else {
+            enemy.direction = "right";
+        }
+        assertNotNull(enemy.tileNumUp());
+        assertNotNull(enemy.direction);
+        assertNotNull(enemy.enemyCollision);
+    }
+
+    @Test
+    void testSearchPath(){
+        testNodeIsInstantiated();
+        testNodeIsSetted();
+        int nextX = startNode.col * enemy.gamePanel.tileSize;
+        int nextY = startNode.row * enemy.gamePanel.tileSize;
+        int enLeftX = enemy.worldX + enemy.bounds.x;
+        int enRightX = enemy.worldX + enemy.bounds.x + enemy.bounds.width;
+        int enTopY = enemy.worldY + enemy.bounds.y;
+        int enDownY = enemy.worldY + enemy.bounds.y + enemy.bounds.height;
+
+        // Enemies' moving method which contains directions for different situations
+        if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + enemy.gamePanel.tileSize) {
+            enemy.worldY -= enemy.speed;
+            enemy.direction = "up";
+        } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + enemy.gamePanel.tileSize) {
+            enemy.worldY += enemy.speed;
+            enemy.direction = "down";
+        } else if (enTopY >= nextY && enDownY < nextY + enemy.gamePanel.tileSize) {
+            if (enLeftX > nextX) {
+                enemy.worldX -= enemy.speed;
+                enemy.direction = "left";
+            }
+            if (enLeftX < nextX) {
+                enemy.worldX += enemy.speed;
+                enemy.direction = "right";
+            }
+        }
+        else if(enTopY > nextY && enLeftX > nextX){
+            enemy.worldY -= enemy.speed;
+            enemy.direction = "up";
+            enemy.enemyCheckCollision();
+            if(enemy.enemyCollision == true){
+                enemy.worldX -= enemy.speed;
+                enemy.direction = "left";
+            }
+        }else if(enTopY > nextY && enLeftX < nextX){
+            enemy.direction = "up";
+            enemy.enemyCheckCollision();
+            if(enemy.enemyCollision == true){
+                enemy.worldX += enemy.speed;
+                enemy.direction = "right";
+            }
+        }else if(enTopY < nextY && enLeftX > nextX){
+            enemy.direction = "down";
+            enemy.enemyCheckCollision();
+            if(enemy.enemyCollision == true){
+                enemy.worldX -= enemy.speed;
+                enemy.direction = "left";
+            }
+        }else if(enTopY < nextY && enLeftX < nextX){
+            enemy.direction = "down";
+            enemy.enemyCheckCollision();
+            if(enemy.enemyCollision == true){
+                enemy.worldX += enemy.speed;
+                enemy.direction = "right";
+			}
+		}
+        assertNotNull(nextX);
+        assertNotNull(nextY);
+        assertNotNull(enLeftX);
+        assertNotNull(enRightX);
+        assertNotNull(enTopY);
+        assertNotNull(enDownY);
+        assertNotNull(enemy.direction);
+        assertNotNull(enemy.speed);
+        assertNotNull(enemy.worldX);
+        assertNotNull(enemy.worldY);
+    }
 }
