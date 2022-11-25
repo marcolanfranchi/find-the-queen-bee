@@ -89,7 +89,7 @@ public class GamePanel extends JPanel implements Runnable {
 	 * Calls setup methods to create instances of this GamePanels components with set 
 	 * fields and sets the starting game state as the title state.
 	 */
-	public void setupGame() {
+	public void setupGame(int gameStateToPut) {
 		eManager.setup();
 		rewardGenerator.setRegRewards();
 		rewardGenerator.setBonusRewards();
@@ -98,7 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
 		for (int i = 0; i < enemies.length; i++) {
 			enemies[i] = new Enemy(this);
 		}
-		gameState = titleState;
+		gameState = gameStateToPut;
 	}
 
 	

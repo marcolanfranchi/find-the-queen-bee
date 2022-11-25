@@ -16,7 +16,7 @@ public class GamePanelTest {
 	void testUpdateMethod() {
 		g.gameState = GamePanel.playState;
 		g.startGameThread();
-		g.setupGame();
+		g.setupGame(0);
 		g.update();
 	}
 

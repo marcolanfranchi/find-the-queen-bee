@@ -2,6 +2,7 @@ package mainTest;
 
 import org.junit.jupiter.api.*;
 
+import main.GamePanel;
 import main.Main;
 
 public class mainTest {
