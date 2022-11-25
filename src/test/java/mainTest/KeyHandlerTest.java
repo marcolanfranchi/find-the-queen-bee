@@ -323,7 +323,41 @@ public class KeyHandlerTest {
         assertFalse(result);
     }
 
+	@Test
+	void testGameStateTitleState_W_UP() {
+		keyHandler.gamePanel.gameState = GamePanel.titleState;
+		// create instance of pressing esc key
+		JPanel j = new JPanel();
+		KeyEvent wEvent = new KeyEvent(j, 1, 1, 1,
+				KeyEvent.VK_W, (char) 1);
 
+		keyHandler.keyPressed(wEvent);
+		// assert pressing the esc key sets the game state to pause state
+
+		int result = keyHandler.gamePanel.ui.commandNum;
+		assertEquals(2, result);
+
+		keyHandler.gamePanel.ui.commandNum = 1;
+		keyHandler.keyPressed(wEvent);
+		result = keyHandler.gamePanel.ui.commandNum;
+		assertEquals(0, result);
+
+	}
+
+	@Test
+	void testGameStateTitleState_S_Down() {
+		keyHandler.gamePanel.gameState = GamePanel.titleState;
+		// create instance of pressing esc key
+		JPanel j = new JPanel();
+		KeyEvent sEvent = new KeyEvent(j, 1, 1, 1,
+				KeyEvent.VK_S, (char) 1);
+
+		keyHandler.keyPressed(sEvent);
+		// assert pressing the esc key sets the game state to pause state
+
+		int result = keyHandler.gamePanel.ui.commandNum;
+		assertEquals(1, result);
+	}
 
 
 
