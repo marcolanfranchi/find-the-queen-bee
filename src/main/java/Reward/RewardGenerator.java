@@ -61,8 +61,8 @@ public class RewardGenerator {
 		for (int i = 0; i < maxRegReward; i++) {
 			gamePanel.rewards[i] = new RegularReward(gamePanel);
 
-			randomX = getRandom(0, gamePanel.tileM.mapTileNum.length - 1);
-			randomY = getRandom(0, gamePanel.tileM.mapTileNum[0].length - 1);
+			randomX = getRandom(1, gamePanel.tileM.mapTileNum.length - 1);
+			randomY = getRandom(1, gamePanel.tileM.mapTileNum[0].length - 1);
 
 			// Avoiding door, walls, and punishment tiles
 			if (gamePanel.tileM.mapTileNum[randomX][randomY] == 3 || gamePanel.tileM.mapTileNum[randomX][randomY] == 1
@@ -71,7 +71,7 @@ public class RewardGenerator {
 				continue;
 			}
 
-			// avoid drawing on queenBee (bottom corner)
+			//avoid drawing on queenBee (bottom corner)
 			if (randomX == gamePanel.tileM.mapTileNum.length - 1
 					&& randomY == gamePanel.tileM.mapTileNum[0].length - 1) {
 				i--;
@@ -100,7 +100,7 @@ public class RewardGenerator {
 				continue;
 			}
 
-			// avoid drawing on queenBee (bottom corner)
+			// // avoid drawing on queenBee (bottom corner)
 			if (randomX == gamePanel.tileM.mapTileNum.length - 1
 					&& randomY == gamePanel.tileM.mapTileNum[0].length - 1) {
 				i--;

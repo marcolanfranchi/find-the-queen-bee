@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import entity.Bee;
+import entity.Enemy;
 import entity.Entity;
 import main.GamePanel;
 import main.KeyHandler;
@@ -121,6 +122,40 @@ public class EntityTest {
       // left of this position is a wall (1 on txt map)
       int result = entity.tileNumLeft();
       assertEquals(1, result);
+   }
+
+   @Test
+   void testCheckGameOverValid() {
+      int x = 8 * 48;
+      int y = 8 * 48;
+      entity.setLocation(x, y);
+      Enemy touchingEnemy = new Enemy(entity.gamePanel);
+      touchingEnemy.setLocation(x, y);
+      Enemy otherEnemy = new Enemy(entity.gamePanel);
+      otherEnemy.setLocation(2 * x, 2 * y);
+      Enemy[] enemies = new Enemy[2];
+      enemies[0] = touchingEnemy;
+      enemies[1] = otherEnemy;
+      double checkResult = entity.checkGameOver(entity, enemies);
+      // assert this value is <= 45, indicating the entity is touching an enemy
+      assertTrue(checkResult <= 45);
+   }
+
+   @Test
+   void testCheckGameOverInvalid() {
+      int x = 8 * 48;
+      int y = 8 * 48;
+      entity.setLocation(x, y);
+      Enemy nonTouchingEnemy = new Enemy(entity.gamePanel);
+      nonTouchingEnemy.setLocation(x + 48, y);
+      Enemy nonTouchingEnemy2 = new Enemy(entity.gamePanel);
+      nonTouchingEnemy2.setLocation(2 * x, 2 * y);
+      Enemy[] enemies = new Enemy[2];
+      enemies[0] = nonTouchingEnemy;
+      enemies[1] = nonTouchingEnemy2;
+      double checkResult = entity.checkGameOver(entity, enemies);
+      // assert this value is > 45, indicating the entity not is touching an enemy
+      assertTrue(checkResult > 45);
    }
 
    @Test

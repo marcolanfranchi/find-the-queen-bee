@@ -23,7 +23,6 @@ public class RegularReward extends Reward {
         try {
             this.image = ImageIO.read(getClass().getResource("../ui/images/HoneyDrop.png"));
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
     /**

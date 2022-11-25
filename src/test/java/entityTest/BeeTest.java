@@ -15,6 +15,7 @@ import entity.Bee;
 import main.GamePanel;
 import main.KeyHandler;
 import reward.RegularReward;
+import reward.Reward;
 
 public class BeeTest {
 
@@ -107,6 +108,44 @@ public class BeeTest {
         // assert the sprite Num changed to 1 because counter is 2
         int spriteNumResult = bee.spriteNum;
         assertEquals(1, spriteNumResult);
+    }
+
+    @Test
+    void testUpdateWhileOnReward() {
+        int x = 1 * tileSize;
+        int y = 1 * tileSize;
+        RegularReward reward = new RegularReward(bee.gamePanel);
+        reward.worldX = x;
+        reward.worldY = y;
+        bee.gamePanel.rewards[0] = reward;
+        // set bee's location on a reward
+        bee.setLocation(x, y);
+        int beeInitialNumRewards = bee.rewardList.size();
+
+        bee.update();
+        // assert calling update() while on a reward collects the reward
+        // increasing the initial number of rewards by 1
+        int beeNumRewardsResult = bee.rewardList.size();
+        assertEquals(beeInitialNumRewards + 1, beeNumRewardsResult);
+    }
+
+    @Test
+    void testUpdateWhileNotOnReward() {
+        int x = 1 * tileSize;
+        int y = 1 * tileSize;
+        RegularReward reward = new RegularReward(bee.gamePanel);
+        reward.worldX = x;
+        reward.worldY = y;
+        bee.gamePanel.rewards[0] = reward;
+        // set bee's location away from reward
+        bee.setLocation(x, y + tileSize);
+        int beeInitialNumRewards = bee.rewardList.size();
+        
+        bee.update();
+        // assert calling update() while NOT on a reward does nothing
+        // to the bees reward list
+        int beeNumRewardsResult = bee.rewardList.size();
+        assertEquals(beeInitialNumRewards, beeNumRewardsResult);
     }
 
     @Test
