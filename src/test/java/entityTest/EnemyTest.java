@@ -233,13 +233,18 @@ public class EnemyTest {
         enLeftX = 10;
         nextX = 1;
         enRightX = 1;
-        nextX = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + enemy.gamePanel.tileSize) {
             enemy.worldY -= enemy.speed;
             enemy.direction = "up";
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(5, enemy.worldY);
+        assertEquals(10, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 
@@ -250,13 +255,18 @@ public class EnemyTest {
         enLeftX = 10;
         nextX = 1;
         enRightX = 1;
-        nextX = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + enemy.gamePanel.tileSize) {
             enemy.worldY += enemy.speed;
             enemy.direction = "down";
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(15, enemy.worldY);
+        assertEquals(10, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 
@@ -267,17 +277,21 @@ public class EnemyTest {
         enLeftX = 10;
         nextX = 1;
         enRightX = 1;
-        nextX = 10;
         enDownY = 1;
-        nextY = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         if (enTopY >= nextY && enDownY < nextY + enemy.gamePanel.tileSize) {
             if (enLeftX > nextX) {
                 enemy.worldX -= enemy.speed;
                 enemy.direction = "left";
             }
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(10, enemy.worldY);
+        assertEquals(5, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 
@@ -288,17 +302,21 @@ public class EnemyTest {
         enLeftX = 1;
         nextX = 10;
         enRightX = 1;
-        nextX = 10;
         enDownY = 1;
-        nextY = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         if (enTopY >= nextY && enDownY < nextY + enemy.gamePanel.tileSize) {
             if (enLeftX < nextX) {
                 enemy.worldX += enemy.speed;
                 enemy.direction = "right";
             }
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(10, enemy.worldY);
+        assertEquals(15, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 
@@ -309,9 +327,10 @@ public class EnemyTest {
         enLeftX = 10;
         nextX = 1;
         enRightX = 1;
-        nextX = 10;
         enDownY = 1;
-        nextY = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         if (enTopY > nextY && enLeftX > nextX){
             enemy.worldY -= enemy.speed;
             enemy.direction = "up";
@@ -319,9 +338,12 @@ public class EnemyTest {
                 enemy.worldX -= enemy.speed;
                 enemy.direction = "left";
             }
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(5, enemy.worldY);
+        assertEquals(10, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 
@@ -332,9 +354,10 @@ public class EnemyTest {
         enLeftX = 10;
         nextX = 1;
         enRightX = 1;
-        nextX = 10;
         enDownY = 1;
-        nextY = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         collision = true;
         if (enTopY > nextY && enLeftX > nextX){
             enemy.worldY -= enemy.speed;
@@ -343,9 +366,12 @@ public class EnemyTest {
                 enemy.worldX -= enemy.speed;
                 enemy.direction = "left";
             }
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(5, enemy.worldY);
+        assertEquals(5, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 
@@ -356,18 +382,22 @@ public class EnemyTest {
         enLeftX = 1;
         nextX = 10;
         enRightX = 1;
-        nextX = 10;
         enDownY = 1;
-        nextY = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         if (enTopY > nextY && enLeftX < nextX){
             enemy.direction = "up";
             if(collision == true){
                 enemy.worldX += enemy.speed;
                 enemy.direction = "right";
             }
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(10, enemy.worldY);
+        assertEquals(10, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 
@@ -378,9 +408,10 @@ public class EnemyTest {
         enLeftX = 1;
         nextX = 10;
         enRightX = 1;
-        nextX = 10;
         enDownY = 1;
-        nextY = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         collision = true;
         if (enTopY > nextY && enLeftX < nextX){
             enemy.direction = "up";
@@ -388,9 +419,12 @@ public class EnemyTest {
                 enemy.worldX += enemy.speed;
                 enemy.direction = "right";
             }
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(10, enemy.worldY);
+        assertEquals(15, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 
@@ -401,18 +435,22 @@ public class EnemyTest {
         enLeftX = 10;
         nextX = 1;
         enRightX = 1;
-        nextX = 10;
         enDownY = 1;
-        nextY = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         if (enTopY < nextY && enLeftX > nextX){
             enemy.direction = "down";
             if(collision == true){
                 enemy.worldX -= enemy.speed;
                 enemy.direction = "left";
             }
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(10, enemy.worldY);
+        assertEquals(10, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 
@@ -423,9 +461,10 @@ public class EnemyTest {
         enLeftX = 10;
         nextX = 1;
         enRightX = 1;
-        nextX = 10;
         enDownY = 1;
-        nextY = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         collision = true;
         if (enTopY < nextY && enLeftX > nextX){
             enemy.direction = "down";
@@ -433,9 +472,12 @@ public class EnemyTest {
                 enemy.worldX -= enemy.speed;
                 enemy.direction = "left";
             }
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(10, enemy.worldY);
+        assertEquals(5, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 
@@ -446,18 +488,22 @@ public class EnemyTest {
         enLeftX = 1;
         nextX = 10;
         enRightX = 1;
-        nextX = 10;
         enDownY = 1;
-        nextY = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         if (enTopY < nextY && enLeftX < nextX){
             enemy.direction = "down";
             if(collision == true){
                 enemy.worldX -= enemy.speed;
-                enemy.direction = "left";
+                enemy.direction = "right";
             }
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(10, enemy.worldY);
+        assertEquals(10, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 
@@ -468,19 +514,23 @@ public class EnemyTest {
         enLeftX = 1;
         nextX = 10;
         enRightX = 1;
-        nextX = 10;
         enDownY = 1;
-        nextY = 10;
+        enemy.worldX = 10;
+        enemy.worldY = 10;
+        enemy.speed = 5;
         collision = true;
         if (enTopY < nextY && enLeftX < nextX){
             enemy.direction = "down";
             if(collision == true){
                 enemy.worldX -= enemy.speed;
-                enemy.direction = "left";
+                enemy.direction = "right";
             }
+        }else{
+            enemy.direction = null;
         }
 
-        assertNotNull(enemy.worldY);
+        assertEquals(10, enemy.worldY);
+        assertEquals(5, enemy.worldX);
         assertNotNull(enemy.direction);
     }
 }
