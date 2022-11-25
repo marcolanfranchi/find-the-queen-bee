@@ -76,8 +76,8 @@ public class Bee extends Entity {
 			left2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-left2.png"));
 			right1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-right.png"));
 			right2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-right2.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException e) { 
+
 		}
 	}
 
@@ -329,12 +329,21 @@ public class Bee extends Entity {
 		}
 	}
 
-	// method only used in BeeTests
+	// method only used in BeeTest
 	public void addNumRewards(int i) {
 		for (int j = 0; j < i; j++) {
 			Reward reward = new RegularReward(this.gamePanel);
 			rewardList.add(reward);
 		}
+	}
 
+	// method only used in BeeTest
+	public void setSpriteCounter(int i) {
+		this.spriteCounter = i;
+	}
+
+	// method only used in BeeTest
+	public void setSpriteNum(int i) {
+		this.spriteNum = i;
 	}
 }

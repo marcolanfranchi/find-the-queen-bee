@@ -1,7 +1,6 @@
 package mainTest;
 
 import org.junit.jupiter.api.Test;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 
 import main.GamePanel;

@@ -1,4 +1,6 @@
 package entityTest;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -27,6 +29,84 @@ public class BeeTest {
         KeyHandler kh = new KeyHandler(gp);
         bee = new Bee(gp, kh);
         tileSize = gp.tileSize;
+    }
+
+    // @Test
+    // void testDrawDir_UpSprite_1() {
+    //     BufferedImage img = new BufferedImage(0,0,0);
+    //     Graphics2D g2 = img.createGraphics();
+    //     bee.direction = "up";
+    //     bee.setSpriteNum(1);
+
+    //     bee.draw(g2);
+
+        
+    // }
+
+    @Test
+    void testUpdateSpriteNum_1Counter_0() {
+        bee.setSpriteCounter(0);
+        int initialSpriteNum = 1;
+        bee.setSpriteNum(initialSpriteNum);
+        bee.update();
+        // assert the sprite Num does change until counter is 2
+        int spriteNumResult = bee.spriteNum;
+        assertEquals(initialSpriteNum, spriteNumResult);
+    }
+
+    @Test
+    void testUpdateSpriteNum_1Counter_1() {
+        bee.setSpriteCounter(1);
+        int initialSpriteNum = 1;
+        bee.setSpriteNum(initialSpriteNum);
+        bee.update();
+        // assert the sprite Num does change until counter is 2
+        int spriteNumResult = bee.spriteNum;
+        assertEquals(initialSpriteNum, spriteNumResult);
+    }
+
+    @Test
+    void testUpdateSpriteNum_1Counter_2() {
+        bee.setSpriteCounter(2);
+        int initialSpriteNum = 1;
+        bee.setSpriteNum(initialSpriteNum);
+        bee.update();
+        // assert the sprite Num changed to 2 because counter is 2
+        int spriteNumResult = bee.spriteNum;
+        assertEquals(2, spriteNumResult);
+    }
+
+    @Test
+    void testUpdateSpriteNum_2Counter_0() {
+        bee.setSpriteCounter(0);
+        int initialSpriteNum = 2;
+        bee.setSpriteNum(initialSpriteNum);
+        bee.update();
+        // assert the sprite Num does change until counter is 2
+        int spriteNumResult = bee.spriteNum;
+        assertEquals(initialSpriteNum, spriteNumResult);
+    }
+
+    @Test
+    void testUpdateSpriteNum_2Counter_1() {
+        bee.setSpriteCounter(1);
+        int initialSpriteNum = 2;
+        bee.setSpriteNum(initialSpriteNum);
+        bee.update();
+        // assert the sprite Num does change until counter is 2
+        int spriteNumResult = bee.spriteNum;
+        assertEquals(initialSpriteNum, spriteNumResult);
+    }
+
+    @Test
+    void testUpdateSpriteNum_2Counter_2() {
+        bee.setSpriteCounter(2);
+        int initialSpriteNum = 2;
+        bee.setSpriteNum(initialSpriteNum);
+        bee.update();
+        // assert the sprite Num changed to 1 because counter is 2
+        int spriteNumResult = bee.spriteNum;
+        assertEquals(1, spriteNumResult);
     }
 
     @Test
