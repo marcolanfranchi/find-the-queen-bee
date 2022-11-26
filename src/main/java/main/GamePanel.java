@@ -240,7 +240,7 @@ public class GamePanel extends JPanel implements Runnable {
 		if (bee.checkGameWon()) {
 			gameState = winState;
 			playMusic(1);
-				}
+		}
 	}
 
 	/**

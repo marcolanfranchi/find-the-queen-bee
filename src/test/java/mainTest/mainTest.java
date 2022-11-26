@@ -12,10 +12,4 @@ public class mainTest {
 	public void setUp() {
 		m = new Main();
 	}
-
-	@Test
-	void testMain() {
-		Main.main(null);
-	}
-
 }

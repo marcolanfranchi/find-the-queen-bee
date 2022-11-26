@@ -1,22 +1,21 @@
 package uiTest;
 
-import org.junit.jupiter.api.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.awt.Graphics2D;
 
-import javax.swing.JFrame;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import java.awt.image.BufferedImage;
 
-import java.awt.Graphics;
 
 import main.GamePanel;
 import main.UI;
-import main.Main;
 
 public class UITest {
 
 	UI ui;
 	GamePanel gp;
-	Graphics g;
 
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -25,184 +24,107 @@ public class UITest {
 	}
 
 	@Test
-	void testDrawTitleMethod1() {
-		JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.setTitle("Bee Maze");
+	void testDrawTitleMethod() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
 
-		GamePanel gamePanel = new GamePanel();
-		window.add(gamePanel);
+		gp.gameState = GamePanel.titleState;
 
-		window.pack();
+		ui.commandNum = 0;
+		ui.draw(g2);
 
-		window.setLocationRelativeTo(null);
 
-		// Game Setup
-		gamePanel.ui.commandNum = 1;
-		gamePanel.setupGame(0);
+		ui.commandNum = 1;
+		ui.draw(g2);
 
-		window.setVisible(true);
 
-		gamePanel.startGameThread();
-	}
+		ui.commandNum = 2;
+		ui.draw(g2);
 
-	@Test
-	void testDrawTitleMethod2() {
-		JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.setTitle("Bee Maze");
-
-		GamePanel gamePanel = new GamePanel();
-		window.add(gamePanel);
-
-		window.pack();
-
-		window.setLocationRelativeTo(null);
-
-		// Game Setup
-		gamePanel.ui.commandNum = 2;
-		gamePanel.setupGame(0);
-
-		window.setVisible(true);
-
-		gamePanel.startGameThread();
+		assertEquals(GamePanel.titleState, gp.gameState);
 	}
 
 	@Test
 	void testDrawPlayMethod() {
-		JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.setTitle("Bee Maze");
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
 
-		GamePanel gamePanel = new GamePanel();
-		window.add(gamePanel);
+		gp.gameState = GamePanel.playState;
 
-		window.pack();
+		ui.draw(g2);
 
-		window.setLocationRelativeTo(null);
-
-		// Game Setup
-		gamePanel.setupGame(1);
-
-		window.setVisible(true);
-
-		gamePanel.startGameThread();
+		assertEquals(GamePanel.playState, gp.gameState);
 	}
 
 	@Test
-	void testDrawPauseMethod1() {
-		JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.setTitle("Bee Maze");
+	void testDrawPauseMethod() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
 
-		GamePanel gamePanel = new GamePanel();
-		window.add(gamePanel);
+		gp.gameState = GamePanel.pauseState;
 
-		window.pack();
+		ui.pauseCommandNum = 0;
+		ui.draw(g2);
 
-		window.setLocationRelativeTo(null);
 
-		// Game Setup
-		gamePanel.ui.pauseCommandNum = 1;
-		gamePanel.setupGame(2);
+		ui.pauseCommandNum = 1;
+		ui.draw(g2);
 
-		window.setVisible(true);
 
-		gamePanel.startGameThread();
-	}
+		ui.pauseCommandNum = 2;
+		ui.draw(g2);
 
-	@Test
-	void testDrawPauseMethod2() {
-		JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.setTitle("Bee Maze");
+		assertEquals(GamePanel.pauseState, gp.gameState);
 
-		GamePanel gamePanel = new GamePanel();
-		window.add(gamePanel);
-
-		window.pack();
-
-		window.setLocationRelativeTo(null);
-
-		// Game Setup
-		gamePanel.ui.pauseCommandNum = 2;
-		gamePanel.setupGame(2);
-
-		window.setVisible(true);
-
-		gamePanel.startGameThread();
-	}
-
-	@Test
-	void testDrawWinMethod() {
-		JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.setTitle("Bee Maze");
-
-		GamePanel gamePanel = new GamePanel();
-		window.add(gamePanel);
-
-		window.pack();
-
-		window.setLocationRelativeTo(null);
-
-		// Game Setup
-		gamePanel.setupGame(3);
-
-		window.setVisible(true);
-
-		gamePanel.startGameThread();
-	}
-
-	@Test
-	void testDrawControlMethod() {
-		JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.setTitle("Bee Maze");
-
-		GamePanel gamePanel = new GamePanel();
-		window.add(gamePanel);
-
-		window.pack();
-
-		window.setLocationRelativeTo(null);
-
-		// Game Setup
-		gamePanel.setupGame(5);
-
-		window.setVisible(true);
-
-		gamePanel.startGameThread();
 	}
 
 	@Test
 	void testDrawOverMethod() {
-		JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.setTitle("Bee Maze");
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
 
-		GamePanel gamePanel = new GamePanel();
-		window.add(gamePanel);
+		gp.gameState = GamePanel.gameOverState;
 
-		window.pack();
+		ui.endCommandNum = 0;
+		ui.draw(g2);
 
-		window.setLocationRelativeTo(null);
 
-		// Game Setup
-		gamePanel.ui.endCommandNum = 1;
-		gamePanel.setupGame(3);
+		ui.endCommandNum = 1;
+		ui.draw(g2);
 
-		window.setVisible(true);
+		assertEquals(GamePanel.gameOverState, gp.gameState);
 
-		gamePanel.startGameThread();
+	}
+
+
+	@Test
+	void testDrawWinMethod() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		gp.gameState = GamePanel.winState;
+
+		ui.winCommandNum = 0;
+		ui.draw(g2);
+
+		ui.winCommandNum = 1;
+		ui.draw(g2);
+
+		assertEquals(GamePanel.winState, gp.gameState);
+
+	}
+
+	@Test
+	void testDrawControlMethod() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		gp.gameState = GamePanel.controlState;
+
+		ui.draw(g2);
+
+		assertEquals(GamePanel.controlState, gp.gameState);
+
 	}
 
 }

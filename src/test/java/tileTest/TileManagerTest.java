@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import main.GamePanel;
 import tile.TileManager;
+import java.awt.Graphics2D;
 
 public class TileManagerTest {
 	private TileManager<BufferedImage> tileManager;
@@ -76,4 +77,13 @@ public class TileManagerTest {
 		br.close();
 	}
 
+	@Test
+	public void testDrawMethod() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		tileManager.setMap("src/main/java/ui/maps/txt-maps/trap-tile.txt");
+
+		tileManager.draw(g2);
+	}
 }
