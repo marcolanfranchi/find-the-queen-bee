@@ -1,15 +1,13 @@
 package entityTest;
 
 import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
 
 import entity.Enemy;
 import entity.Node;
@@ -37,10 +35,11 @@ public class EnemyTest {
     int tileNumDown;
     int tileNumLeft;
     int tileNumRight;
+	GamePanel gp;
 
     @BeforeEach
     void setup(){
-        GamePanel gp = new GamePanel();
+		gp = new GamePanel();
         gp.tileM.setMap("./src/main/java/ui/maps/txt-maps/trap-tile.txt");
         enemy = new Enemy(gp);
     }
@@ -533,4 +532,138 @@ public class EnemyTest {
         assertEquals(5, enemy.worldX);
         assertNotNull(enemy.direction);
     }
+
+	@Test
+	void testDrawUp() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		enemy.worldX = 10;
+		enemy.worldY = 10;
+
+		enemy.direction = "up";
+
+		enemy.draw(g2);
+		assertNotNull(enemy);
+	}
+
+	@Test
+	void testDrawDown() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		enemy.worldX = 10;
+		enemy.worldY = 10;
+
+		enemy.direction = "down";
+
+		enemy.draw(g2);
+		assertNotNull(enemy);
+	}
+
+	@Test
+	void testDrawLeft() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		enemy.worldX = 10;
+		enemy.worldY = 10;
+
+		enemy.direction = "left";
+
+		enemy.draw(g2);
+		assertNotNull(enemy);
+
+	}
+
+	@Test
+	void testDrawRight() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		enemy.worldX = 10;
+		enemy.worldY = 10;
+
+		enemy.direction = "right";
+
+		enemy.draw(g2);
+		assertNotNull(enemy);
+
+	}
+
+	@Test
+	void testDrawNone() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		enemy.worldX = 10;
+		enemy.worldY = 10;
+
+		enemy.direction = "none";
+
+		enemy.draw(g2);
+		assertNotNull(enemy);
+
+	}
+
+	@Test
+	void testDrawArg1() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		enemy.worldX = -600;
+		enemy.worldY = 10;
+
+		enemy.direction = "right";
+
+		enemy.draw(g2);
+		assertNotNull(enemy);
+
+	}
+
+	@Test
+	void testDrawArg2() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		enemy.worldX = 680;
+		enemy.worldY = 10;
+
+		enemy.direction = "right";
+
+		enemy.draw(g2);
+		assertNotNull(enemy);
+
+	}
+
+	@Test
+	void testDrawArg3() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		enemy.worldX = 10;
+		enemy.worldY = -365;
+
+		enemy.direction = "right";
+
+		enemy.draw(g2);
+		assertNotNull(enemy);
+
+	}
+
+	@Test
+	void testDrawArg4() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		enemy.worldX = 10;
+		enemy.worldY = 470;
+
+		enemy.direction = "right";
+
+		enemy.draw(g2);
+		assertNotNull(enemy);
+
+	}
+
 }
