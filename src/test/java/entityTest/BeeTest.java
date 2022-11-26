@@ -1,5 +1,6 @@
 package entityTest;
 import java.awt.Graphics2D;
+
 import java.awt.image.BufferedImage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,6 @@ import entity.Bee;
 import main.GamePanel;
 import main.KeyHandler;
 import reward.RegularReward;
-import reward.Reward;
 
 public class BeeTest {
 
@@ -31,18 +31,6 @@ public class BeeTest {
         bee = new Bee(gp, kh);
         tileSize = gp.tileSize;
     }
-
-    // @Test
-    // void testDrawDir_UpSprite_1() {
-    //     BufferedImage img = new BufferedImage(0,0,0);
-    //     Graphics2D g2 = img.createGraphics();
-    //     bee.direction = "up";
-    //     bee.setSpriteNum(1);
-
-    //     bee.draw(g2);
-
-        
-    // }
 
     @Test
     void testUpdateSpriteNum_1Counter_0() {
@@ -773,5 +761,85 @@ public class BeeTest {
         int resultAfterTwoCalls = bee.beeScore;
         // assert the second call of reduceScore() did not change the bee's score
         assertEquals(resultAfterOneCall, resultAfterTwoCalls);
-    }    
+    }
+    
+    @Test
+    void testDrawDir_UpSprite_1() {
+        bee.direction = "up";
+        bee.setSpriteNum(1);
+        BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = image.createGraphics();
+        bee.draw(g2);
+        assertNotNull(g2);
+    }
+
+    @Test
+    void testDrawDir_UpSprite_2() {
+        bee.direction = "up";
+        bee.setSpriteNum(2);
+        BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = image.createGraphics();
+        bee.draw(g2);
+        assertNotNull(g2);
+    }
+
+    @Test
+    void testDrawDir_DownSprite_1() {
+        bee.direction = "down";
+        bee.setSpriteNum(1);
+        BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = image.createGraphics();
+        bee.draw(g2);
+        assertNotNull(g2);
+    }
+
+    @Test
+    void testDrawDir_DownSprite_2() {
+        bee.direction = "down";
+        bee.setSpriteNum(2);
+        BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = image.createGraphics();
+        bee.draw(g2);
+        assertNotNull(g2);
+    }
+
+    @Test
+    void testDrawDir_LeftSprite_1() {
+        bee.direction = "left";
+        bee.setSpriteNum(1);
+        BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = image.createGraphics();
+        bee.draw(g2);
+        assertNotNull(g2);
+    }
+
+    @Test
+    void testDrawDir_LeftSprite_2() {
+        bee.direction = "left";
+        bee.setSpriteNum(2);
+        BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = image.createGraphics();
+        bee.draw(g2);
+        assertNotNull(g2);
+    }
+
+    @Test
+    void testDrawDir_RightSprite_1() {
+        bee.direction = "right";
+        bee.setSpriteNum(1);
+        BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = image.createGraphics();
+        bee.draw(g2);
+        assertNotNull(g2);
+    }
+
+    @Test
+    void testDrawDir_RightSprite_2() {
+        bee.direction = "right";
+        bee.setSpriteNum(2);
+        BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = image.createGraphics();
+        bee.draw(g2);
+        assertNotNull(g2);
+    }
 }
