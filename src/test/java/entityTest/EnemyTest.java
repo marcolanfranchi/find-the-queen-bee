@@ -1,15 +1,13 @@
 package entityTest;
 
 import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
 
 import entity.Enemy;
 import entity.Node;
@@ -28,7 +26,7 @@ public class EnemyTest {
 
     @BeforeEach
     void setup(){
-        GamePanel gp = new GamePanel();
+		GamePanel gp = new GamePanel();
         gp.tileM.setMap("./src/main/java/ui/maps/txt-maps/trap-tile.txt");
         enemy = new Enemy(gp);
     }
@@ -125,13 +123,4 @@ public class EnemyTest {
         enemy.worldY = 480;
         enemy.searchPath(goalCol, goalRow);
     }
-
-    // @Test
-    // void testSearchPath2(){
-    //     int goalCol = 100;
-	// 	int goalRow = 100;
-    //     enemy.worldX = 480;
-    //     enemy.worldY = 48;
-    //     enemy.searchPath(goalCol, goalRow);
-    // }
 }
