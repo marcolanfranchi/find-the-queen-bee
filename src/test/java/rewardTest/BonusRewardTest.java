@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -23,10 +24,11 @@ import reward.BonusReward;
 public class BonusRewardTest {
     
     private BonusReward bonusReward;
+	GamePanel gp;
 
     @BeforeEach
     void setup() {
-        GamePanel gp = new GamePanel();
+		gp = new GamePanel();
         // setting a specific map to use for testing
         gp.tileM.setMap("./src/main/java/ui/maps/txt-maps/trap-tile.txt");
         bonusReward = new BonusReward(gp);
@@ -105,4 +107,51 @@ public class BonusRewardTest {
         // assert the reward's image is now null
         assertNull(imgResult);
     }
+
+	@Test
+	void testUpdateTimer() {
+		bonusReward.switchVisibility();
+	}
+
+	@Test
+	void testDrawMethod() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		bonusReward.worldX = -1000;
+		bonusReward.draw(g2, gp);
+		assertNotNull(bonusReward);
+
+		bonusReward.worldX = 1000;
+		bonusReward.draw(g2, gp);
+		assertNotNull(bonusReward);
+
+		bonusReward.worldY = -1000;
+		bonusReward.worldX = 0;
+		bonusReward.draw(g2, gp);
+		assertNotNull(bonusReward);
+
+		bonusReward.worldY = 1000;
+		bonusReward.draw(g2, gp);
+		assertNotNull(bonusReward);
+
+		bonusReward.worldX = 0;
+		bonusReward.worldY = 0;
+		System.out.println("worldX: " + bonusReward.worldX);
+		System.out.println("worldY: " + bonusReward.worldY);
+		System.out.println("gp.tileSize: " + gp.tileSize);
+		System.out.println("gp.bee.worldX: " + gp.bee.worldX);
+		System.out.println("gp.bee.worldY: " + gp.bee.worldY);
+		System.out.println("gp.bee.screenX: " + gp.bee.screenX);
+		System.out.println("gp.bee.screenY: " + gp.bee.screenY);
+
+		System.out.println("Arg1: " + (bonusReward.worldX + gp.tileSize > gp.bee.worldX - gp.bee.screenX));
+		System.out.println("Arg2: " + (bonusReward.worldX - gp.tileSize < gp.bee.worldX + gp.bee.screenX));
+		System.out.println("Arg3: " + (bonusReward.worldY + gp.tileSize > gp.bee.worldY - gp.bee.screenY));
+		System.out.println("Arg4: " + (bonusReward.worldY - gp.tileSize < gp.bee.worldY + gp.bee.screenY));
+		bonusReward.collected = false;
+		bonusReward.displayNow = true;
+		bonusReward.draw(g2, gp);
+
+	}
 }

@@ -86,4 +86,17 @@ public class TileManagerTest {
 
 		tileManager.draw(g2);
 	}
+
+	@Test
+	public void testDrawMethod_While_Test1() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		tileManager.setMap("src/main/java/ui/maps/txt-maps/trap-tile.txt");
+		tileManager.worldCol = 1000;
+		tileManager.worldRow = 0;
+
+		tileManager.draw(g2);
+	}
+
 }

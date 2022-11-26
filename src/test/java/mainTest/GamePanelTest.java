@@ -84,4 +84,22 @@ public class GamePanelTest {
 
 		assertEquals(GamePanel.playState, g.gameState);
 	}
+
+	@Test
+	void testStartGameThread() {
+		g.startGameThread();
+		assertNotNull(g);
+	}
+
+	@Test
+	void testSetupGame() {
+		g.setupGame(0);
+		assertNotNull(g);
+	}
+
+	@Test
+	void testRun(){
+		g.run();
+		assertNotNull(g);
+	}
 }

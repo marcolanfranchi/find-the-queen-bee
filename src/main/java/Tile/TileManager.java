@@ -27,6 +27,9 @@ public class TileManager<BufferedImage> {
 	Tile[] tile;
 	public int mapTileNum[][];
 
+	public int worldCol = 0;
+	public int worldRow = 0;
+
 	/**
 	 * Constructor for the TileManager class
 	 * It loads the tile images and the map file
@@ -62,9 +65,8 @@ public class TileManager<BufferedImage> {
 			tile[2] = new Tile();
 			tile[2].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Door-2.png"));
 
-			tile[3] = new Tile(); 
+			tile[3] = new Tile();
 			tile[3].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/TrapTile2.png"));
-			
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -118,7 +120,7 @@ public class TileManager<BufferedImage> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	} 
+	}
 
 	/**
 	 * Draws the tiles to the screen that are only in the view of the player
@@ -126,8 +128,6 @@ public class TileManager<BufferedImage> {
 	 * @param g The Graphics2D object
 	 */
 	public void draw(Graphics2D g2) {
-		int worldCol = 0;
-		int worldRow = 0;
 
 		while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 			int tileNum = mapTileNum[worldCol][worldRow];

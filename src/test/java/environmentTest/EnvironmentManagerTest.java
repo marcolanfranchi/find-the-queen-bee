@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.Assert.*;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
 
 import environment.EnvironmentManager;
+import environment.Lighting;
 import main.GamePanel;
 
 public class EnvironmentManagerTest {
@@ -33,5 +36,15 @@ public class EnvironmentManagerTest {
 	public void testSetup() {
 		environmentManager.setup();
 		assertNotNull(environmentManager);
+	}
+
+	@Test
+	public void testEnvironmentDraw() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		environmentManager.setup();
+		environmentManager.draw(g2);
+
 	}
 }

@@ -28,34 +28,25 @@ public class SuperObjectTest {
 	}
 
 	@Test
-	void testDrawMethod() {
+	void testDrawMethodArgs() {
 		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 
-		so.draw(g2, gp);
-
 		so.worldX = -1000;
-		gp.bee.worldX = 2;
 		so.draw(g2, gp);
-
 		assertNotNull(so);
 
 		so.worldX = 1000;
-		gp.bee.worldX = 2;
 		so.draw(g2, gp);
-
 		assertNotNull(so);
 
 		so.worldY = -1000;
-		gp.bee.worldY = 2;
+		so.worldX = 0;
 		so.draw(g2, gp);
-
 		assertNotNull(so);
 
 		so.worldY = 1000;
-		gp.bee.worldY = 2;
 		so.draw(g2, gp);
-
 		assertNotNull(so);
 	}
 
