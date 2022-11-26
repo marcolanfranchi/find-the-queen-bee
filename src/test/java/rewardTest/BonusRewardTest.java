@@ -10,9 +10,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import entity.Bee;
+
+import org.junit.jupiter.api.BeforeEach;
+
 import main.GamePanel;
 import main.KeyHandler;
 import reward.BonusReward;

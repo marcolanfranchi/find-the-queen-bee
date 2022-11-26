@@ -30,7 +30,7 @@ public class Enemy extends Entity{
 	boolean goalReached = false;
 	Node[][] node;
 	Node startNode, goalNode, currentNode;
-	ArrayList<Node> openList = new ArrayList<>();
+	public ArrayList<Node> openList = new ArrayList<>();
     public ArrayList<Node> pathList = new ArrayList<>();
     
 	/**

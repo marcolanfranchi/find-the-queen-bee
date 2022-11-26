@@ -8,14 +8,14 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import entity.Bee;
+import entity.Enemy;
 import object.ObjectManager;
 import object.OBJ_TextBubble;
 import object.SuperObject;
 import reward.Reward;
 import reward.RewardGenerator;
 import tile.TileManager;
-import entity.Bee;
-import entity.Enemy;
 import environment.EnvironmentManager;
 import environment.Sound;
 

@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 
 /** 
      * This Class represents an Entity in the game which is to be extended
-     * by the Game's different types of characters.
+     * by the Game's different tsypes of characters.
      * 
      * @author Marco Lanfranchi
      */
