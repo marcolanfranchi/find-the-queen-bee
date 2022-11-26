@@ -29,7 +29,7 @@ public class EntityTest {
    }
 
    @Test
-   void testGetX() {
+   void testSetX() {
       int x = 96;
       entity.setX(x);
       int result = entity.getX();
@@ -37,7 +37,7 @@ public class EntityTest {
    }
 
    @Test
-   void testGetY() {
+   void testSetY() {
       int y = 48;
       entity.setY(y);
       int result = entity.getY();
