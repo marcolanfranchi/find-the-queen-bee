@@ -6,7 +6,7 @@
 Current progress: <br>
 Phase 1: Complete <br>
 Phase 2: Complete <br>
-Phase 3:  <br>
+Phase 3: Complete <br>
 Phase 4:  <br>
 
 ## Instructions
@@ -29,7 +29,7 @@ To build the game you must have the following installed:
 
 Download the repository and unzip or clone the repository using git:
 
-`git clonehttps://csil-git1.cs.surrey.sfu.ca/cmpt276f22_group16/project.git`
+`git clone https://csil-git1.cs.surrey.sfu.ca/cmpt276f22_group16/project.git`
 
 Build the project running the following Maven command:
 
@@ -43,24 +43,9 @@ After following [how to build](#how-to-build), you can run the game by running t
 
 `mvn exec:java`
 
-or
-
-`java -jar target/BeeMaze-1.0-SNAPSHOT.jar`
-
-Both commands will run the game.
-
 ### How to Test
 
 After following [how to build](#how-to-build), you can test the game by running
 the following command:
 
 `mvn test`
-
-### Generate Javadocs
-
-To generate Javadocs for the project, run the following command:
-
-`mvn javadoc:javadoc`
-
-The Javadocs are located in the `target/site/apidocs` directory and can be viewed
-by opening the `index.html` file in your browser.
