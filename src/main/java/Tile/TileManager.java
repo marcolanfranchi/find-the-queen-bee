@@ -27,9 +27,6 @@ public class TileManager<BufferedImage> {
 	Tile[] tile;
 	public int mapTileNum[][];
 
-	public int worldCol = 0;
-	public int worldRow = 0;
-
 	/**
 	 * Constructor for the TileManager class
 	 * It loads the tile images and the map file
@@ -128,6 +125,8 @@ public class TileManager<BufferedImage> {
 	 * @param g The Graphics2D object
 	 */
 	public void draw(Graphics2D g2) {
+		int worldCol = 0;
+		int worldRow = 0;
 
 		while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 			int tileNum = mapTileNum[worldCol][worldRow];
