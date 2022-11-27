@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -22,10 +23,11 @@ import reward.RegularReward;
 public class RegularRewardTest {
 
     private RegularReward regReward;
+	GamePanel gp;
 
     @BeforeEach
     void setup() {
-        GamePanel gp = new GamePanel();
+		gp = new GamePanel();
         // setting a specific map to use for testing
         gp.tileM.setMap("./src/main/java/ui/maps/txt-maps/trap-tile.txt");
         regReward = new RegularReward(gp);
@@ -81,6 +83,34 @@ public class RegularRewardTest {
         // assert the reward's image is now null
         assertNull(imgResult);
     }
+
+	@Test
+	void testDraw() {
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = image.createGraphics();
+
+		regReward.worldX = -1000;
+		regReward.draw(g2, gp);
+		assertNotNull(regReward);
+
+		regReward.worldX = 1000;
+		regReward.draw(g2, gp);
+		assertNotNull(regReward);
+
+		regReward.worldY = -1000;
+		regReward.worldX = 0;
+		regReward.draw(g2, gp);
+		assertNotNull(regReward);
+
+		regReward.worldY = 1000;
+		regReward.draw(g2, gp);
+		assertNotNull(regReward);
+
+		regReward.collected = true;
+		regReward.worldY = 0;
+		regReward.draw(g2, gp);
+		assertNotNull(regReward);
+	}
 }
 
 
