@@ -6,7 +6,7 @@
 
   <groupId>com.beemaze.app</groupId>
   <artifactId>BeeMaze</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1</version>
 
   <name>BeeMaze</name>
 
@@ -37,6 +37,27 @@
   </dependencies>
 
   <build>
+  	<!-- <configuration>
+	    <outputDirectory>${basedir}/target/classes/ui</outputDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/java/ui/images</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java/ui/font</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java/ui/maps/txt-maps</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java/sounds</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</configuration> -->
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
@@ -46,8 +67,74 @@
         </plugin>
         <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
         <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
+			<artifactId>maven-resources-plugin</artifactId>
+			<version>3.0.2</version>
+			<executions>
+				<execution>
+					<id>copy-images</id>
+					<phase>validate</phase>
+					<goals>
+						<goal>copy-resources</goal>
+					</goals>
+					<configuration>
+						<outputDirectory>${basedir}/target/classes/ui/images</outputDirectory>
+						<resources>
+							<resource>
+								<directory>src/main/java/ui/images</directory>
+								<filtering>true</filtering>
+							</resource>
+						</resources>
+					</configuration>
+				</execution>
+				<execution>
+					<id>copy-font</id>
+					<phase>validate</phase>
+					<goals>
+						<goal>copy-resources</goal>
+					</goals>
+					<configuration>
+						<outputDirectory>${basedir}/target/classes/ui/font</outputDirectory>
+						<resources>
+							<resource>
+								<directory>src/main/java/ui/font</directory>
+								<filtering>false</filtering>
+							</resource>
+						</resources>
+					</configuration>
+				</execution>
+				<execution>
+					<id>copy-txt-maps</id>
+					<phase>validate</phase>
+					<goals>
+						<goal>copy-resources</goal>
+					</goals>
+					<configuration>
+						<outputDirectory>${basedir}/target/classes/ui/maps/txt-maps</outputDirectory>
+						<resources>
+							<resource>
+								<directory>src/main/java/ui/maps/txt-maps</directory>
+								<filtering>true</filtering>
+							</resource>
+						</resources>
+					</configuration>
+				</execution>
+				<execution>
+					<id>copy-sounds</id>
+					<phase>validate</phase>
+					<goals>
+						<goal>copy-resources</goal>
+					</goals>
+					<configuration>
+						<outputDirectory>${basedir}/target/classes/sounds</outputDirectory>
+						<resources>
+							<resource>
+								<directory>src/main/java/sounds</directory>
+								<filtering>false</filtering>
+							</resource>
+						</resources>
+					</configuration>
+				</execution>
+			</executions>
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -59,8 +146,8 @@
           <version>2.22.0</version>
         </plugin>
         <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
+			<artifactId>maven-jar-plugin</artifactId>
+			<version>3.0.2</version>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
