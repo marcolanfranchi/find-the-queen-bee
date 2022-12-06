@@ -1,7 +1,6 @@
 package entity;
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.image.BufferedImage;
@@ -150,16 +149,16 @@ public class Bee extends Entity {
 	 * switches the direction it is facing after this move.
 	 */
 	public void moveBee() {
-		if (keyHandler.upPressed && moveUp) {
+		if (KeyHandler.upPressed && moveUp) {
 			world.setY(world.getY() - speed);
 			direction = "up";
-		} else if (keyHandler.downPressed && moveDown) {
+		} else if (KeyHandler.downPressed && moveDown) {
 			world.setY(world.getY() + speed);
 			direction = "down";
-		} else if (keyHandler.leftPressed && moveLeft) {
+		} else if (KeyHandler.leftPressed && moveLeft) {
 			world.setX(world.getX() - speed);
 			direction = "left";
-		} else if (keyHandler.rightPressed && moveRight) {
+		} else if (KeyHandler.rightPressed && moveRight) {
 			world.setX(world.getX() + speed);
 			direction = "right";
 		}
@@ -308,19 +307,19 @@ public class Bee extends Entity {
 	// method only used in BeeTests
 	public void setDirectionPressed(String s, boolean b) {
 		if (s == "up") {
-			this.keyHandler.upPressed = b;
+			KeyHandler.upPressed = b;
 		}
 
 		if (s == "down") {
-			this.keyHandler.downPressed = b;
+			KeyHandler.downPressed = b;
 		}
 
 		if (s == "left") {
-			this.keyHandler.leftPressed = b;
+			KeyHandler.leftPressed = b;
 		}
 
 		if (s == "right") {
-			this.keyHandler.rightPressed = b;
+			KeyHandler.rightPressed = b;
 		}
 	}
 

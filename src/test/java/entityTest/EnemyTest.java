@@ -1,6 +1,5 @@
 package entityTest;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
