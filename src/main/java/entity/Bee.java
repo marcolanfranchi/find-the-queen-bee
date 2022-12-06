@@ -86,26 +86,31 @@ public class Bee extends Entity {
 
 		BufferedImage image = null;
 
-		if (direction == Direction.UP) {
+		switch(direction) {
+			case UP:
 			if (spriteNum == 1) {
 				image = up1;
 			} else
 				image = up2;
-		} else if (direction == Direction.DOWN) {
+			break;
+			case DOWN:
 			if (spriteNum == 1) {
 				image = down1;
 			} else
 				image = down2;
-		} else if (direction == Direction.LEFT) {
+			break;
+			case LEFT:
 			if (spriteNum == 1) {
 				image = left1;
 			} else
 				image = left2;
-		} else if (direction == Direction.RIGHT) {
+			break;
+			case RIGHT:
 			if (spriteNum == 1) {
 				image = right1;
 			} else
 				image = right2;
+			break;
 		}
 		g2.drawImage(image, screen.getX(), screen.getY(), width, height, null);
 	}
