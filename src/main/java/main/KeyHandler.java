@@ -32,7 +32,8 @@ public class KeyHandler implements KeyListener {
 
     
     /**
-	 * 
+	 * Mandatory method from KeyListener interface. This method is called when a key
+	 * is pressed.
 	 */
 	public void keyTyped(KeyEvent e) {}
 
@@ -49,63 +50,12 @@ public class KeyHandler implements KeyListener {
 
 		// title state
 		if (gamePanel.gameState == GamePanel.titleState) {
-			if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
-				gamePanel.ui.commandNum--;
-				if (gamePanel.ui.commandNum < 0) {
-					gamePanel.ui.commandNum = 2;
-				}
-			}
-
-			if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
-				gamePanel.ui.commandNum++;
-				if (gamePanel.ui.commandNum > 2) {
-					gamePanel.ui.commandNum = 0;
-				}
-			}
-
-			if(keyCode == KeyEvent.VK_ENTER) {
-				if(gamePanel.ui.commandNum == 0) {
-					gamePanel.gameState = GamePanel.playState;
-				}
-				if(gamePanel.ui.commandNum == 1) {
-					prevState = gamePanel.gameState;
-					gamePanel.gameState = GamePanel.controlState;
-				}
-				if(gamePanel.ui.commandNum == 2) {
-					System.exit(0);
-				}
-			}
+			updateCommandNum(keyCode, gamePanel.ui.commandNum);
 		}
 
 		// pause state
 		if (gamePanel.gameState == GamePanel.pauseState) {
-			if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
-				gamePanel.ui.pauseCommandNum--;
-				if (gamePanel.ui.pauseCommandNum < 0) {
-					gamePanel.ui.pauseCommandNum = 2;
-				}
-			}
-
-			if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
-				gamePanel.ui.pauseCommandNum++;
-				if (gamePanel.ui.pauseCommandNum > 2) {
-					gamePanel.ui.pauseCommandNum = 0;
-				}
-			}
-
-			if (keyCode == KeyEvent.VK_ENTER) {
-				if (gamePanel.ui.pauseCommandNum == 0) {
-					gamePanel.gameState = GamePanel.playState;
-				}
-				if (gamePanel.ui.pauseCommandNum == 1) {
-					prevState = gamePanel.gameState;
-					System.out.println("PrevState == " + prevState);
-					gamePanel.gameState = GamePanel.controlState;
-				}
-				if (gamePanel.ui.pauseCommandNum == 2) {
-					System.exit(0);
-				}
-			}
+			updateCommandNum(keyCode, gamePanel.ui.pauseCommandNum);
 		}
 
 		// Game Over state
@@ -137,7 +87,11 @@ public class KeyHandler implements KeyListener {
 			}
 		}
 
-        if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) { // up
+		updatePressedVar(keyCode);
+	}
+
+	private void updatePressedVar(int keyCode) {
+		if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) { // up
             upPressed = true;
         }
 
@@ -151,9 +105,37 @@ public class KeyHandler implements KeyListener {
 
         if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) { // right
             rightPressed = true;
-        }        
-    }
+		}
+	}
 
+	private void updateCommandNum(int keyCode, int commandNum) {
+		if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
+			commandNum--;
+			if (commandNum < 0) {
+				commandNum = 2;
+			}
+		}
+
+		if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
+			commandNum++;
+			if (commandNum > 2) {
+				commandNum = 0;
+			}
+		}
+
+		if (keyCode == KeyEvent.VK_ENTER) {
+			if (commandNum == 0) {
+				gamePanel.gameState = GamePanel.playState;
+			}
+			if (commandNum == 1) {
+				prevState = gamePanel.gameState;
+				commandNum = GamePanel.controlState;
+			}
+			if (commandNum == 2) {
+				System.exit(0);
+			}
+		}
+	}
 
     /**
 	 * Sets the boolean values for indicating the directional move being made to
