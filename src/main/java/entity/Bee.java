@@ -50,7 +50,7 @@ public class Bee extends Entity {
 		world.setX(1 * gp.tileSize);
 		world.setY(1 * gp.tileSize);
 		speed = gp.tileSize / 2;
-		direction = "down";
+		direction = Direction.DOWN;
 		setImages();
 	}
 
@@ -86,22 +86,22 @@ public class Bee extends Entity {
 
 		BufferedImage image = null;
 
-		if (direction == "up") {
+		if (direction == Direction.UP) {
 			if (spriteNum == 1) {
 				image = up1;
 			} else
 				image = up2;
-		} else if (direction == "down") {
+		} else if (direction == Direction.DOWN) {
 			if (spriteNum == 1) {
 				image = down1;
 			} else
 				image = down2;
-		} else if (direction == "left") {
+		} else if (direction == Direction.LEFT) {
 			if (spriteNum == 1) {
 				image = left1;
 			} else
 				image = left2;
-		} else if (direction == "right") {
+		} else if (direction == Direction.RIGHT) {
 			if (spriteNum == 1) {
 				image = right1;
 			} else
@@ -151,16 +151,16 @@ public class Bee extends Entity {
 	public void moveBee() {
 		if (KeyHandler.upPressed && moveUp) {
 			world.setY(world.getY() - speed);
-			direction = "up";
+			direction = Direction.UP;
 		} else if (KeyHandler.downPressed && moveDown) {
 			world.setY(world.getY() + speed);
-			direction = "down";
+			direction = Direction.DOWN;
 		} else if (KeyHandler.leftPressed && moveLeft) {
 			world.setX(world.getX() - speed);
-			direction = "left";
+			direction = Direction.LEFT;
 		} else if (KeyHandler.rightPressed && moveRight) {
 			world.setX(world.getX() + speed);
-			direction = "right";
+			direction = Direction.RIGHT;
 		}
 	}
 
@@ -305,20 +305,20 @@ public class Bee extends Entity {
 	}
 
 	// method only used in BeeTests
-	public void setDirectionPressed(String s, boolean b) {
-		if (s == "up") {
+	public void setDirectionPressed(Direction d, boolean b) {
+		if (d == Direction.UP) {
 			KeyHandler.upPressed = b;
 		}
 
-		if (s == "down") {
+		if (d == Direction.DOWN) {
 			KeyHandler.downPressed = b;
 		}
 
-		if (s == "left") {
+		if (d == Direction.LEFT) {
 			KeyHandler.leftPressed = b;
 		}
 
-		if (s == "right") {
+		if (d == Direction.RIGHT) {
 			KeyHandler.rightPressed = b;
 		}
 	}

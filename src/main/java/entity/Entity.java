@@ -22,11 +22,11 @@ abstract public class Entity {
     public int speed;
     public int width = 32;
     public int height = 32;
-    public int actionLockCounter = 0;
     public int spriteCounter = 0;
     public int spriteNum = 1;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, enemyUp, enemyDown, enemyLeft, enemyRight;
-    public String direction;
+    //public String direction;
+    public Direction direction;
 
     public Rectangle bounds;
     public boolean moveUp, moveDown, moveLeft, moveRight;
@@ -190,8 +190,6 @@ abstract public class Entity {
         }
 	}
 
-    
-
     /**
      * Returns true if the given x and y ints give a location of a tile number in
      * the top left room of the map
@@ -210,22 +208,21 @@ abstract public class Entity {
     }
 
     // method only used for testing
-    public void setCanMove(String s, boolean b) {
-        if (s == "up") {
-			this.moveUp = b;
+    public void setCanMove(Direction d, boolean b) {
+    if (d == Direction.UP) {
+		  this.moveUp = b;
 		}
 
-		if (s == "down") {
+		if (d == Direction.DOWN) {
 			this.moveDown = b;
 		}
 
-		if (s == "left") {
+		if (d == Direction.LEFT) {
 			this.moveLeft = b;
 		}
 
-		if (s == "right") {
+		if (d == Direction.RIGHT) {
 			this.moveRight = b;
 		}
-
     }
 }

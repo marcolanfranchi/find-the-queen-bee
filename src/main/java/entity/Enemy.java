@@ -67,7 +67,7 @@ public class Enemy extends Entity{
 		}
 		setRandomStartPoint();
 		speed = gamePanel.tileSize / 8;
-		direction = "up";
+		direction = Direction.UP;
 		setImages();
 
 	}
@@ -153,48 +153,48 @@ public class Enemy extends Entity{
 			// Enemies' moving method which contains directions for different situations
 			if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
 				world.setY(world.getY() - speed);
-				direction = "up";
+				direction = Direction.UP;
 			} else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
 				world.setY(world.getY() + speed);
-				direction = "down";
+				direction = Direction.DOWN;
 			} else if (enTopY >= nextY && enDownY < nextY + gamePanel.tileSize) {
 				if (enLeftX > nextX) {
 					world.setX(world.getX() - speed);
-					direction = "left";
+					direction = Direction.LEFT;
 				}
 				if (enLeftX < nextX) {
 					world.setX(world.getX() + speed);
-					direction = "right";
+					direction = Direction.RIGHT;
 				}
 			}
 			else if(enTopY > nextY && enLeftX > nextX){
 				world.setY(world.getY() - speed);
-				direction = "up";
+				direction = Direction.UP;
 				enemyCheckCollision();
 				if(enemyCollision == true){
 					world.setX(world.getX() - speed);
-					direction = "left";
+					direction = Direction.LEFT;
 				}
 			}else if(enTopY > nextY && enLeftX < nextX){
-				direction = "up";
+				direction = Direction.UP;
 				enemyCheckCollision();
 				if(enemyCollision == true){
 					world.setX(world.getX() + speed);
-					direction = "right";
+					direction = Direction.RIGHT;
 				}
 			}else if(enTopY < nextY && enLeftX > nextX){
-				direction = "down";
+				direction = Direction.DOWN;
 				enemyCheckCollision();
 				if(enemyCollision == true){
 					world.setX(world.getX() - speed);
-					direction = "left";
+					direction = Direction.LEFT;
 				}
 			}else if(enTopY < nextY && enLeftX < nextX){
-				direction = "down";
+				direction = Direction.DOWN;
 				enemyCheckCollision();
 				if(enemyCollision == true){
 					world.setX(world.getX() + speed);
-					direction = "right";
+					direction = Direction.RIGHT;
 				}
 			}
 		}
@@ -211,28 +211,28 @@ public class Enemy extends Entity{
             enemyCollision = true;
             direction = null;
         } else {
-            direction = "up";
+            direction = Direction.UP;
         }
 
         if (this.tileNumDown() == 1) {
             enemyCollision = true;
             direction = null;
         } else {
-            direction = "down";
+            direction = Direction.DOWN;
         }
 
         if (this.tileNumLeft() == 1) {
             enemyCollision = true;
             direction = null;
         } else {
-            direction = "left";
+            direction = Direction.LEFT;
         }
 
         if (this.tileNumRight() == 1) {
             enemyCollision = true;
             direction = null;
         } else {
-            direction = "right";
+            direction = Direction.RIGHT;
         }
 	}
 
@@ -436,13 +436,13 @@ public class Enemy extends Entity{
 				world.getX() - gamePanel.tileSize < gamePanel.bee.world.getX() + gamePanel.bee.screen.getX() &&
 				world.getY() + gamePanel.tileSize > gamePanel.bee.world.getY() - gamePanel.bee.screen.getY() &&
 				world.getY() - gamePanel.tileSize < gamePanel.bee.world.getY() + gamePanel.bee.screen.getY()) {
-            if (direction == "up") {
+            if (direction == Direction.UP) {
                 image = up1; 
-            } else if (direction == "down") {
+            } else if (direction == Direction.DOWN) {
                 image = down1; 
-            } else if (direction == "left") {
+            } else if (direction == Direction.LEFT) {
                 image = left1; 
-            } else if (direction == "right") {
+            } else if (direction == Direction.RIGHT) {
                 image = right1; 
             }
             g2.drawImage(image, screenX, screenY, width, height, null);

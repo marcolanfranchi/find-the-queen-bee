@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 
+import entity.Direction;
 import entity.Enemy;
 import entity.Node;
 import main.GamePanel;
@@ -132,7 +133,7 @@ public class EnemyTest {
 		enemy.world.setX(10);
 		enemy.world.setY(10);
 
-		enemy.direction = "up";
+		enemy.direction = Direction.UP;
 
 		enemy.draw(g2);
 		assertNotNull(enemy);
@@ -146,7 +147,7 @@ public class EnemyTest {
 		enemy.world.setX(10);
 		enemy.world.setY(10);
 
-		enemy.direction = "down";
+		enemy.direction = Direction.DOWN;
 
 		enemy.draw(g2);
 		assertNotNull(enemy);
@@ -160,7 +161,7 @@ public class EnemyTest {
 		enemy.world.setX(10);
 		enemy.world.setY(10);
 
-		enemy.direction = "left";
+		enemy.direction = Direction.LEFT;
 
 		enemy.draw(g2);
 		assertNotNull(enemy);
@@ -175,7 +176,7 @@ public class EnemyTest {
 		enemy.world.setX(10);
 		enemy.world.setY(10);
 
-		enemy.direction = "right";
+		enemy.direction = Direction.RIGHT;
 
 		enemy.draw(g2);
 		assertNotNull(enemy);
@@ -190,7 +191,7 @@ public class EnemyTest {
 		enemy.world.setX(10);
 		enemy.world.setY(10);
 
-		enemy.direction = "none";
+		enemy.direction = null;
 
 		enemy.draw(g2);
 		assertNotNull(enemy);
@@ -205,7 +206,7 @@ public class EnemyTest {
 		enemy.world.setX(-600);
 		enemy.world.setY(10);
 
-		enemy.direction = "right";
+		enemy.direction = Direction.RIGHT;
 
 		enemy.draw(g2);
 		assertNotNull(enemy);
@@ -220,7 +221,7 @@ public class EnemyTest {
 		enemy.world.setX(680);
 		enemy.world.setY(10);
 
-		enemy.direction = "right";
+		enemy.direction = Direction.RIGHT;
 
 		enemy.draw(g2);
 		assertNotNull(enemy);
@@ -235,7 +236,7 @@ public class EnemyTest {
 		enemy.world.setX(10);
 		enemy.world.setY(-365);
 
-		enemy.direction = "right";
+		enemy.direction = Direction.RIGHT;
 
 		enemy.draw(g2);
 		assertNotNull(enemy);
@@ -250,7 +251,7 @@ public class EnemyTest {
 		enemy.world.setX(10);
 		enemy.world.setY(470);
 
-		enemy.direction = "right";
+		enemy.direction = Direction.RIGHT;
 
 		enemy.draw(g2);
 		assertNotNull(enemy);
