@@ -133,14 +133,14 @@ public class TileManager<BufferedImage> {
 
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;
-			int screenX = worldX - gp.bee.worldX + gp.bee.screenX;
-			int screenY = worldY - gp.bee.worldY + gp.bee.screenY;
+			int screenX = worldX - gp.bee.world.getX() + gp.bee.screen.getX();
+			int screenY = worldY - gp.bee.world.getY() + gp.bee.screen.getY();
 
 			// Optimization (Only draw tiles that are visibile)
-			if (worldX + gp.tileSize > gp.bee.worldX - gp.bee.screenX &&
-					worldX - gp.tileSize < gp.bee.worldX + gp.bee.screenX &&
-					worldY + gp.tileSize > gp.bee.worldY - gp.bee.screenY &&
-					worldY - gp.tileSize < gp.bee.worldY + gp.bee.screenY) {
+			if (worldX + gp.tileSize > gp.bee.world.getX() - gp.bee.screen.getX() &&
+					worldX - gp.tileSize < gp.bee.world.getX() + gp.bee.screen.getX() &&
+					worldY + gp.tileSize > gp.bee.world.getY() - gp.bee.screen.getY() &&
+					worldY - gp.tileSize < gp.bee.world.getY() + gp.bee.screen.getY()) {
 				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 			}
 

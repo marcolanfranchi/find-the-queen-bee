@@ -74,8 +74,8 @@ public class RegularRewardTest {
 
         regReward.remove();
 
-        int xResult = regReward.worldX;
-        int yResult = regReward.worldY;
+		int xResult = regReward.world.getX();
+		int yResult = regReward.world.getY();
         BufferedImage imgResult = regReward.getImage();
         // assert the reward is now at the unaccessible point (0,0)
         assertEquals(0, xResult);
@@ -89,25 +89,25 @@ public class RegularRewardTest {
 		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 
-		regReward.worldX = -1000;
+		regReward.world.setX(-1000);
 		regReward.draw(g2, gp);
 		assertNotNull(regReward);
 
-		regReward.worldX = 1000;
+		regReward.world.setX(1000);
 		regReward.draw(g2, gp);
 		assertNotNull(regReward);
 
-		regReward.worldY = -1000;
-		regReward.worldX = 0;
+		regReward.world.setY(-1000);
+		regReward.world.setX(0);
 		regReward.draw(g2, gp);
 		assertNotNull(regReward);
 
-		regReward.worldY = 1000;
+		regReward.world.setY(1000);
 		regReward.draw(g2, gp);
 		assertNotNull(regReward);
 
 		regReward.collected = true;
-		regReward.worldY = 0;
+		regReward.world.setY(0);
 		regReward.draw(g2, gp);
 		assertNotNull(regReward);
 	}

@@ -103,8 +103,7 @@ public class BeeTest {
         int x = 1 * tileSize;
         int y = 1 * tileSize;
         RegularReward reward = new RegularReward(bee.gamePanel);
-        reward.worldX = x;
-        reward.worldY = y;
+		reward.world.setLocation(x, y);
         bee.gamePanel.rewards[0] = reward;
         // set bee's location on a reward
         bee.setLocation(x, y);
@@ -122,8 +121,7 @@ public class BeeTest {
         int x = 1 * tileSize;
         int y = 1 * tileSize;
         RegularReward reward = new RegularReward(bee.gamePanel);
-        reward.worldX = x;
-        reward.worldY = y;
+		reward.world.setLocation(x, y);
         bee.gamePanel.rewards[0] = reward;
         // set bee's location away from reward
         bee.setLocation(x, y + tileSize);
@@ -144,7 +142,7 @@ public class BeeTest {
         bee.setDirectionPressed("up", false);
         bee.setCanMove("up", false);
         bee.moveBee();
-        int resultY = bee.worldY;
+		int resultY = bee.world.getY();
         assertEquals(y, resultY); // assert Y value did not change
         String resultDir = bee.direction; // initialized as "down"
         assertEquals("down", resultDir); // assert direction did not change
@@ -158,7 +156,7 @@ public class BeeTest {
         bee.setDirectionPressed("up", false);
         bee.setCanMove("up", true);
         bee.moveBee();
-        int resultY = bee.worldY;
+		int resultY = bee.world.getY();
         assertEquals(y, resultY); // assert Y value did not change
         String resultDir = bee.direction; // initialized as "down"
         assertEquals("down", resultDir); // assert direction did not change
@@ -172,7 +170,7 @@ public class BeeTest {
         bee.setDirectionPressed("up", true);
         bee.setCanMove("up", false);
         bee.moveBee();
-        int resultY = bee.worldY;
+		int resultY = bee.world.getY();
         assertEquals(y, resultY); // assert Y value did not change
         String resultDir = bee.direction; // initialized as "down"
         assertEquals("down", resultDir); // assert direction did not change
@@ -186,7 +184,7 @@ public class BeeTest {
         bee.setDirectionPressed("up", true);
         bee.setCanMove("up", true);
         bee.moveBee();
-        int resultY = bee.worldY;
+		int resultY = bee.world.getY();
         assertEquals(y - bee.speed, resultY); // assert Y value decreased by the Bee's speed
         String resultDir = bee.direction; // initialized as "down"
         assertEquals("up", resultDir); // assert direction changed to "up"
@@ -201,7 +199,7 @@ public class BeeTest {
         bee.setDirectionPressed("down", false);
         bee.setCanMove("down", false);
         bee.moveBee();
-        int resultY = bee.worldY;
+		int resultY = bee.world.getY();
         assertEquals(y, resultY); // assert Y value did not change
         String resultDir = bee.direction;
         assertEquals("up", resultDir); // assert direction did not change
@@ -216,7 +214,7 @@ public class BeeTest {
         bee.setDirectionPressed("down", false);
         bee.setCanMove("down", true);
         bee.moveBee();
-        int resultY = bee.worldY;
+		int resultY = bee.world.getY();
         assertEquals(y, resultY); // assert Y value did not change
         String resultDir = bee.direction;
         assertEquals("up", resultDir); // assert direction did not change
@@ -231,7 +229,7 @@ public class BeeTest {
         bee.setDirectionPressed("down", true);
         bee.setCanMove("down", false);
         bee.moveBee();
-        int resultY = bee.worldY;
+		int resultY = bee.world.getY();
         assertEquals(y, resultY); // assert Y value did not change
         String resultDir = bee.direction;
         assertEquals("up", resultDir); // assert direction did not change
@@ -246,7 +244,7 @@ public class BeeTest {
         bee.setDirectionPressed("down", true);
         bee.setCanMove("down", true);
         bee.moveBee();
-        int resultY = bee.worldY;
+		int resultY = bee.world.getY();
         assertEquals(y + bee.speed, resultY); // assert Y value increased by Bee's speed
         String resultDir = bee.direction;
         assertEquals("down", resultDir); // assert direction changed to "down"
@@ -261,7 +259,7 @@ public class BeeTest {
         bee.setDirectionPressed("left", false);
         bee.setCanMove("left", false);
         bee.moveBee();
-        int resultX = bee.worldX;
+		int resultX = bee.world.getX();
         assertEquals(x, resultX); // assert X value did not change
         String resultDir = bee.direction; // initialized at "down"
         assertEquals("down", resultDir); // assert direction did not change
@@ -275,7 +273,7 @@ public class BeeTest {
         bee.setDirectionPressed("left", false);
         bee.setCanMove("left", true);
         bee.moveBee();
-        int resultX = bee.worldX;
+		int resultX = bee.world.getX();
         assertEquals(x, resultX); // assert X value did not change
         String resultDir = bee.direction; // initialized at "down"
         assertEquals("down", resultDir); // assert direction did not change
@@ -289,7 +287,7 @@ public class BeeTest {
         bee.setDirectionPressed("left", true);
         bee.setCanMove("left", false);
         bee.moveBee();
-        int resultX = bee.worldX;
+		int resultX = bee.world.getX();
         assertEquals(x, resultX); // assert X value did not change
         String resultDir = bee.direction; // initialized at "down"
         assertEquals("down", resultDir); // assert direction did not change
@@ -303,7 +301,7 @@ public class BeeTest {
         bee.setDirectionPressed("left", true);
         bee.setCanMove("left", true);
         bee.moveBee();
-        int resultX = bee.worldX;
+		int resultX = bee.world.getX();
         assertEquals(x - bee.speed, resultX); // assert X value decreased by Bee's speed
         String resultDir = bee.direction; // initialized at "down"
         assertEquals("left", resultDir); // assert direction changed to "left"
@@ -318,7 +316,7 @@ public class BeeTest {
         bee.setDirectionPressed("right", false);
         bee.setCanMove("right", false);
         bee.moveBee();
-        int resultX = bee.worldX;
+		int resultX = bee.world.getX();
         assertEquals(x, resultX); // assert X value did not change
         String resultDir = bee.direction; // initialized at "down"
         assertEquals("down", resultDir); // assert direction did not change
@@ -332,7 +330,7 @@ public class BeeTest {
         bee.setDirectionPressed("right", false);
         bee.setCanMove("right", true);
         bee.moveBee();
-        int resultX = bee.worldX;
+		int resultX = bee.world.getX();
         assertEquals(x, resultX); // assert X value did not change
         String resultDir = bee.direction; // initialized at "down"
         assertEquals("down", resultDir); // assert direction did not change
@@ -346,7 +344,7 @@ public class BeeTest {
         bee.setDirectionPressed("right", true);
         bee.setCanMove("right", false);
         bee.moveBee();
-        int resultX = bee.worldX;
+		int resultX = bee.world.getX();
         assertEquals(x, resultX); // assert X value did not change
         String resultDir = bee.direction; // initialized at "down"
         assertEquals("down", resultDir); // assert direction did not change
@@ -360,7 +358,7 @@ public class BeeTest {
         bee.setDirectionPressed("right", true);
         bee.setCanMove("right", true);
         bee.moveBee();
-        int resultX = bee.worldX;
+		int resultX = bee.world.getX();
         assertEquals(x + bee.speed, resultX); // assert X value decreased by Bee's speed
         String resultDir = bee.direction; // initialized at "down"
         assertEquals("right", resultDir); // assert direction changed to "left"

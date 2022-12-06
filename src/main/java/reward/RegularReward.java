@@ -31,13 +31,13 @@ public class RegularReward extends Reward {
      * @param g a Graphics object used to paint on all components in the GamePanel
      */
     public void draw(Graphics2D g2, GamePanel g) {
-        int screenX = worldX - g.bee.worldX + g.bee.screenX;
-        int screenY = worldY - g.bee.worldY + g.bee.screenY;
+		int screenX = world.getX() - g.bee.world.getX() + g.bee.screen.getX();
+		int screenY = world.getY() - g.bee.world.getY() + g.bee.screen.getY();
 
-        if (worldX + g.tileSize > g.bee.worldX - g.bee.screenX &&
-                    worldX - g.tileSize < g.bee.worldX + g.bee.screenX &&
-                    worldY + g.tileSize > g.bee.worldY - g.bee.screenY &&
-                    worldY - g.tileSize < g.bee.worldY + g.bee.screenY) {
+		if (world.getX() + g.tileSize > g.bee.world.getX() - g.bee.screen.getX() &&
+				world.getX() - g.tileSize < g.bee.world.getX() + g.bee.screen.getX() &&
+				world.getY() + g.tileSize > g.bee.world.getY() - g.bee.screen.getY() &&
+				world.getY() - g.tileSize < g.bee.world.getY() + g.bee.screen.getY()) {
                         if (this.collected == false) {
                             g2.drawImage(image, screenX, screenY, width, height, null);
                         }
