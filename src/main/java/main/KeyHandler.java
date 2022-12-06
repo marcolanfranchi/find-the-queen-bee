@@ -90,6 +90,10 @@ public class KeyHandler implements KeyListener {
 		updatePressedVar(keyCode);
 	}
 
+	/**
+	 * Updates the pressed variables in the UI class based on the given key code
+	 * @param keyCode
+	 */
 	private void updatePressedVar(int keyCode) {
 		if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) { // up
             upPressed = true;
@@ -108,6 +112,12 @@ public class KeyHandler implements KeyListener {
 		}
 	}
 
+	/**
+	 * Updates the commandNum variable in the UI class based on the given key code
+	 * @param keyCode
+	 * @param commandNum
+	 * @return
+	 */
 	private int updateCommandNum(int keyCode, int commandNum) {
 		System.out.println("commandNum: " + commandNum);
 		if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
