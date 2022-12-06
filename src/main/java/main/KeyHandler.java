@@ -109,10 +109,8 @@ public class KeyHandler implements KeyListener {
 	}
 
 	private int updateCommandNum(int keyCode, int commandNum) {
-		System.out.println("commandNum: " + commandNum);
 		if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
 			commandNum--;
-			System.out.println("commandNum: " + commandNum);
 			if (commandNum < 0) {
 				commandNum = 2;
 			}

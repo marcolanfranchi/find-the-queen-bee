@@ -20,7 +20,6 @@ public class ObjArrowTest {
 	@Test
 	public void testInstance() {
 		String nameResult = arrowKeys.name;
-		System.out.println(nameResult);
 		assertEquals("ArrowKeys", nameResult);
 		BufferedImage imgResult = arrowKeys.image;
 		assertNotNull(imgResult);

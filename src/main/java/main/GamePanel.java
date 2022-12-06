@@ -26,7 +26,8 @@ import environment.Sound;
  * @author Marco Lanfranchi
  */
 public class GamePanel extends JPanel implements Runnable {
-
+public static int gameWinState;
+	
 	// SYSTEM
 	EnvironmentManager eManager = new EnvironmentManager(this);
 	public TileManager tileM = new TileManager(this);
