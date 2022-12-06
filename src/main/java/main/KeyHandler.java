@@ -50,12 +50,12 @@ public class KeyHandler implements KeyListener {
 
 		// title state
 		if (gamePanel.gameState == GamePanel.titleState) {
-			updateCommandNum(keyCode, gamePanel.ui.commandNum);
+			gamePanel.ui.commandNum = updateCommandNum(keyCode, gamePanel.ui.commandNum);
 		}
 
 		// pause state
 		if (gamePanel.gameState == GamePanel.pauseState) {
-			updateCommandNum(keyCode, gamePanel.ui.pauseCommandNum);
+			gamePanel.ui.pauseCommandNum = updateCommandNum(keyCode, gamePanel.ui.pauseCommandNum);
 		}
 
 		// Game Over state
@@ -108,9 +108,11 @@ public class KeyHandler implements KeyListener {
 		}
 	}
 
-	private void updateCommandNum(int keyCode, int commandNum) {
+	private int updateCommandNum(int keyCode, int commandNum) {
+		System.out.println("commandNum: " + commandNum);
 		if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
 			commandNum--;
+			System.out.println("commandNum: " + commandNum);
 			if (commandNum < 0) {
 				commandNum = 2;
 			}
@@ -129,12 +131,14 @@ public class KeyHandler implements KeyListener {
 			}
 			if (commandNum == 1) {
 				prevState = gamePanel.gameState;
-				commandNum = GamePanel.controlState;
+				gamePanel.gameState = GamePanel.controlState;
 			}
 			if (commandNum == 2) {
 				System.exit(0);
 			}
 		}
+
+		return commandNum;
 	}
 
     /**
