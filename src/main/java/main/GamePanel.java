@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// SYSTEM
 	EnvironmentManager eManager = new EnvironmentManager(this);
-	public TileManager<BufferedImage> tileM = new TileManager<BufferedImage>(this);
+	public TileManager tileM = new TileManager(this);
 	Thread gameThread;
 	KeyHandler keyHandler = new KeyHandler(this);
 	public UI ui = new UI(this);
