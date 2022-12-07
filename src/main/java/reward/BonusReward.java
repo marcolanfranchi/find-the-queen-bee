@@ -46,7 +46,7 @@ public class BonusReward extends Reward {
 		timer.start();
 
 		try {
-			this.image = ImageIO.read(getClass().getResource("../ui/images/HoneyPot.png"));
+			this.image = ImageIO.read(getClass().getResource("/ui/images/HoneyPot.png"));
 		} catch (IOException e) {
 		}
 	}

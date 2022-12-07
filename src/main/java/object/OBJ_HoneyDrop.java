@@ -19,7 +19,7 @@ public class OBJ_HoneyDrop extends SuperObject {
 		name = "Honey";
 
 		try {
-			image = ImageIO.read(getClass().getResource("../ui/images/HoneyDrop.png"));
+			image = ImageIO.read(getClass().getResource("/ui/images/HoneyDrop.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
