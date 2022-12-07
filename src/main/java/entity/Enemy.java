@@ -78,10 +78,10 @@ public class Enemy extends Entity{
 	 */
 	public void setImages() {
 		try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-up.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-down.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-left.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-right.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-up.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-down.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-left.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-right.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }       

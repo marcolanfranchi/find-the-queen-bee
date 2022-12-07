@@ -61,7 +61,7 @@ public class UI {
 		countDownTimer();
 
 		try {
-			InputStream is = getClass().getResourceAsStream("../ui/font/retro_pixel.ttf");
+			InputStream is = getClass().getResourceAsStream("/ui/font/retro_pixel.ttf");
 			retroPixel = Font.createFont(Font.TRUETYPE_FONT, is);
 		} catch (FontFormatException e) {
 			e.printStackTrace();

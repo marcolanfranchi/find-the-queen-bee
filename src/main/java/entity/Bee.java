@@ -62,14 +62,14 @@ public class Bee extends Entity {
 	public void setImages() {
 		try {
 
-			up1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-up.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-up2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-down.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-down2.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-left.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-left2.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-right.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-right2.png"));
+			up1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-up.png"));
+			up2 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-up2.png"));
+			down1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-down.png"));
+			down2 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-down2.png"));
+			left1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-left.png"));
+			left2 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-left2.png"));
+			right1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-right.png"));
+			right2 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-right2.png"));
 		} catch (IOException e) { 
 
 		}
