@@ -49,3 +49,12 @@ After following [how to build](#how-to-build), you can test the game by running
 the following command:
 
 `mvn test`
+
+### Generate Javadocs
+
+To generate Javadocs for the project, run the following command:
+
+`mvn javadoc:javadoc`
+
+The Javadocs are located in the `target/site/apidocs` directory and can be viewed
+by opening the `index.html` file in your browser.
