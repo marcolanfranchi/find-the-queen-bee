@@ -37,24 +37,6 @@
   </dependencies>
 
   <build>
-	<resources>
-		<resource>
-			<directory>src/main/java/ui/images</directory>   
-			<filtering>true</filtering>
-		</resource>
-		<resource>
-			<directory>src/main/java/ui/font</directory>   
-			<filtering>false</filtering>
-		</resource>
-		<resource>
-			<directory>src/main/java/ui/maps/txt-maps</directory>   
-			<filtering>true</filtering>
-		</resource>
-		<resource>
-			<directory>src/main/java/sounds</directory>   
-			<filtering>false</filtering>
-		</resource>
-	</resources>
       <plugins>
 	  	<!-- Clean plugin -->
         <plugin>
