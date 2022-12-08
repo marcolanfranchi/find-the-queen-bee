@@ -53,23 +53,26 @@ public class Enemy extends Entity{
 
 		randomX = num.nextInt(25);
 		randomY = num.nextInt(25);
-		if (randomX % 6 == 0) {
-			randomX++;
-			if (randomX == 25) {
-				randomX -= 2;
-			}
-		}
-		if (randomY % 6 == 0) {
-			randomY++;
-			if (randomY == 25) {
-				randomY -= 2;
-			}
-		}
+		checkRandom(randomX);
+		checkRandom(randomY);
 		setRandomStartPoint();
 		speed = gamePanel.tileSize / 8;
 		direction = "up";
 		setImages();
 
+	}
+
+	/**
+	 * This function is to check if enemies are born at available location
+	 * @param randomNum pass into randomX and randomY
+	 */
+	public void checkRandom(int randomNum){
+		if (randomNum % 6 == 0) {
+			randomNum++;
+			if (randomNum == 25) {
+				randomNum -= 2;
+			}
+		}
 	}
 
 	/**
@@ -152,52 +155,75 @@ public class Enemy extends Entity{
 
 			// Enemies' moving method which contains directions for different situations
 			if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
-				worldY -= speed;
-				direction = "up";
+				enemyMoveUp();
 			} else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
-				worldY += speed;
-				direction = "down";
+				enemyMoveDown();
 			} else if (enTopY >= nextY && enDownY < nextY + gamePanel.tileSize) {
 				if (enLeftX > nextX) {
-					worldX -= speed;
-					direction = "left";
+					enemyMoveLeft();
 				}
 				if (enLeftX < nextX) {
-					worldX += speed;
-					direction = "right";
+					enemyMoveRight();
 				}
 			}
 			else if(enTopY > nextY && enLeftX > nextX){
-				worldY -= speed;
-				direction = "up";
+				enemyMoveUp();
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					worldX -= speed;
-					direction = "left";
+					enemyMoveLeft();
 				}
 			}else if(enTopY > nextY && enLeftX < nextX){
-				direction = "up";
+				enemyMoveUp();
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					worldX += speed;
-					direction = "right";
+					enemyMoveRight();
 				}
 			}else if(enTopY < nextY && enLeftX > nextX){
-				direction = "down";
+				enemyMoveDown();
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					worldX -= speed;
-					direction = "left";
+					enemyMoveLeft();
 				}
 			}else if(enTopY < nextY && enLeftX < nextX){
-				direction = "down";
+				enemyMoveDown();
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					worldX += speed;
-					direction = "right";
+					enemyMoveRight();
 				}
 			}
 		}
+	}
+
+	/**
+	 * Let Enemies to move Up
+	 */
+	public void enemyMoveUp(){
+		worldY -= speed;
+		direction = "up";
+	}
+
+	/**
+	 * Let Enemies to move Down
+	 */
+	public void enemyMoveDown(){
+		worldY += speed;
+		direction = "down";
+	}
+
+	/**
+	 * Let Enemies to move Left
+	 */
+	public void enemyMoveLeft(){
+		worldX -= speed;
+		direction = "left";
+	}
+
+	/**
+	 * Let Enemies to move Right
+	 */
+	public void enemyMoveRight(){
+		worldX += speed;
+		direction = "right";
 	}
 
 	/**
@@ -208,32 +234,36 @@ public class Enemy extends Entity{
     public void enemyCheckCollision() {
 
         if (this.tileNumUp() == 1) {
-            enemyCollision = true;
-            direction = null;
+			enemyStop();
         } else {
             direction = "up";
         }
 
         if (this.tileNumDown() == 1) {
-            enemyCollision = true;
-            direction = null;
+			enemyStop();
         } else {
             direction = "down";
         }
 
         if (this.tileNumLeft() == 1) {
-            enemyCollision = true;
-            direction = null;
+			enemyStop();
         } else {
             direction = "left";
         }
 
         if (this.tileNumRight() == 1) {
-            enemyCollision = true;
-            direction = null;
+			enemyStop();
         } else {
             direction = "right";
         }
+	}
+
+	/**
+	 * This function is to make enemies to stop when they hit the wall
+	 */
+	public void enemyStop(){
+		enemyCollision = true;
+		direction = null;
 	}
 
 	/**

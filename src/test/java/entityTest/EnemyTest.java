@@ -116,14 +116,53 @@ public class EnemyTest {
         assertNotNull(enemy.openList);
     }
 
+	@Test
+	void testCheckRandom(){
+		int num = 6;
+		enemy.checkRandom(num);
+		assertNotNull(num);
+	}
+
     @Test
-    void testSearchPath1(){
-        int goalCol = 48;
-		int goalRow = 48;
-        enemy.worldX = 480;
-        enemy.worldY = 480;
-        enemy.searchPath(goalCol, goalRow);
-    }
+    void testEnemyMoveUp(){
+		enemy.enemyMoveUp();
+		assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+	}
+
+	@Test
+    void testEnemyMoveDown(){
+		enemy.enemyMoveDown();
+		assertNotNull(enemy.worldY);
+        assertNotNull(enemy.direction);
+	}
+
+	@Test
+    void testEnemyMoveLeft(){
+		enemy.enemyMoveLeft();
+		assertNotNull(enemy.worldX);
+        assertNotNull(enemy.direction);
+	}
+
+	@Test
+    void testEnemyMoveRight(){
+		enemy.enemyMoveRight();
+		assertNotNull(enemy.worldX);
+        assertNotNull(enemy.direction);
+	}
+
+	@Test
+	void testEnmeyStop(){
+		enemy.enemyStop();
+		assertTrue(enemy.enemyCollision);
+        assertNull(enemy.direction);
+	}
+
+	@Test
+	void testEnmeyCheckCollision(){
+		enemy.enemyCheckCollision();
+		assertNotNull(enemy.direction);
+	}
 
 	@Test
 	void testDrawUp() {
