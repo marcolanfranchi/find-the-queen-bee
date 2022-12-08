@@ -28,13 +28,13 @@ public class SuperObject {
 	 */
 	public void draw(Graphics2D g2, GamePanel gp) {
 
-		int screenX = worldX - gp.bee.worldX + gp.bee.screenX;
-		int screenY = worldY - gp.bee.worldY + gp.bee.screenY;
+		int screenX = worldX - gp.bee.world.getX() + gp.bee.screen.getX();
+		int screenY = worldY - gp.bee.world.getY() + gp.bee.screen.getY();
 
-		if (worldX + gp.tileSize > gp.bee.worldX - gp.bee.screenX &&
-					worldX - gp.tileSize < gp.bee.worldX + gp.bee.screenX &&
-					worldY + gp.tileSize > gp.bee.worldY - gp.bee.screenY &&
-					worldY - gp.tileSize < gp.bee.worldY + gp.bee.screenY) {
+		if (worldX + gp.tileSize > gp.bee.world.getX() - gp.bee.screen.getX() &&
+				worldX - gp.tileSize < gp.bee.world.getX() + gp.bee.screen.getX() &&
+				worldY + gp.tileSize > gp.bee.world.getY() - gp.bee.screen.getY() &&
+				worldY - gp.tileSize < gp.bee.world.getY() + gp.bee.screen.getY()) {
 				g2.drawImage(image, screenX, screenY, width, height, null);
 					}
 	}

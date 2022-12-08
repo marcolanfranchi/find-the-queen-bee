@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 
 import environment.EnvironmentManager;
-import environment.Lighting;
 import main.GamePanel;
 
 public class EnvironmentManagerTest {

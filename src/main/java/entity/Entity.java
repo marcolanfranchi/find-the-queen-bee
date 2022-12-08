@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 import main.GamePanel;
 import java.awt.Graphics2D;
+import util.Point;
 
 
 
@@ -17,16 +18,15 @@ abstract public class Entity {
 
     public GamePanel gamePanel;
 
-    public int worldX;
-    public int worldY;
+	public Point world;
     public int speed;
     public int width = 32;
     public int height = 32;
-    public int actionLockCounter = 0;
     public int spriteCounter = 0;
     public int spriteNum = 1;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, enemyUp, enemyDown, enemyLeft, enemyRight;
-    public String direction;
+    //public String direction;
+    public Direction direction;
 
     public Rectangle bounds;
     public boolean moveUp, moveDown, moveLeft, moveRight;
@@ -41,6 +41,7 @@ abstract public class Entity {
      */
     public Entity(GamePanel gp){
         this.gamePanel = gp;
+		world = new Point(0, 0);
     }
 
     // abstract methods:
@@ -62,11 +63,11 @@ abstract public class Entity {
     public abstract void update();
 
     public void setX(int x) {
-        this.worldX = x;
+		this.world.setX(x);
     }
 
     public void setY(int y) {
-        this.worldY = y;
+		this.world.setY(y);
     }
 
     // method only used for testing
@@ -81,7 +82,7 @@ abstract public class Entity {
      *          direction that this Entity is located.
      */
     public int getX() {
-        return this.worldX;
+		return this.world.getX();
     }
 
     /**
@@ -90,7 +91,7 @@ abstract public class Entity {
      *          direction that this Entity is located.
      */
     public int getY() {
-        return this.worldY;
+		return this.world.getY();
     }
     
     /**
@@ -99,9 +100,8 @@ abstract public class Entity {
      * @return an int 0, 1, 2, or 3 which represents a type of Tile.
      */
     public int getTileNum() {
-        int posX = this.getX() / gamePanel.tileSize;
-        int posY = this.getY() / gamePanel.tileSize;
-        return gamePanel.tileM.mapTileNum[posX][posY];
+		Point pos = new Point(this.getX() / gamePanel.tileSize, this.getY() / gamePanel.tileSize);
+		return gamePanel.tileM.mapTileNum[pos.getX()][pos.getY()];
     }
 
     /**
@@ -109,9 +109,8 @@ abstract public class Entity {
      * @return an int 0, 1, 2, or 3 which represents a type of Tile.
      */
     public int tileNumUp() {
-        int posX = this.getX() / gamePanel.tileSize;
-        int posY = (this.getY() - speed) / gamePanel.tileSize;
-        return gamePanel.tileM.mapTileNum[posX][posY];
+		Point pos = new Point(this.getX() / gamePanel.tileSize, (this.getY() - speed) / gamePanel.tileSize);
+		return gamePanel.tileM.mapTileNum[pos.getX()][pos.getY()];
     } 
     
     /**
@@ -119,9 +118,8 @@ abstract public class Entity {
      * @return an int 0, 1, 2, or 3 which represents a type of Tile.
      */
     public int tileNumDown() {
-        int posX = this.getX() / gamePanel.tileSize;
-        int posY = (this.getY() + speed) / gamePanel.tileSize;
-        return gamePanel.tileM.mapTileNum[posX][posY];
+		Point pos = new Point(this.getX() / gamePanel.tileSize, (this.getY() + speed) / gamePanel.tileSize);
+		return gamePanel.tileM.mapTileNum[pos.getX()][pos.getY()];
     }
 
     /**
@@ -129,9 +127,8 @@ abstract public class Entity {
      * @return an int 0, 1, 2, or 3 which represents a type of Tile.
      */
     public int tileNumLeft() {
-        int posX = (this.getX() - speed) / gamePanel.tileSize;
-        int posY = this.getY() / gamePanel.tileSize;
-        return gamePanel.tileM.mapTileNum[posX][posY];
+		Point pos = new Point((this.getX() - speed) / gamePanel.tileSize, this.getY() / gamePanel.tileSize);
+		return gamePanel.tileM.mapTileNum[pos.getX()][pos.getY()];
     }
 
     /**
@@ -139,9 +136,8 @@ abstract public class Entity {
      * @return an int 0, 1, 2, or 3 which represents a type of Tile.
      */
     public int tileNumRight() {
-        int posX = (this.getX() + speed) / gamePanel.tileSize;
-        int posY = this.getY() / gamePanel.tileSize;
-        return gamePanel.tileM.mapTileNum[posX][posY];
+		Point pos = new Point((this.getX() + speed) / gamePanel.tileSize, this.getY() / gamePanel.tileSize);
+		return gamePanel.tileM.mapTileNum[pos.getX()][pos.getY()];
     }
 
     /**
@@ -153,7 +149,9 @@ abstract public class Entity {
     public double checkGameOver(Entity entity, Entity[] enemies){
         double index = 999;
         for(int i = 0; i < enemies.length; i++){
-            index = Math.sqrt(Math.pow((entity.worldX - enemies[i].worldX), 2) + Math.pow((entity.worldY - enemies[i].worldY), 2));
+			double powX = Math.pow((entity.world.getX() - enemies[i].world.getX()), 2);
+			double powY = Math.pow((entity.world.getY() - enemies[i].world.getY()), 2);
+			index = Math.sqrt(powX + powY);
             if(index <= 34){
                 break;
             }
@@ -192,8 +190,6 @@ abstract public class Entity {
         }
 	}
 
-    
-
     /**
      * Returns true if the given x and y ints give a location of a tile number in
      * the top left room of the map
@@ -212,22 +208,21 @@ abstract public class Entity {
     }
 
     // method only used for testing
-    public void setCanMove(String s, boolean b) {
-        if (s == "up") {
-			this.moveUp = b;
+    public void setCanMove(Direction d, boolean b) {
+    if (d == Direction.UP) {
+		  this.moveUp = b;
 		}
 
-		if (s == "down") {
+		if (d == Direction.DOWN) {
 			this.moveDown = b;
 		}
 
-		if (s == "left") {
+		if (d == Direction.LEFT) {
 			this.moveLeft = b;
 		}
 
-		if (s == "right") {
+		if (d == Direction.RIGHT) {
 			this.moveRight = b;
 		}
-
     }
 }

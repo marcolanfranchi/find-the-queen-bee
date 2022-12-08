@@ -61,7 +61,7 @@ public class UI {
 		countDownTimer();
 
 		try {
-			InputStream is = getClass().getResourceAsStream("../ui/font/retro_pixel.ttf");
+			InputStream is = getClass().getResourceAsStream("/ui/font/retro_pixel.ttf");
 			retroPixel = Font.createFont(Font.TRUETYPE_FONT, is);
 		} catch (FontFormatException e) {
 			e.printStackTrace();
@@ -111,8 +111,25 @@ public class UI {
 				drawControlState();
 				break;
 		}
-
 	}
+
+	/**
+	 * This method is used to draw the quit button used in multiple game states
+	 * @param text the string to be displayed as a button
+	 * @param height the y coordinate of the button being displayed
+	 * @param command 
+	 */
+	private void drawTextButton(String textToDisplay, int height, int num, int commandNum) {
+        String text;
+        int x;
+        text = textToDisplay;
+        x = getXforCenteredText(text);
+        g2.drawString(text, x, height);
+
+        if (commandNum == num) {
+            g2.drawString(">", x - gp.tileSize, height);
+        }
+    }
 
 	/**
 	 * This method is used to draw the title screen to the graphics object
@@ -121,7 +138,7 @@ public class UI {
 		g2.setColor(new Color(244, 187, 68));
 		g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
 
-		// TItle Name
+		// Title Name
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
 		String text = "Find The Queen Bee";
 		int x = getXforCenteredText(text);
@@ -137,35 +154,22 @@ public class UI {
 		x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
 		y += gp.tileSize * 2;
 		g2.drawImage(gp.bee.down1, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
-
-		// Menu
+		
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
-		text = "NEW GAME";
-		x = getXforCenteredText(text);
+		
+		// Menu
+		// New Game
 		y += gp.tileSize * 5;
-		g2.drawString(text, x, y);
+        drawTextButton("NEW GAME", y, 0, commandNum);
 
-		if (commandNum == 0) {
-			g2.drawString(">", x - gp.tileSize, y);
-		}
-
-		text = "CONTROLS";
-		x = getXforCenteredText(text);
+		// Controls
 		y += gp.tileSize * 1.5;
-		g2.drawString(text, x, y);
+        drawTextButton("CONTROLS", y, 1, commandNum);
 
-		if (commandNum == 1) {
-			g2.drawString(">", x - gp.tileSize, y);
-		}
-
-		text = "QUIT";
-		x = getXforCenteredText(text);
+		// Quit
 		y += gp.tileSize * 1.5;
-		g2.drawString(text, x, y);
+		drawTextButton("QUIT", y, 2, commandNum);
 
-		if (commandNum == 2) {
-			g2.drawString(">", x - gp.tileSize, y);
-		}
 
 	}
 
@@ -201,9 +205,7 @@ public class UI {
 	 * This method is used to draw the pause screen to the graphics object
 	 */
 	public void drawPauseScreen() {
-		// Draw Pause Menu
-		// Draw the Paused Text
-		// Draw Button to Resume
+
 		timer.stop();
 		String text = "PAUSED";
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 100f));
@@ -217,35 +219,19 @@ public class UI {
 		g2.setColor(Color.WHITE);
 		g2.drawString(text, x, y);
 
-		// Draw Resume Button
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 55f));
-		text = "RESUME GAME";
-		x = getXforCenteredText(text);
+
+		// Resume Button
 		y += gp.tileSize * 6;
-		g2.drawString(text, x, y);
-
-		if (pauseCommandNum == 0) {
-			g2.drawString(">", x - gp.tileSize, y);
-		}
-
-		text = "CONTROLS";
-		x = getXforCenteredText(text);
+        drawTextButton("RESUME GAME", y, 0, pauseCommandNum);;
+		
+		// Control Button
 		y += gp.tileSize * 1.5;
-		g2.drawString(text, x, y);
+        drawTextButton("CONTROLS", y, 1, pauseCommandNum);
 
-		if (pauseCommandNum == 1) {
-			g2.drawString(">", x - gp.tileSize, y);
-		}
-
-		// Draw Quit Button
-		text = "QUIT";
-		x = getXforCenteredText(text);
+		// Quit Button
 		y += gp.tileSize * 1.5;
-		g2.drawString(text, x, y);
-
-		if (pauseCommandNum == 2) {
-			g2.drawString(">", x - gp.tileSize, y);
-		}
+        drawTextButton("QUIT", y, 2, pauseCommandNum);
 
 	}
 
@@ -297,15 +283,8 @@ public class UI {
 		g2.drawString(text, x, y);
 
 		// Draw Quit Button
-		text = "QUIT";
-		x = getXforCenteredText(text);
-		y += gp.tileSize * 5;
-		g2.drawString(text, x, y);
-
-		if (endCommandNum == 0) {
-			g2.drawString(">", x - gp.tileSize, y);
-		}
-
+		y += gp.tileSize * 5;	
+		drawTextButton("QUIT", y, 0, endCommandNum);
 	}
 
 	/**
@@ -355,14 +334,8 @@ public class UI {
 		g2.drawString(text, x, y);
 
 		// Draw Quit Button
-		text = "QUIT";
-		x = getXforCenteredText(text);
-		y += gp.tileSize * 5;
-		g2.drawString(text, x, y);
-
-		if (winCommandNum == 0) {
-			g2.drawString(">", x - gp.tileSize, y);
-		}
+		y += gp.tileSize * 5;	
+		drawTextButton("QUIT", y, 0, winCommandNum); 
 	}
 
 	/**
@@ -495,4 +468,6 @@ public class UI {
 			}
 		});
 	}
+
+
 }

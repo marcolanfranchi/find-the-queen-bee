@@ -1,7 +1,6 @@
 package entity;
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.image.BufferedImage;
@@ -12,6 +11,7 @@ import main.GamePanel;
 import main.KeyHandler;
 import reward.RegularReward;
 import reward.Reward;
+import util.Point;
 
 /**
  * This class represents a Bee character in the game which is the main
@@ -22,8 +22,7 @@ import reward.Reward;
 public class Bee extends Entity {
 
 	KeyHandler keyHandler;
-	public final int screenX;
-	public final int screenY;
+	public final Point screen;
 	public ArrayList<Reward> rewardList = new ArrayList<>();
 
 	public int beeScore;
@@ -45,18 +44,13 @@ public class Bee extends Entity {
 		super(gp);
 		this.keyHandler = kh;
 		beeScore = 20; // bee starts with 30 points
-		bounds = new Rectangle();
-		bounds.x = getX();
-		bounds.y = getY();
-		bounds.width = this.width;
-		bounds.height = this.height;
-		this.screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
-		this.screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
+		screen = new Point(0, 0);
+		this.screen.setLocation(gp.screenWidth / 2 - (gp.tileSize / 2), gp.screenHeight / 2 - (gp.tileSize / 2));
 
-		worldX = 1 * gp.tileSize;
-		worldY = 1 * gp.tileSize;
+		world.setX(1 * gp.tileSize);
+		world.setY(1 * gp.tileSize);
 		speed = gp.tileSize / 2;
-		direction = "down";
+		direction = Direction.DOWN;
 		setImages();
 	}
 
@@ -68,14 +62,14 @@ public class Bee extends Entity {
 	public void setImages() {
 		try {
 
-			up1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-up.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-up2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-down.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-down2.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-left.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-left2.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-right.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("../ui/images/Bee-right2.png"));
+			up1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-up.png"));
+			up2 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-up2.png"));
+			down1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-down.png"));
+			down2 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-down2.png"));
+			left1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-left.png"));
+			left2 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-left2.png"));
+			right1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-right.png"));
+			right2 = ImageIO.read(getClass().getResourceAsStream("/ui/images/Bee-right2.png"));
 		} catch (IOException e) { 
 
 		}
@@ -92,28 +86,33 @@ public class Bee extends Entity {
 
 		BufferedImage image = null;
 
-		if (direction == "up") {
+		switch(direction) {
+			case UP:
 			if (spriteNum == 1) {
 				image = up1;
 			} else
 				image = up2;
-		} else if (direction == "down") {
+			break;
+			case DOWN:
 			if (spriteNum == 1) {
 				image = down1;
 			} else
 				image = down2;
-		} else if (direction == "left") {
+			break;
+			case LEFT:
 			if (spriteNum == 1) {
 				image = left1;
 			} else
 				image = left2;
-		} else if (direction == "right") {
+			break;
+			case RIGHT:
 			if (spriteNum == 1) {
 				image = right1;
 			} else
 				image = right2;
+			break;
 		}
-		g2.drawImage(image, screenX, screenY, width, height, null);
+		g2.drawImage(image, screen.getX(), screen.getY(), width, height, null);
 	}
 
 	/**
@@ -155,18 +154,18 @@ public class Bee extends Entity {
 	 * switches the direction it is facing after this move.
 	 */
 	public void moveBee() {
-		if (keyHandler.upPressed && moveUp) {
-			worldY -= speed;
-			direction = "up";
-		} else if (keyHandler.downPressed && moveDown) {
-			worldY += speed;
-			direction = "down";
-		} else if (keyHandler.leftPressed && moveLeft) {
-			worldX -= speed;
-			direction = "left";
-		} else if (keyHandler.rightPressed && moveRight) {
-			worldX += speed;
-			direction = "right";
+		if (KeyHandler.upPressed && moveUp) {
+			world.setY(world.getY() - speed);
+			direction = Direction.UP;
+		} else if (KeyHandler.downPressed && moveDown) {
+			world.setY(world.getY() + speed);
+			direction = Direction.DOWN;
+		} else if (KeyHandler.leftPressed && moveLeft) {
+			world.setX(world.getX() - speed);
+			direction = Direction.LEFT;
+		} else if (KeyHandler.rightPressed && moveRight) {
+			world.setX(world.getX() + speed);
+			direction = Direction.RIGHT;
 		}
 	}
 
@@ -185,7 +184,7 @@ public class Bee extends Entity {
 		//int endTileY = gamePanel.objects[0].worldY;
 		int endTileY = 23 * gamePanel.tileSize;
 
-		if (this.worldX >= endTileX && this.worldY >= endTileY) {
+		if (this.world.getX() >= endTileX && this.world.getY() >= endTileY) {
 			return true;
 		} else {
 			return false;
@@ -235,13 +234,13 @@ public class Bee extends Entity {
 	 *         Reward or not.
 	 */
 	public boolean onReward(Reward reward) {
-		int rewardX = reward.worldX;
-		int rewardY = reward.worldY;
+		int rewardX = reward.world.getX();
+		int rewardY = reward.world.getY();
 
-		final boolean inTopLeft = this.worldX == rewardX && this.worldY == rewardY;
-		final boolean inTopRight = this.worldX - speed == rewardX && this.worldY == rewardY;
-		final boolean inBottomLeft = this.worldX == rewardX && this.worldY == rewardY + speed;
-		final boolean inBottomRight = this.worldX - speed == rewardX && this.worldY == rewardY + speed;
+		final boolean inTopLeft = this.world.getX() == rewardX && this.world.getY() == rewardY;
+		final boolean inTopRight = this.world.getX() - speed == rewardX && this.world.getY() == rewardY;
+		final boolean inBottomLeft = this.world.getX() == rewardX && this.world.getY() == rewardY + speed;
+		final boolean inBottomRight = this.world.getX() - speed == rewardX && this.world.getY() == rewardY + speed;
 
 		if (inTopLeft || inTopRight || inBottomLeft || inBottomRight) {
 			return true;
@@ -273,8 +272,8 @@ public class Bee extends Entity {
 	 *         end tile and it has not collected all rewards.
 	 */
 	public boolean nearQueenMissingRewards() {
-		if (this.worldX >= (23 * gamePanel.tileSize) - 3 * gamePanel.tileSize &&
-				this.worldY >= (23 * gamePanel.tileSize) - 3 * gamePanel.tileSize) {
+		if (this.world.getX() >= (23 * gamePanel.tileSize) - 3 * gamePanel.tileSize &&
+				this.world.getY() >= (23 * gamePanel.tileSize) - 3 * gamePanel.tileSize) {
 			if (!hasAllRegRewards()) {
 				return true;
 			}
@@ -311,21 +310,21 @@ public class Bee extends Entity {
 	}
 
 	// method only used in BeeTests
-	public void setDirectionPressed(String s, boolean b) {
-		if (s == "up") {
-			this.keyHandler.upPressed = b;
+	public void setDirectionPressed(Direction d, boolean b) {
+		if (d == Direction.UP) {
+			KeyHandler.upPressed = b;
 		}
 
-		if (s == "down") {
-			this.keyHandler.downPressed = b;
+		if (d == Direction.DOWN) {
+			KeyHandler.downPressed = b;
 		}
 
-		if (s == "left") {
-			this.keyHandler.leftPressed = b;
+		if (d == Direction.LEFT) {
+			KeyHandler.leftPressed = b;
 		}
 
-		if (s == "right") {
-			this.keyHandler.rightPressed = b;
+		if (d == Direction.RIGHT) {
+			KeyHandler.rightPressed = b;
 		}
 	}
 

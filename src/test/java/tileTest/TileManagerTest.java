@@ -18,14 +18,14 @@ import tile.TileManager;
 import java.awt.Graphics2D;
 
 public class TileManagerTest {
-	private TileManager<BufferedImage> tileManager;
+	private TileManager tileManager;
 	GamePanel gp;
 
 	@BeforeEach
 	public void setUp() throws Exception {
 		// Define new game panel
 		gp = new GamePanel();
-		tileManager = new TileManager<BufferedImage>(gp);
+		tileManager = new TileManager(gp);
 	}
 
 	@Test
@@ -37,14 +37,6 @@ public class TileManagerTest {
 	public void testSetMap() {
 		tileManager.setMap("./src/main/java/ui/maps/txt-maps/trap-tile.txt");
 		assertNotNull(tileManager.mapTileNum);
-	}
-
-	@Test
-	public void testGetTile() {
-		for (int i = 0; i < tileManager.getTile().length; i++) {
-			System.out.println(tileManager.getTile()[i]);
-			assertNotNull(tileManager.getTile()[i]);
-		}
 	}
 
 	@Test

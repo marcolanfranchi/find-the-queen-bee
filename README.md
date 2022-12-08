@@ -41,7 +41,13 @@ This generates a jar file located in the `target` directory
 
 After following [how to build](#how-to-build), you can run the game by running the following command:
 
-`mvn exec:java`
+`mvn exec:java` 
+
+or 
+
+`java -jar target/BeeMaze-1.jar`
+
+Both commands run the game.
 
 ### How to Test
 

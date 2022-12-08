@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
 
 import main.GamePanel;
+import util.Point;
 
 /**
  * This class is used to create the lighting effect for the game. It creates a
@@ -32,8 +33,7 @@ public class Lighting {
 		Graphics2D g2 = (Graphics2D) darknessFilter.getGraphics();
 
 		// Get the center x and y of the light circle
-		int centerX = gp.bee.screenX + (gp.tileSize) / 2;
-		int centerY = gp.bee.screenY + (gp.tileSize) / 2;
+		Point center = new Point(gp.bee.screen.getX() + (gp.tileSize) / 2, gp.bee.screen.getY() + (gp.tileSize) / 2);
 
 		// Create a gradation effect
 		Color color[] = new Color[12];
@@ -46,7 +46,8 @@ public class Lighting {
 		initFractions(fraction);
 
 		// Create a gradation paint settings
-		RadialGradientPaint gPaint = new RadialGradientPaint(centerX, centerY, (circleSize / 2), fraction, color);
+		RadialGradientPaint gPaint = new RadialGradientPaint(center.getX(), center.getY(), (circleSize / 2), fraction,
+				color);
 
 		// Set the gradient data on g2
 		g2.setPaint(gPaint);

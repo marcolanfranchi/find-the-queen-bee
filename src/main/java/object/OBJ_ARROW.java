@@ -12,7 +12,7 @@ public class OBJ_ARROW extends SuperObject {
 
 		// Load the image into the image variable defined in the SuperObject class.
 		try {
-			image = ImageIO.read(getClass().getResource("../ui/images/arrowKeys.png"));
+			image = ImageIO.read(getClass().getResource("/ui/images/arrowKeys.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

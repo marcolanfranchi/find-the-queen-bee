@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import util.Point;
 
 /**
 	 * This class represents an Enemy character in the game.
@@ -19,8 +20,7 @@ import main.GamePanel;
 	 */
 public class Enemy extends Entity{
 
-	public final int screenX;
-	public final int screenY;
+	public final Point screen;
 
     int step = 0;
 	int randomX;
@@ -48,8 +48,8 @@ public class Enemy extends Entity{
 		bounds.y = getY();
 		bounds.width = this.width;
 		bounds.height = this.height;
-		this.screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
-		this.screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
+		this.screen = new Point(0, 0);
+		this.screen.setLocation(gp.screenWidth / 2 - (gp.tileSize / 2), gp.screenHeight / 2 - (gp.tileSize / 2));
 
 		randomX = num.nextInt(25);
 		randomY = num.nextInt(25);
@@ -67,7 +67,7 @@ public class Enemy extends Entity{
 		}
 		setRandomStartPoint();
 		speed = gamePanel.tileSize / 8;
-		direction = "up";
+		direction = Direction.UP;
 		setImages();
 
 	}
@@ -78,10 +78,10 @@ public class Enemy extends Entity{
 	 */
 	public void setImages() {
 		try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-up.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-down.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-left.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-right.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-up.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-down.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-left.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-right.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }       
@@ -94,17 +94,17 @@ public class Enemy extends Entity{
 	 */
 	public void setRandomStartPoint() {
 		for (int i = 0; i < 1; i++) {
-			int randomX = getRandom(0, gamePanel.tileM.mapTileNum.length - 1);
-			int randomY = getRandom(0, gamePanel.tileM.mapTileNum[0].length - 1);
+			Point random = new Point(getRandom(0, gamePanel.tileM.mapTileNum.length - 1),
+					getRandom(0, gamePanel.tileM.mapTileNum[0].length - 1));
 
-			if (gamePanel.tileM.mapTileNum[randomX][randomY] == 1
-					|| gamePanel.tileM.mapTileNum[randomX][randomY] == 2
-					|| inFirstRoom(randomX, randomY)) {
+			if (gamePanel.tileM.mapTileNum[random.getX()][random.getY()] == 1
+					|| gamePanel.tileM.mapTileNum[random.getX()][random.getY()] == 2
+					|| inFirstRoom(random.getX(), random.getY())) {
 				i--;
 				continue;
 			}
-			this.worldX = randomX * gamePanel.tileSize;
-			this.worldY = randomY * gamePanel.tileSize;
+			world.setX(random.getX() * gamePanel.tileSize);
+			world.setY(random.getY() * gamePanel.tileSize);
 		}
 	}
 
@@ -118,8 +118,8 @@ public class Enemy extends Entity{
 		this.checkWallCollision();
 
 		// Bee's current position
-		int goalCol = gamePanel.bee.worldX / gamePanel.tileSize;
-		int goalRow = gamePanel.bee.worldY / gamePanel.tileSize;
+		int goalCol = gamePanel.bee.world.getX() / gamePanel.tileSize;
+		int goalRow = gamePanel.bee.world.getY() / gamePanel.tileSize;
 
 		// A* Path Finding Algorithm
 		searchPath(goalCol, goalRow);
@@ -135,8 +135,8 @@ public class Enemy extends Entity{
 	public void searchPath(int goalCol, int goalRow) {
 
 		// Enemies' starting and current postion 
-		int startCol = worldX / gamePanel.tileSize;
-		int startRow = worldY / gamePanel.tileSize;
+		int startCol = world.getX() / gamePanel.tileSize;
+		int startRow = world.getY() / gamePanel.tileSize;
 
 		// Divide the entire map into multiple samll areas which are represented by Nodes
 		setNodes(startCol, startRow, goalCol, goalRow);
@@ -145,56 +145,56 @@ public class Enemy extends Entity{
 		if (search() == true) {
 			int nextX = pathList.get(0).col * gamePanel.tileSize;
 			int nextY = pathList.get(0).row * gamePanel.tileSize;
-			int enLeftX = worldX + bounds.x;
-			int enRightX = worldX + bounds.x + bounds.width;
-			int enTopY = worldY + bounds.y;
-			int enDownY = worldY + bounds.y + bounds.height;
+			int enLeftX = world.getX() + bounds.x;
+			int enRightX = world.getX() + bounds.x + bounds.width;
+			int enTopY = world.getY() + bounds.y;
+			int enDownY = world.getY() + bounds.y + bounds.height;
 
 			// Enemies' moving method which contains directions for different situations
 			if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
-				worldY -= speed;
-				direction = "up";
+				world.setY(world.getY() - speed);
+				direction = Direction.UP;
 			} else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
-				worldY += speed;
-				direction = "down";
+				world.setY(world.getY() + speed);
+				direction = Direction.DOWN;
 			} else if (enTopY >= nextY && enDownY < nextY + gamePanel.tileSize) {
 				if (enLeftX > nextX) {
-					worldX -= speed;
-					direction = "left";
+					world.setX(world.getX() - speed);
+					direction = Direction.LEFT;
 				}
 				if (enLeftX < nextX) {
-					worldX += speed;
-					direction = "right";
+					world.setX(world.getX() + speed);
+					direction = Direction.RIGHT;
 				}
 			}
 			else if(enTopY > nextY && enLeftX > nextX){
-				worldY -= speed;
-				direction = "up";
+				world.setY(world.getY() - speed);
+				direction = Direction.UP;
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					worldX -= speed;
-					direction = "left";
+					world.setX(world.getX() - speed);
+					direction = Direction.LEFT;
 				}
 			}else if(enTopY > nextY && enLeftX < nextX){
-				direction = "up";
+				direction = Direction.UP;
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					worldX += speed;
-					direction = "right";
+					world.setX(world.getX() + speed);
+					direction = Direction.RIGHT;
 				}
 			}else if(enTopY < nextY && enLeftX > nextX){
-				direction = "down";
+				direction = Direction.DOWN;
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					worldX -= speed;
-					direction = "left";
+					world.setX(world.getX() - speed);
+					direction = Direction.LEFT;
 				}
 			}else if(enTopY < nextY && enLeftX < nextX){
-				direction = "down";
+				direction = Direction.DOWN;
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					worldX += speed;
-					direction = "right";
+					world.setX(world.getX() + speed);
+					direction = Direction.RIGHT;
 				}
 			}
 		}
@@ -211,28 +211,28 @@ public class Enemy extends Entity{
             enemyCollision = true;
             direction = null;
         } else {
-            direction = "up";
+            direction = Direction.UP;
         }
 
         if (this.tileNumDown() == 1) {
             enemyCollision = true;
             direction = null;
         } else {
-            direction = "down";
+            direction = Direction.DOWN;
         }
 
         if (this.tileNumLeft() == 1) {
             enemyCollision = true;
             direction = null;
         } else {
-            direction = "left";
+            direction = Direction.LEFT;
         }
 
         if (this.tileNumRight() == 1) {
             enemyCollision = true;
             direction = null;
         } else {
-            direction = "right";
+            direction = Direction.RIGHT;
         }
 	}
 
@@ -430,19 +430,19 @@ public class Enemy extends Entity{
 	 */
 	public void draw(Graphics2D g2) {
 		BufferedImage image = null;
-        int screenX = worldX - gamePanel.bee.worldX + gamePanel.bee.screenX;
-        int screenY = worldY - gamePanel.bee.worldY + gamePanel.bee.screenY;
-        if(worldX + gamePanel.tileSize > gamePanel.bee.worldX - gamePanel.bee.screenX &&
-           worldX - gamePanel.tileSize < gamePanel.bee.worldX + gamePanel.bee.screenX &&
-           worldY + gamePanel.tileSize > gamePanel.bee.worldY - gamePanel.bee.screenY &&
-           worldY - gamePanel.tileSize < gamePanel.bee.worldY + gamePanel.bee.screenY){
-            if (direction == "up") {
+		int screenX = world.getX() - gamePanel.bee.world.getX() + gamePanel.bee.screen.getX();
+		int screenY = world.getY() - gamePanel.bee.world.getY() + gamePanel.bee.screen.getY();
+		if (world.getX() + gamePanel.tileSize > gamePanel.bee.world.getX() - gamePanel.bee.screen.getX() &&
+				world.getX() - gamePanel.tileSize < gamePanel.bee.world.getX() + gamePanel.bee.screen.getX() &&
+				world.getY() + gamePanel.tileSize > gamePanel.bee.world.getY() - gamePanel.bee.screen.getY() &&
+				world.getY() - gamePanel.tileSize < gamePanel.bee.world.getY() + gamePanel.bee.screen.getY()) {
+            if (direction == Direction.UP) {
                 image = up1; 
-            } else if (direction == "down") {
+            } else if (direction == Direction.DOWN) {
                 image = down1; 
-            } else if (direction == "left") {
+            } else if (direction == Direction.LEFT) {
                 image = left1; 
-            } else if (direction == "right") {
+            } else if (direction == Direction.RIGHT) {
                 image = right1; 
             }
             g2.drawImage(image, screenX, screenY, width, height, null);

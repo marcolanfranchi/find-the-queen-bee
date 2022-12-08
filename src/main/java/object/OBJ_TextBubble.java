@@ -19,7 +19,7 @@ public class OBJ_TextBubble extends SuperObject {
     public OBJ_TextBubble() {
 		name = "Text Bubble";
         try {
-            image = ImageIO.read(getClass().getResource("../ui/images/DownHereText.png"));
+            image = ImageIO.read(getClass().getResource("/ui/images/DownHereText.png"));
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -34,7 +34,7 @@ public class OBJ_TextBubble extends SuperObject {
          */
         public void setAltImage() {
             try {
-                image = ImageIO.read(getClass().getResource("../ui/images/ForgotHoneyText.png"));
+                image = ImageIO.read(getClass().getResource("/ui/images/ForgotHoneyText.png"));
                 
             } catch (IOException e) {
                 e.printStackTrace();
