@@ -11,6 +11,8 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import util.Point;
+import entity.Direction;
 
 /**
 	 * This class represents an Enemy character in the game.
@@ -19,8 +21,7 @@ import main.GamePanel;
 	 */
 public class Enemy extends Entity{
 
-	public final int screenX;
-	public final int screenY;
+	public final Point screen;
 
     int step = 0;
 	int randomX;
@@ -47,8 +48,8 @@ public class Enemy extends Entity{
 		bounds.y = getY();
 		bounds.width = this.width;
 		bounds.height = this.height;
-		this.screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
-		this.screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
+		this.screen = new Point(0, 0);
+		this.screen.setLocation(gp.screenWidth / 2 - (gp.tileSize / 2), gp.screenHeight / 2 - (gp.tileSize / 2));
 
 		randomX = num.nextInt(25);
 		randomY = num.nextInt(25);
@@ -56,7 +57,7 @@ public class Enemy extends Entity{
 		checkRandom(randomY);
 		setRandomStartPoint();
 		speed = gamePanel.tileSize / 8;
-		direction = "up";
+		direction = Direction.UP;
 		setImages();
 
 	}
@@ -80,10 +81,10 @@ public class Enemy extends Entity{
 	 */
 	public void setImages() {
 		try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-up.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-down.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-left.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("../ui/images/BeeKeeper-right.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-up.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-down.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-left.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/ui/images/BeeKeeper-right.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }       
@@ -96,17 +97,17 @@ public class Enemy extends Entity{
 	 */
 	public void setRandomStartPoint() {
 		for (int i = 0; i < 1; i++) {
-			int randomX = getRandom(0, gamePanel.tileM.mapTileNum.length - 1);
-			int randomY = getRandom(0, gamePanel.tileM.mapTileNum[0].length - 1);
+			Point random = new Point(getRandom(0, gamePanel.tileM.mapTileNum.length - 1),
+					getRandom(0, gamePanel.tileM.mapTileNum[0].length - 1));
 
-			if (gamePanel.tileM.mapTileNum[randomX][randomY] == 1
-					|| gamePanel.tileM.mapTileNum[randomX][randomY] == 2
-					|| inFirstRoom(randomX, randomY)) {
+			if (gamePanel.tileM.mapTileNum[random.getX()][random.getY()] == 1
+					|| gamePanel.tileM.mapTileNum[random.getX()][random.getY()] == 2
+					|| inFirstRoom(random.getX(), random.getY())) {
 				i--;
 				continue;
 			}
-			this.worldX = randomX * gamePanel.tileSize;
-			this.worldY = randomY * gamePanel.tileSize;
+			world.setX(random.getX() * gamePanel.tileSize);
+			world.setY(random.getY() * gamePanel.tileSize);
 		}
 	}
 
@@ -120,8 +121,8 @@ public class Enemy extends Entity{
 		this.checkWallCollision();
 
 		// Bee's current position
-		int goalCol = gamePanel.bee.worldX / gamePanel.tileSize;
-		int goalRow = gamePanel.bee.worldY / gamePanel.tileSize;
+		int goalCol = gamePanel.bee.world.getX() / gamePanel.tileSize;
+		int goalRow = gamePanel.bee.world.getY() / gamePanel.tileSize;
 
 		// A* Path Finding Algorithm
 		searchPath(goalCol, goalRow);
@@ -137,66 +138,58 @@ public class Enemy extends Entity{
 	public void searchPath(int goalCol, int goalRow) {
 
 		// Enemies' starting and current postion 
-		int startCol = worldX / gamePanel.tileSize;
-		int startRow = worldY / gamePanel.tileSize;
+		int startCol = world.getX() / gamePanel.tileSize;
+		int startRow = world.getY() / gamePanel.tileSize;
 
 		// Divide the entire map into multiple samll areas which are represented by Nodes
 		setNodes(startCol, startRow, goalCol, goalRow);
 
 		// Check if the shortest path between enemies and the Bee is setted
 		if (search() == true) {
-			enemyMove();
-		}
-	}
+			int nextX = pathList.get(0).col * gamePanel.tileSize;
+			int nextY = pathList.get(0).row * gamePanel.tileSize;
+			int enLeftX = world.getX() + bounds.x;
+			int enRightX = world.getX() + bounds.x + bounds.width;
+			int enTopY = world.getY() + bounds.y;
+			int enDownY = world.getY()+ bounds.y + bounds.height;
 
-	/**
-	 * This function is to make enemies move on the path that has been found by the algorithm before
-	 * And also to make discisons when enemies move from one room to another.
-	 */
-	public void enemyMove(){
-		int nextX = pathList.get(0).col * gamePanel.tileSize;
-		int nextY = pathList.get(0).row * gamePanel.tileSize;
-		int enLeftX = worldX + bounds.x;
-		int enRightX = worldX + bounds.x + bounds.width;
-		int enTopY = worldY + bounds.y;
-		int enDownY = worldY + bounds.y + bounds.height;
-
-		// Enemies' moving method which contains directions for different situations
-		if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
-			enemyMoveUp();
-		} else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
-			enemyMoveDown();
-		} else if (enTopY >= nextY && enDownY < nextY + gamePanel.tileSize) {
-			if (enLeftX > nextX) {
-				enemyMoveLeft();
+			// Enemies' moving method which contains directions for different situations
+			if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
+				enemyMoveUp();
+			} else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
+				enemyMoveDown();
+			} else if (enTopY >= nextY && enDownY < nextY + gamePanel.tileSize) {
+				if (enLeftX > nextX) {
+					enemyMoveLeft();
+				}
+				if (enLeftX < nextX) {
+					enemyMoveRight();
+				}
 			}
-			if (enLeftX < nextX) {
-				enemyMoveRight();
-			}
-		}
-		else if(enTopY > nextY && enLeftX > nextX){
-			enemyMoveUp();
-			enemyCheckCollision();
-			if(enemyCollision == true){
-				enemyMoveLeft();
-			}
-		}else if(enTopY > nextY && enLeftX < nextX){
-			enemyMoveUp();
-			enemyCheckCollision();
-			if(enemyCollision == true){
-				enemyMoveRight();
-			}
-		}else if(enTopY < nextY && enLeftX > nextX){
-			enemyMoveDown();
-			enemyCheckCollision();
-			if(enemyCollision == true){
-				enemyMoveLeft();
-			}
-		}else if(enTopY < nextY && enLeftX < nextX){
-			enemyMoveDown();
-			enemyCheckCollision();
-			if(enemyCollision == true){
-				enemyMoveRight();
+			else if(enTopY > nextY && enLeftX > nextX){
+				enemyMoveUp();
+				enemyCheckCollision();
+				if(enemyCollision == true){
+					enemyMoveLeft();
+				}
+			}else if(enTopY > nextY && enLeftX < nextX){
+				enemyMoveUp();
+				enemyCheckCollision();
+				if(enemyCollision == true){
+					enemyMoveRight();
+				}
+			}else if(enTopY < nextY && enLeftX > nextX){
+				enemyMoveDown();
+				enemyCheckCollision();
+				if(enemyCollision == true){
+					enemyMoveLeft();
+				}
+			}else if(enTopY < nextY && enLeftX < nextX){
+				enemyMoveDown();
+				enemyCheckCollision();
+				if(enemyCollision == true){
+					enemyMoveRight();
+				}
 			}
 		}
 	}
@@ -205,32 +198,32 @@ public class Enemy extends Entity{
 	 * Let Enemies to move Up
 	 */
 	public void enemyMoveUp(){
-		worldY -= speed;
-		direction = "up";
+		world.setY(world.getY() - speed);
+		direction = Direction.UP;
 	}
 
 	/**
 	 * Let Enemies to move Down
 	 */
 	public void enemyMoveDown(){
-		worldY += speed;
-		direction = "down";
+		world.setY(world.getY() + speed);
+		direction = Direction.DOWN;
 	}
 
 	/**
 	 * Let Enemies to move Left
 	 */
 	public void enemyMoveLeft(){
-		worldX -= speed;
-		direction = "left";
+		world.setX(world.getX() - speed);
+		direction = Direction.LEFT;
 	}
 
 	/**
 	 * Let Enemies to move Right
 	 */
 	public void enemyMoveRight(){
-		worldX += speed;
-		direction = "right";
+		world.setX(world.getX() + speed);
+		direction = Direction.RIGHT;
 	}
 
 	/**
@@ -243,25 +236,25 @@ public class Enemy extends Entity{
         if (this.tileNumUp() == 1) {
 			enemyStop();
         } else {
-            direction = "up";
+            direction = Direction.UP;
         }
 
         if (this.tileNumDown() == 1) {
 			enemyStop();
         } else {
-            direction = "down";
+            direction = Direction.DOWN;
         }
 
         if (this.tileNumLeft() == 1) {
 			enemyStop();
         } else {
-            direction = "left";
+            direction = Direction.LEFT;
         }
 
         if (this.tileNumRight() == 1) {
 			enemyStop();
         } else {
-            direction = "right";
+            direction = Direction.RIGHT;
         }
 	}
 
@@ -467,19 +460,19 @@ public class Enemy extends Entity{
 	 */
 	public void draw(Graphics2D g2) {
 		BufferedImage image = null;
-        int screenX = worldX - gamePanel.bee.worldX + gamePanel.bee.screenX;
-        int screenY = worldY - gamePanel.bee.worldY + gamePanel.bee.screenY;
-        if(worldX + gamePanel.tileSize > gamePanel.bee.worldX - gamePanel.bee.screenX &&
-           worldX - gamePanel.tileSize < gamePanel.bee.worldX + gamePanel.bee.screenX &&
-           worldY + gamePanel.tileSize > gamePanel.bee.worldY - gamePanel.bee.screenY &&
-           worldY - gamePanel.tileSize < gamePanel.bee.worldY + gamePanel.bee.screenY){
-            if (direction == "up") {
+		int screenX = world.getX() - gamePanel.bee.world.getX() + gamePanel.bee.screen.getX();
+		int screenY = world.getY() - gamePanel.bee.world.getY() + gamePanel.bee.screen.getY();
+		if (world.getX() + gamePanel.tileSize > gamePanel.bee.world.getX() - gamePanel.bee.screen.getX() &&
+				world.getX() - gamePanel.tileSize < gamePanel.bee.world.getX() + gamePanel.bee.screen.getX() &&
+				world.getY() + gamePanel.tileSize > gamePanel.bee.world.getY() - gamePanel.bee.screen.getY() &&
+				world.getY() - gamePanel.tileSize < gamePanel.bee.world.getY() + gamePanel.bee.screen.getY()) {
+            if (direction == Direction.UP) {
                 image = up1; 
-            } else if (direction == "down") {
+            } else if (direction == Direction.DOWN) {
                 image = down1; 
-            } else if (direction == "left") {
+            } else if (direction == Direction.LEFT) {
                 image = left1; 
-            } else if (direction == "right") {
+            } else if (direction == Direction.RIGHT) {
                 image = right1; 
             }
             g2.drawImage(image, screenX, screenY, width, height, null);

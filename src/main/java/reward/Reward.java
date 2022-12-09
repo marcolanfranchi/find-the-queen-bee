@@ -1,5 +1,8 @@
 package reward;
 
+
+import util.Point;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -18,8 +21,7 @@ public abstract class Reward {
 	private GamePanel map;
 	public int value;
 	protected BufferedImage image;
-	public int worldX;
-	public int worldY;
+	public Point world;
 	public boolean collected;
 	public int width;
 	public int height;
@@ -29,6 +31,7 @@ public abstract class Reward {
 		map = gp;
 		width = 60;
 		height = 60;
+		world = new Point(0, 0);
 	}
 
 	/**
@@ -83,14 +86,12 @@ public abstract class Reward {
 	 * unaccessible position on the map.
 	 */
 	public void remove() {
-		this.worldX = 0;
-		this.worldY = 0;
+		world.setLocation(0, 0);
 		this.image = null;
 	}
 
 	// method used for testing
 	public void setLocation(int x, int y) {
-		this.worldX = x;
-		this.worldY = y;
+		world.setLocation(x, y);
 	}
 }

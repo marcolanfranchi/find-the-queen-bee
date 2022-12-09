@@ -77,8 +77,8 @@ public class RewardGenerator {
 				i--;
 				continue;
 			}
-			gamePanel.rewards[i].worldX = randomX * gamePanel.tileSize;
-			gamePanel.rewards[i].worldY = randomY * gamePanel.tileSize;
+			gamePanel.rewards[i].world.setX(randomX * gamePanel.tileSize);
+			gamePanel.rewards[i].world.setY(randomY * gamePanel.tileSize);
 		}
 	}
 
@@ -106,8 +106,8 @@ public class RewardGenerator {
 				i--;
 				continue;
 			}
-			gamePanel.rewards[i].worldX = randomX * gamePanel.tileSize;
-			gamePanel.rewards[i].worldY = randomY * gamePanel.tileSize;
+			gamePanel.rewards[i].world.setX(randomX * gamePanel.tileSize);
+			gamePanel.rewards[i].world.setY(randomY * gamePanel.tileSize);
 		}
 	}
 

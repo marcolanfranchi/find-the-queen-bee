@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Random;
+import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
@@ -22,9 +23,9 @@ import main.GamePanel;
  * 
  * @author Satvik Garg
  */
-public class TileManager<BufferedImage> {
+public class TileManager {
 	GamePanel gp;
-	Tile[] tile;
+	BufferedImage[] tiles;
 	public int mapTileNum[][];
 
 	/**
@@ -35,7 +36,7 @@ public class TileManager<BufferedImage> {
 	 */
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
-		tile = new Tile[4];
+		tiles = new BufferedImage[4];
 
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
@@ -53,17 +54,13 @@ public class TileManager<BufferedImage> {
 	 */
 	public void getTileImage() {
 		try {
-			tile[0] = new Tile();
-			tile[0].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Tile2.png"));
+			tiles[0] = ImageIO.read(getClass().getResourceAsStream("/ui/images/Tile2.png"));
 
-			tile[1] = new Tile();
-			tile[1].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Wall-2.png"));
+			tiles[1] = ImageIO.read(getClass().getResourceAsStream("/ui/images/Wall-2.png"));
 
-			tile[2] = new Tile();
-			tile[2].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/Door-2.png"));
+			tiles[2] = ImageIO.read(getClass().getResourceAsStream("/ui/images/Door-2.png"));
 
-			tile[3] = new Tile();
-			tile[3].image = ImageIO.read(getClass().getResourceAsStream("../ui/images/TrapTile2.png"));
+			tiles[3] = ImageIO.read(getClass().getResourceAsStream("/ui/images/TrapTile2.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -72,15 +69,6 @@ public class TileManager<BufferedImage> {
 
 	public void setMap(String mapPath) {
 		loadMap(mapPath);
-	}
-
-	/**
-	 * Used to test Tile array
-	 * 
-	 * @return The tile array
-	 */
-	public Tile[] getTile() {
-		return tile;
 	}
 
 	/**
@@ -133,15 +121,15 @@ public class TileManager<BufferedImage> {
 
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;
-			int screenX = worldX - gp.bee.worldX + gp.bee.screenX;
-			int screenY = worldY - gp.bee.worldY + gp.bee.screenY;
+			int screenX = worldX - gp.bee.world.getX() + gp.bee.screen.getX();
+			int screenY = worldY - gp.bee.world.getY() + gp.bee.screen.getY();
 
 			// Optimization (Only draw tiles that are visibile)
-			if (worldX + gp.tileSize > gp.bee.worldX - gp.bee.screenX &&
-					worldX - gp.tileSize < gp.bee.worldX + gp.bee.screenX &&
-					worldY + gp.tileSize > gp.bee.worldY - gp.bee.screenY &&
-					worldY - gp.tileSize < gp.bee.worldY + gp.bee.screenY) {
-				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+			if (worldX + gp.tileSize > gp.bee.world.getX() - gp.bee.screen.getX() &&
+					worldX - gp.tileSize < gp.bee.world.getX() + gp.bee.screen.getX() &&
+					worldY + gp.tileSize > gp.bee.world.getY() - gp.bee.screen.getY() &&
+					worldY - gp.tileSize < gp.bee.world.getY() + gp.bee.screen.getY()) {
+				g2.drawImage(tiles[tileNum], screenX, screenY, gp.tileSize, gp.tileSize, null);
 			}
 
 			worldCol++;
