@@ -1,13 +1,7 @@
-# Group 16 CMPT 276 Project
+## Group 16 CMPT 276 Project
 
-"The Maze to the Queen Bee" <br>
-<br>
-<br>
-Current progress: <br>
-Phase 1: Complete <br>
-Phase 2: Complete <br>
-Phase 3: Complete <br>
-Phase 4:  <br>
+# Find the Queen Bee <br>
+
 
 ## Instructions
 

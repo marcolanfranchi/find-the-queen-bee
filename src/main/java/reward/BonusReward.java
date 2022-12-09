@@ -1,20 +1,16 @@
 package reward;
 
-import main.GamePanel;
-
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 import entity.Bee;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.imageio.ImageIO;
-
-import java.awt.*;
+import main.GamePanel;
 
 public class BonusReward extends Reward {
 
@@ -88,12 +84,12 @@ public class BonusReward extends Reward {
 				} else {
 					displayNow = true;
 				}
-
-				updateTimer();
+					updateTimer();
 			}
 		});
-
 	}
+
+
 
 	private void updateTimer() {
 		timer.stop();

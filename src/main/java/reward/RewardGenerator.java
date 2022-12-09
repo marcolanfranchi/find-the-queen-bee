@@ -1,9 +1,9 @@
 package reward;
 
-import main.GamePanel;
-
 import java.util.ArrayList;
 import java.util.Random;
+
+import main.GamePanel;
 
 /**
  * This class represents a RewardGenerator which has a list
@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public class RewardGenerator {
 
-	private static ArrayList<Reward> rewardsList = new ArrayList<>();
+	private static final ArrayList<Reward> rewardsList = new ArrayList<>();
 
 	public GamePanel gamePanel;
 

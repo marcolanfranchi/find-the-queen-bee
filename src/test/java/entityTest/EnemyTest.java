@@ -116,6 +116,13 @@ public class EnemyTest {
         assertNotNull(enemy.openList);
     }
 
+	@Test
+	void testCheckRandom(){
+		int num = 6;
+		enemy.checkRandom(num);
+		assertNotNull(num);
+	}
+
     @Test
     void testSearchPath1(){
         int goalCol = 48;

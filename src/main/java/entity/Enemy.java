@@ -3,15 +3,16 @@ package entity;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import util.Point;
+import entity.Direction;
 
 /**
 	 * This class represents an Enemy character in the game.
@@ -25,7 +26,6 @@ public class Enemy extends Entity{
     int step = 0;
 	int randomX;
 	int randomY;
-	int tempGCost = 0;
 	Random num = new Random();
 	boolean goalReached = false;
 	Node[][] node;
@@ -53,23 +53,26 @@ public class Enemy extends Entity{
 
 		randomX = num.nextInt(25);
 		randomY = num.nextInt(25);
-		if (randomX % 6 == 0) {
-			randomX++;
-			if (randomX == 25) {
-				randomX -= 2;
-			}
-		}
-		if (randomY % 6 == 0) {
-			randomY++;
-			if (randomY == 25) {
-				randomY -= 2;
-			}
-		}
+		checkRandom(randomX);
+		checkRandom(randomY);
 		setRandomStartPoint();
 		speed = gamePanel.tileSize / 8;
 		direction = Direction.UP;
 		setImages();
 
+	}
+
+	/**
+	 * This function is to check if enemies are born at available location
+	 * @param randomNum pass into randomX and randomY
+	 */
+	public void checkRandom(int randomNum){
+		if (randomNum % 6 == 0) {
+			randomNum++;
+			if (randomNum == 25) {
+				randomNum -= 2;
+			}
+		}
 	}
 
 	/**
@@ -148,56 +151,79 @@ public class Enemy extends Entity{
 			int enLeftX = world.getX() + bounds.x;
 			int enRightX = world.getX() + bounds.x + bounds.width;
 			int enTopY = world.getY() + bounds.y;
-			int enDownY = world.getY() + bounds.y + bounds.height;
+			int enDownY = world.getY()+ bounds.y + bounds.height;
 
 			// Enemies' moving method which contains directions for different situations
 			if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
-				world.setY(world.getY() - speed);
-				direction = Direction.UP;
+				enemyMoveUp();
 			} else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
-				world.setY(world.getY() + speed);
-				direction = Direction.DOWN;
+				enemyMoveDown();
 			} else if (enTopY >= nextY && enDownY < nextY + gamePanel.tileSize) {
 				if (enLeftX > nextX) {
-					world.setX(world.getX() - speed);
-					direction = Direction.LEFT;
+					enemyMoveLeft();
 				}
 				if (enLeftX < nextX) {
-					world.setX(world.getX() + speed);
-					direction = Direction.RIGHT;
+					enemyMoveRight();
 				}
 			}
 			else if(enTopY > nextY && enLeftX > nextX){
-				world.setY(world.getY() - speed);
-				direction = Direction.UP;
+				enemyMoveUp();
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					world.setX(world.getX() - speed);
-					direction = Direction.LEFT;
+					enemyMoveLeft();
 				}
 			}else if(enTopY > nextY && enLeftX < nextX){
-				direction = Direction.UP;
+				enemyMoveUp();
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					world.setX(world.getX() + speed);
-					direction = Direction.RIGHT;
+					enemyMoveRight();
 				}
 			}else if(enTopY < nextY && enLeftX > nextX){
-				direction = Direction.DOWN;
+				enemyMoveDown();
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					world.setX(world.getX() - speed);
-					direction = Direction.LEFT;
+					enemyMoveLeft();
 				}
 			}else if(enTopY < nextY && enLeftX < nextX){
-				direction = Direction.DOWN;
+				enemyMoveDown();
 				enemyCheckCollision();
 				if(enemyCollision == true){
-					world.setX(world.getX() + speed);
-					direction = Direction.RIGHT;
+					enemyMoveRight();
 				}
 			}
 		}
+	}
+
+	/**
+	 * Let Enemies to move Up
+	 */
+	public void enemyMoveUp(){
+		world.setY(world.getY() - speed);
+		direction = Direction.UP;
+	}
+
+	/**
+	 * Let Enemies to move Down
+	 */
+	public void enemyMoveDown(){
+		world.setY(world.getY() + speed);
+		direction = Direction.DOWN;
+	}
+
+	/**
+	 * Let Enemies to move Left
+	 */
+	public void enemyMoveLeft(){
+		world.setX(world.getX() - speed);
+		direction = Direction.LEFT;
+	}
+
+	/**
+	 * Let Enemies to move Right
+	 */
+	public void enemyMoveRight(){
+		world.setX(world.getX() + speed);
+		direction = Direction.RIGHT;
 	}
 
 	/**
@@ -208,32 +234,36 @@ public class Enemy extends Entity{
     public void enemyCheckCollision() {
 
         if (this.tileNumUp() == 1) {
-            enemyCollision = true;
-            direction = null;
+			enemyStop();
         } else {
             direction = Direction.UP;
         }
 
         if (this.tileNumDown() == 1) {
-            enemyCollision = true;
-            direction = null;
+			enemyStop();
         } else {
             direction = Direction.DOWN;
         }
 
         if (this.tileNumLeft() == 1) {
-            enemyCollision = true;
-            direction = null;
+			enemyStop();
         } else {
             direction = Direction.LEFT;
         }
 
         if (this.tileNumRight() == 1) {
-            enemyCollision = true;
-            direction = null;
+			enemyStop();
         } else {
             direction = Direction.RIGHT;
         }
+	}
+
+	/**
+	 * This function is to make enemies to stop when they hit the wall
+	 */
+	public void enemyStop(){
+		enemyCollision = true;
+		direction = null;
 	}
 
 	/**
