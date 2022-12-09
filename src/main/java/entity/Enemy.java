@@ -25,7 +25,6 @@ public class Enemy extends Entity{
     int step = 0;
 	int randomX;
 	int randomY;
-	int tempGCost = 0;
 	Random num = new Random();
 	boolean goalReached = false;
 	Node[][] node;
@@ -146,50 +145,58 @@ public class Enemy extends Entity{
 
 		// Check if the shortest path between enemies and the Bee is setted
 		if (search() == true) {
-			int nextX = pathList.get(0).col * gamePanel.tileSize;
-			int nextY = pathList.get(0).row * gamePanel.tileSize;
-			int enLeftX = worldX + bounds.x;
-			int enRightX = worldX + bounds.x + bounds.width;
-			int enTopY = worldY + bounds.y;
-			int enDownY = worldY + bounds.y + bounds.height;
+			enemyMove();
+		}
+	}
 
-			// Enemies' moving method which contains directions for different situations
-			if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
-				enemyMoveUp();
-			} else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
-				enemyMoveDown();
-			} else if (enTopY >= nextY && enDownY < nextY + gamePanel.tileSize) {
-				if (enLeftX > nextX) {
-					enemyMoveLeft();
-				}
-				if (enLeftX < nextX) {
-					enemyMoveRight();
-				}
+	/**
+	 * This function is to make enemies move on the path that has been found by the algorithm before
+	 * And also to make discisons when enemies move from one room to another.
+	 */
+	public void enemyMove(){
+		int nextX = pathList.get(0).col * gamePanel.tileSize;
+		int nextY = pathList.get(0).row * gamePanel.tileSize;
+		int enLeftX = worldX + bounds.x;
+		int enRightX = worldX + bounds.x + bounds.width;
+		int enTopY = worldY + bounds.y;
+		int enDownY = worldY + bounds.y + bounds.height;
+
+		// Enemies' moving method which contains directions for different situations
+		if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
+			enemyMoveUp();
+		} else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
+			enemyMoveDown();
+		} else if (enTopY >= nextY && enDownY < nextY + gamePanel.tileSize) {
+			if (enLeftX > nextX) {
+				enemyMoveLeft();
 			}
-			else if(enTopY > nextY && enLeftX > nextX){
-				enemyMoveUp();
-				enemyCheckCollision();
-				if(enemyCollision == true){
-					enemyMoveLeft();
-				}
-			}else if(enTopY > nextY && enLeftX < nextX){
-				enemyMoveUp();
-				enemyCheckCollision();
-				if(enemyCollision == true){
-					enemyMoveRight();
-				}
-			}else if(enTopY < nextY && enLeftX > nextX){
-				enemyMoveDown();
-				enemyCheckCollision();
-				if(enemyCollision == true){
-					enemyMoveLeft();
-				}
-			}else if(enTopY < nextY && enLeftX < nextX){
-				enemyMoveDown();
-				enemyCheckCollision();
-				if(enemyCollision == true){
-					enemyMoveRight();
-				}
+			if (enLeftX < nextX) {
+				enemyMoveRight();
+			}
+		}
+		else if(enTopY > nextY && enLeftX > nextX){
+			enemyMoveUp();
+			enemyCheckCollision();
+			if(enemyCollision == true){
+				enemyMoveLeft();
+			}
+		}else if(enTopY > nextY && enLeftX < nextX){
+			enemyMoveUp();
+			enemyCheckCollision();
+			if(enemyCollision == true){
+				enemyMoveRight();
+			}
+		}else if(enTopY < nextY && enLeftX > nextX){
+			enemyMoveDown();
+			enemyCheckCollision();
+			if(enemyCollision == true){
+				enemyMoveLeft();
+			}
+		}else if(enTopY < nextY && enLeftX < nextX){
+			enemyMoveDown();
+			enemyCheckCollision();
+			if(enemyCollision == true){
+				enemyMoveRight();
 			}
 		}
 	}

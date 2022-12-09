@@ -88,12 +88,12 @@ public class BonusReward extends Reward {
 				} else {
 					displayNow = true;
 				}
-
-				updateTimer();
+					updateTimer();
 			}
 		});
-
 	}
+
+
 
 	private void updateTimer() {
 		timer.stop();
