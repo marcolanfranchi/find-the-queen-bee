@@ -40,8 +40,6 @@ public class GamePanelTest {
 
 		g.objManager.setObjects();
 
-		System.out.println("g.objects = " + g.objects);
-
 		g.drawObjects(g2);
 	}
 
@@ -53,8 +51,6 @@ public class GamePanelTest {
 		g.rewardGenerator.setRegRewards();
 		g.rewardGenerator.setBonusRewards();
 
-		System.out.println("g.rewards = " + g.rewards);
-
 		g.drawRewards(g2);
 	}
 
@@ -62,8 +58,6 @@ public class GamePanelTest {
 	void testDrawRewardsNull() {
 		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
-
-		System.out.println("g.rewards = " + g.rewards);
 
 		g.drawRewards(g2);
 	}

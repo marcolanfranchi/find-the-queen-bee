@@ -13,7 +13,7 @@ public class OBJ_WASD extends SuperObject {
 
 		//Load the image into the image variable defined in the SuperObject class.
 		try {
-			image = ImageIO.read(getClass().getResource("../ui/images/WASDKeys.png"));
+			image = ImageIO.read(getClass().getResource("/ui/images/WASDKeys.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

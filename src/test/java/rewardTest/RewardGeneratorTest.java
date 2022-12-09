@@ -50,22 +50,18 @@ class RewardGeneratorTest {
     @Test
     void rewardOnRoad()
     {
-        ArrayList<Reward> rewardsList = rewardGenerator.getRewardsList();
+		ArrayList<Reward> rewardsList = RewardGenerator.getRewardsList();
         boolean check = true;
-        for(Reward e:rewardsList)
-        {
-            //if(!reward.gameObjects[(int) e.getMap().getY()][(int) e.getMap().getX()].getClass().getSimpleName().equals("Road"))
-            {
-                check = false;
-            }
-        }
+		for (Reward e : rewardsList) {
+			check = false;
+		}
         assertTrue(check, "Some rewards have not been generated on the road");
     }
 
     @Test
     void rewardInTheSamePosition()
     {
-        ArrayList<Reward> rewardsList = rewardGenerator.getRewardsList();
+		ArrayList<Reward> rewardsList = RewardGenerator.getRewardsList();
         boolean check = true;
         for(Reward e:rewardsList)
         {

@@ -37,35 +37,13 @@
   </dependencies>
 
   <build>
-  	<!-- <configuration>
-	    <outputDirectory>${basedir}/target/classes/ui</outputDirectory>
-		<resources>
-			<resource>
-				<directory>src/main/java/ui/images</directory>
-				<filtering>true</filtering>
-			</resource>
-			<resource>
-				<directory>src/main/java/ui/font</directory>
-				<filtering>true</filtering>
-			</resource>
-			<resource>
-				<directory>src/main/java/ui/maps/txt-maps</directory>
-				<filtering>true</filtering>
-			</resource>
-			<resource>
-				<directory>src/main/java/sounds</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-	</configuration> -->
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
-        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+	  	<!-- Clean plugin -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>
-        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+		<!-- Resource plugin -->
         <plugin>
 			<artifactId>maven-resources-plugin</artifactId>
 			<version>3.0.2</version>
@@ -136,37 +114,37 @@
 				</execution>
 			</executions>
         </plugin>
-        <plugin>
+		<!-- Compiler plugin -->
+		<plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
         </plugin>
-        <plugin>
+		<!-- Surefire plugin -->
+		<plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.0</version>
         </plugin>
-        <plugin>
+		<!-- Jar plugin -->
+		<plugin>
 			<artifactId>maven-jar-plugin</artifactId>
-			<version>3.0.2</version>
+			<version>3.3.0</version>
+			<configuration>
+				<archive>
+					<manifest>
+						<addClasspath>true</addClasspath>
+						<mainClass>main.Main</mainClass>
+					</manifest>
+				</archive>		
+			</configuration>
         </plugin>
-        <plugin>
+		<!-- Install plugin -->
+	    <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.5.2</version>
         </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-        </plugin>
-        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
-        <plugin>
+		<!-- Exec plugin -->
+		<plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
           <version>3.0.0</version>
@@ -174,7 +152,7 @@
             <mainClass>main.Main</mainClass>
           </configuration>
         </plugin>
-
+		<!-- Jacoco plugin -->
 		<plugin>
 			<groupId>org.jacoco</groupId>
 			<artifactId>jacoco-maven-plugin</artifactId>
@@ -191,9 +169,17 @@
 				</execution>
             </executions>
         </plugin>
-
-
+		<!-- Javadoc plugin -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-javadoc-plugin</artifactId>
+			<version>3.3.1</version>
+			<configuration>
+				<additionalparam>-Xdoclint:none</additionalparam>
+				<additionalOptions>-Xdoclint:none</additionalOptions>
+				<additionalJOption>-Xdoclint:none</additionalJOption>
+			</configuration>
+		</plugin>
       </plugins>
-    </pluginManagement>
   </build>
 </project>

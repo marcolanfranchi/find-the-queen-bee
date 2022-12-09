@@ -127,8 +127,8 @@ public class EnemyTest {
     void testSearchPath1(){
         int goalCol = 48;
 		int goalRow = 48;
-        enemy.screen.setX(480);
-        enemy.screen.setY(480);
+		enemy.world.setX(480);
+		enemy.world.setY(480);
         enemy.searchPath(goalCol, goalRow);
     }
 

@@ -1,13 +1,7 @@
-# Group 16 CMPT 276 Project
+## Group 16 CMPT 276 Project
 
-"The Maze to the Queen Bee" <br>
-<br>
-<br>
-Current progress: <br>
-Phase 1: Complete <br>
-Phase 2: Complete <br>
-Phase 3: Complete <br>
-Phase 4:  <br>
+# Find the Queen Bee <br>
+
 
 ## Instructions
 
@@ -41,7 +35,13 @@ This generates a jar file located in the `target` directory
 
 After following [how to build](#how-to-build), you can run the game by running the following command:
 
-`mvn exec:java`
+`mvn exec:java` 
+
+or 
+
+`java -jar target/BeeMaze-1.jar`
+
+Both commands run the game.
 
 ### How to Test
 
@@ -49,3 +49,12 @@ After following [how to build](#how-to-build), you can test the game by running
 the following command:
 
 `mvn test`
+
+### Generate Javadocs
+
+To generate Javadocs for the project, run the following command:
+
+`mvn javadoc:javadoc`
+
+The Javadocs are located in the `target/site/apidocs` directory and can be viewed
+by opening the `index.html` file in your browser.
