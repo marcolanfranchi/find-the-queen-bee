@@ -1,13 +1,11 @@
 package reward;
-import main.GamePanel;
-
+import java.awt.Graphics2D;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 import entity.Bee;
-
-import java.awt.*;
+import main.GamePanel;
 
 /**
 * Sets Regular Reward's image

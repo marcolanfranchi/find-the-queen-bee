@@ -1,11 +1,10 @@
 package reward;
 
-import main.GamePanel;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import entity.Bee;
+import main.GamePanel;
 
 /**
  * This class represents Rewards in the game which has to be
