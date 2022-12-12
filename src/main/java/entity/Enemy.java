@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import util.Point;
-import entity.Direction;
 
 /**
 	 * This class represents an Enemy character in the game.
